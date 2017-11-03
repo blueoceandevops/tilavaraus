@@ -13,7 +13,7 @@
 </head>
 <body>
     <ul>
-    <jsp:useBean id="rooms" scope="request" type="java.util.List<com.example.demo.domain.Room>"/>
+        <jsp:useBean id="rooms" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Room>"/>
     <c:forEach items="${rooms}" var="room">
         <li>
             <a href="/${room.id}">${room.name}</a>

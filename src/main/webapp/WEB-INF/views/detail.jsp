@@ -1,5 +1,5 @@
 <%@page pageEncoding="UTF-8" %>
-<jsp:useBean id="room" scope="request" type="com.example.demo.domain.Room"/>
+<jsp:useBean id="room" scope="request" type="fi.xamk.tilavaraus.domain.Room"/>
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,15 +20,18 @@
     <form action="/${room.id}/reserve" method="POST">
         <label for="startTime">Aloitusaika</label>
         <input type="datetime-local" name="startTime" id="startTime">
+        <br>
 
         <label for="endTime">Lopetusaika</label>
         <input type="datetime-local" name="endTime" id="endTime">
+        <br>
 
         <label for="count">Henkilömäärä</label>
         <input id="count" type="number" name="count" max="${room.capacity}">
+        <br>
 
         <input type="checkbox" name="additionalServices" value="es">ES<br>
-        <input type="checkbox" name="additionalServices" value="kahvi">Kahvi
+        <input type="checkbox" name="additionalServices" value="kahvi">Kahvi<br>
 
         <input type="submit">
     </form>

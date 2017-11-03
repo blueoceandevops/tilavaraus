@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package fi.xamk.tilavaraus.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package fi.xamk.tilavaraus.domain;
 
 public class Room {
     private Long id;

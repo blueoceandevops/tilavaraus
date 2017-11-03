@@ -1,4 +1,4 @@
-package com.example.demo;
+package fi.xamk.tilavaraus;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

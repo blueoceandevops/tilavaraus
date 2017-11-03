@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package fi.xamk.tilavaraus.domain;
 
 import org.springframework.data.repository.CrudRepository;
 

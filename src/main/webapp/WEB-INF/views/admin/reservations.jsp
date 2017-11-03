@@ -13,7 +13,7 @@
 </head>
 <body>
 <table class="table">
-    <jsp:useBean id="reservations" scope="request" type="java.util.List<com.example.demo.domain.Reservation>"/>
+    <jsp:useBean id="reservations" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Reservation>"/>
     <tr>
         <th>Käyttäjä</th>
         <th>Tilan nimi</th>

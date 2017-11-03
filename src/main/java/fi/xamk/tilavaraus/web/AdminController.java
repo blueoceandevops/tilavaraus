@@ -1,6 +1,6 @@
-package com.example.demo.web;
+package fi.xamk.tilavaraus.web;
 
-import com.example.demo.domain.ReservationRepository;
+import fi.xamk.tilavaraus.domain.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

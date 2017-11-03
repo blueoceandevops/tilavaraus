@@ -41,8 +41,8 @@
             $('#calendar').fullCalendar({
                 defaultView: 'agendaWeek',
 	            events: '${pageContext.request.contextPath}/${room.id}/events',
-                dayClick: function() {
-                    console.log(arguments);
+	            dayClick: function (date) {
+		            $('#startTime').val(date.format());
                 }
             });
         });

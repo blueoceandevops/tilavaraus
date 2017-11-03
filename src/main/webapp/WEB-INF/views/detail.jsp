@@ -17,7 +17,7 @@
 <body>
 
     <h1>${room.name}</h1>
-    <form action="/${room.id}/reserve" method="POST">
+    <form action="${pageContext.request.contextPath}/${room.id}/reserve" method="POST">
         <label for="startTime">Aloitusaika</label>
         <input type="datetime-local" name="startTime" id="startTime">
         <br>
@@ -38,17 +38,13 @@
     <div id='calendar'></div>
     <script>
         $(document).ready(function() {
-
-            // page is now ready, initialize the calendar...
-
             $('#calendar').fullCalendar({
                 defaultView: 'agendaWeek',
-                events: '/${room.id}/events',
+	            events: '${pageContext.request.contextPath}/${room.id}/events',
                 dayClick: function() {
                     console.log(arguments);
                 }
             });
-
         });
     </script>
 

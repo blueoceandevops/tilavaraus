@@ -1,7 +1,16 @@
 package fi.xamk.tilavaraus.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Room {
+    @Id
+    @GeneratedValue
     private Long id;
+    @NotNull
     private String name;
     private String address;
     private Integer capacity;

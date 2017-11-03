@@ -11,7 +11,7 @@ public class Reservation {
     @Id
     @GeneratedValue
     private Long id;
-    @Transient
+    @ManyToOne
     private Room room;
     private Integer personCount;
     @NotNull

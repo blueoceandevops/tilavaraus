@@ -39,12 +39,11 @@ public class FooController {
     @GetMapping("/{id}/events")
     @ResponseBody
     public Iterable<FullCalendarEvent> getEvents(@PathVariable("id") Long id) {
-        List<FullCalendarEvent> events = StreamSupport.stream(reservationRepository.findAll().spliterator(), false)
-                .map(reservation -> new FullCalendarEvent(reservation.getId().toString(),
+	    return StreamSupport.stream(reservationRepository.findAll().spliterator(), false)
+			    .map(reservation -> new FullCalendarEvent(reservation.getId().toString(),
                         reservation.getId().toString(),
                         reservation.getStartTime(),
                         reservation.getEndTime())).collect(Collectors.toList());
-        return events;
     }
 
     @PostMapping("/{id}/reserve")

@@ -13,6 +13,8 @@
     <script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/lib/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/lib/moment.min.js"></script>
     <script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/fullcalendar.js"></script>
+    <script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/locale-all.js"></script>
+
 </head>
 <body>
 
@@ -35,12 +37,16 @@
 
         <input type="submit">
     </form>
-    <div id='calendar'></div>
+    <div id="calendar"></div>
     <script>
         $(document).ready(function() {
             $('#calendar').fullCalendar({
                 defaultView: 'agendaWeek',
 	            events: '${pageContext.request.contextPath}/${room.id}/events',
+	            locale: 'fi',
+	            firstDay: 1,
+	            hiddenDays: [0],
+	            allDaySlot: false,
 	            dayClick: function (date) {
 		            $('#startTime').val(date.format());
                 }

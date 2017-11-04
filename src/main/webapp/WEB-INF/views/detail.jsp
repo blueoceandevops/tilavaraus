@@ -16,10 +16,8 @@
 	<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/lib/moment.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/fullcalendar.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/locale-all.js"></script>
-
 </head>
 <body>
-
 <h1>${room.name}</h1>
 <form action="${pageContext.request.contextPath}/${room.id}/reserve" method="POST">
 	<label for="startTime"><spring:message code="reservation.startTime"/></label>
@@ -71,9 +69,6 @@
 			});
 		});
 	})(window.jQuery);
-
-
 </script>
-
 </body>
 </html>

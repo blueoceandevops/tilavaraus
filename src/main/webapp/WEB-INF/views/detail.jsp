@@ -18,6 +18,7 @@
 	<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/locale-all.js"></script>
 </head>
 <body>
+<jsp:include page="_header.jsp"/>
 <h1>${room.name}</h1>
 <form action="${pageContext.request.contextPath}/${room.id}/reserve" method="POST">
 	<label for="startTime"><spring:message code="reservation.startTime"/></label>

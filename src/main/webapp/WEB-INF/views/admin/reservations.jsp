@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<jsp:include page="../_header.jsp"/>
 <table class="table">
 	<jsp:useBean id="reservations" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Reservation>"/>
 	<tr>

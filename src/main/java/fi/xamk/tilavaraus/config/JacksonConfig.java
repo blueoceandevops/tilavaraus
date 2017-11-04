@@ -1,4 +1,4 @@
-package fi.xamk.tilavaraus;
+package fi.xamk.tilavaraus.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

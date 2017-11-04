@@ -18,7 +18,6 @@ public class Reservation {
 	private Instant startTime;
 	@NotNull
 	private Instant endTime;
-	@NotNull
 	private String user;
 	@ElementCollection
 	private List<String> additionalServices;

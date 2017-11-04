@@ -24,7 +24,7 @@ public class FooController {
 		this.reservationRepository = reservationRepository;
 	}
 
-	@GetMapping("/{id}/events")
+	@GetMapping("/rooms/{id}/events")
 	@ResponseBody
 	public Iterable<FullCalendarEvent> getEvents(@PathVariable("id") Long id) {
 		Room room = roomRepository.findById(id).get();
@@ -36,7 +36,7 @@ public class FooController {
 				.collect(Collectors.toList());
 	}
 
-	@PostMapping("/{id}/reserve")
+	@PostMapping("/rooms/{id}/reserve")
 	@ResponseBody
 	public String reserveRoom(@PathVariable("id") Long id,
 	                          @RequestParam("count") Integer count,
@@ -55,7 +55,7 @@ public class FooController {
 		return "Varattu tila " + id + " " + count + " henkilölle!";
 	}
 
-	@RequestMapping("/{id}")
+	@RequestMapping("/rooms/{id}")
 	public String roomDetail(Model model, @PathVariable("id") Long id) {
 		model.addAttribute("room", roomRepository.findById(id).get());
 		return "detail";

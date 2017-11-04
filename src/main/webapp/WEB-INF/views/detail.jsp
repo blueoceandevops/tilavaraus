@@ -28,7 +28,7 @@
 
 					$('#calendar').fullCalendar({
 						defaultView: 'agendaWeek',
-						events: '${pageContext.request.contextPath}/${room.id}/events',
+						events: '${pageContext.request.contextPath}/rooms/${room.id}/events',
 						locale: '${pageContext.response.locale}',
 						firstDay: 1,
 						hiddenDays: [0],
@@ -45,7 +45,7 @@
 	</jsp:attribute>
 	<jsp:body>
 		<h1>${room.name}</h1>
-		<form action="${pageContext.request.contextPath}/${room.id}/reserve" method="POST">
+		<form action="${pageContext.request.contextPath}/rooms/${room.id}/reserve" method="POST">
 			<label for="startTime"><spring:message code="reservation.startTime"/></label>
 			<input type="datetime-local" name="startTime" id="startTime" onchange="APP.updateDuration()">
 			<br>

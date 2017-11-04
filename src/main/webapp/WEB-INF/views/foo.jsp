@@ -7,7 +7,7 @@
 		<jsp:useBean id="rooms" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Room>"/>
 		<c:forEach items="${rooms}" var="room">
 			<li>
-				<a href="${pageContext.request.contextPath}/${room.id}">${room.name}</a>
+				<a href="${pageContext.request.contextPath}/rooms/${room.id}">${room.name}</a>
 				<p>${room.price}€ Max. ${room.capacity} henkilöä</p>
 			</li>
 		</c:forEach>

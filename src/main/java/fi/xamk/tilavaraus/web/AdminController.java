@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminController {
 
-    private final ReservationRepository reservationRepository;
+	private final ReservationRepository reservationRepository;
 
-    @Autowired
-    public AdminController(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
-    }
+	@Autowired
+	public AdminController(ReservationRepository reservationRepository) {
+		this.reservationRepository = reservationRepository;
+	}
 
-    @GetMapping("/admin/reservations")
-    public String listOrders(Model model) {
-        model.addAttribute("reservations", reservationRepository.findAll());
-        return "admin/reservations";
-    }
+	@GetMapping("/admin/reservations")
+	public String listOrders(Model model) {
+		model.addAttribute("reservations", reservationRepository.findAll());
+		return "admin/reservations";
+	}
 }

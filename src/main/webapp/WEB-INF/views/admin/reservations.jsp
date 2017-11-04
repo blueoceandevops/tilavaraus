@@ -1,5 +1,6 @@
 <%@page language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,12 +17,12 @@
 <table class="table">
 	<jsp:useBean id="reservations" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Reservation>"/>
 	<tr>
-		<th>Käyttäjä</th>
-		<th>Tilan nimi</th>
-		<th>Aloitusaika</th>
-		<th>Lopetusaika</th>
-		<th>Henkilömäärä</th>
-		<th>Oheispalvelut</th>
+		<th><spring:message code="reservation.user"/></th>
+		<th><spring:message code="room.name"/></th>
+		<th><spring:message code="reservation.startTime"/></th>
+		<th><spring:message code="reservation.endTime"/></th>
+		<th><spring:message code="reservation.personCount"/></th>
+		<th><spring:message code="reservation.additionalServices"/></th>
 	</tr>
 	<c:forEach items="${reservations}" var="reservation">
 		<tr>

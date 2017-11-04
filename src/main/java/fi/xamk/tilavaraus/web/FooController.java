@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -40,12 +42,13 @@ public class FooController {
 	                          @RequestParam("count") Integer count,
 	                          @RequestParam("startTime") String startTime,
 	                          @RequestParam("endTime") String endTime,
-	                          @RequestParam("additionalServices") List<String> additionalServices) {
+	                          @RequestParam("additionalServices") List<String> additionalServices,
+	                          Principal principal) {
 		Reservation reservation = new Reservation();
 		reservation.setPersonCount(count);
 		reservation.setStartTime(Instant.parse(startTime + ":00.00Z"));
 		reservation.setEndTime(Instant.parse(endTime + ":00.00Z"));
-		reservation.setUser("foo");
+		Optional.ofNullable(principal).map(Principal::getName).ifPresent(reservation::setUser);
 		reservation.setAdditionalServices(additionalServices);
 		reservation.setRoom(roomRepository.findById(id).get());
 		reservationRepository.save(reservation);

@@ -13,7 +13,7 @@
             <th><spring:message code="reservation.endTime"/></th>
             <th><spring:message code="reservation.personCount"/></th>
             <th><spring:message code="reservation.additionalServices"/></th>
-            <th>foo</th>
+            <th><spring:message code="actions"/></th>
         </tr>
         <c:forEach items="${reservations}" var="reservation">
             <tr>

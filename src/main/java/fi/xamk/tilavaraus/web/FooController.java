@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,6 @@ import java.security.Principal;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -53,23 +53,34 @@ public class FooController {
 	}
 
 	@PostMapping("/rooms/{id}/reserve")
-	@ResponseBody
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String reserveRoom(@PathVariable("id") Room room,
-							  @RequestParam("count") Integer count,
+	                          @RequestParam("count") Integer count,
 	                          @RequestParam("startTime") String startTime,
 	                          @RequestParam("endTime") String endTime,
 	                          @RequestParam("additionalServices") List<String> additionalServices,
+	                          BindingResult bindingResult,
 	                          Principal principal) {
+		Instant start = Instant.parse(startTime + ":00.00Z");
+		Instant end = Instant.parse(endTime + ":00.00Z");
+
+		if (!reservationRepository.findOverlapping(start, end, room).isEmpty()) {
+			throw new RuntimeException("Cannot make overlapping reservations!");
+		}
+
+		if (bindingResult.hasErrors()) {
+			return "redirect:/rooms/" + room.getId();
+		}
+
 		Reservation reservation = new Reservation();
 		reservation.setPersonCount(count);
-		reservation.setStartTime(Instant.parse(startTime + ":00.00Z"));
-		reservation.setEndTime(Instant.parse(endTime + ":00.00Z"));
-		Optional.ofNullable(principal).map(Principal::getName).ifPresent(reservation::setUser);
+		reservation.setStartTime(start);
+		reservation.setEndTime(end);
+		reservation.setUser(principal.getName());
 		reservation.setAdditionalServices(additionalServices);
 		reservation.setRoom(room);
 		reservationRepository.save(reservation);
-		return "Varattu tila " + room.getId() + " " + count + " henkilölle!";
+		return "redirect:/rooms/" + room.getId();
 	}
 
 	@RequestMapping("/rooms/{id}")

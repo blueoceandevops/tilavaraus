@@ -16,26 +16,26 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
+
+	private Room createRoom(Long id, String name, Integer capacity, Double price) {
+		Room r = new Room();
+		r.setId(id);
+		r.setName(name);
+		r.setCapacity(capacity);
+		r.setPrice(price);
+		return r;
+	}
+
 	@Bean
 	public CommandLineRunner populateRooms(RoomRepository roomRepository) {
-		return (args) -> {
-			Room r1 = new Room();
-			r1.setId(1L);
-			r1.setName("Mikpoli Sali");
-			r1.setCapacity(5);
-			r1.setPrice(10000.00);
-			Room r2 = new Room();
-			r2.setName("Vintti");
-			r2.setPrice(999.0);
-			r2.setCapacity(123);
-			r2.setId(2L);
-			Room r3 = new Room();
-			r3.setName("Kuitula");
-			r3.setPrice(123.0);
-			r3.setCapacity(999);
-			r3.setId(5L);
-			roomRepository.saveAll(Arrays.asList(r1, r2, r3));
-		};
+		return (args) ->
+				roomRepository.saveAll(Arrays.asList(
+						createRoom(1L, "Mikpolisali", 100, 160.0),
+						createRoom(2L, "Kuitula", 40, 200.0),
+						createRoom(3L, "Tallin vintti", 20, 90.0),
+						createRoom(4L, "MA325", 50, 80.0),
+						createRoom(5L, "MB124", 50, 60.0)
+				));
 	}
 
 }

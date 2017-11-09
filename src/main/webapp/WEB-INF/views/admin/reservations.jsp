@@ -5,7 +5,7 @@
 <jsp:useBean id="reservations" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Reservation>"/>
 
 <t:layout>
-	<table class="table">
+	<table class="table table-responsive">
 		<tr>
 			<th><spring:message code="reservation.user"/></th>
 			<th><spring:message code="room.name"/></th>

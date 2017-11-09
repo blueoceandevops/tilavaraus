@@ -6,8 +6,7 @@
 
 <t:layout>
     <h1><spring:message code="myReservations"/></h1>
-
-    <table class="table">
+    <table class="table table-responsive">
         <tr>
             <th><spring:message code="room.name"/></th>
             <th><spring:message code="reservation.startTime"/></th>
@@ -15,7 +14,6 @@
             <th><spring:message code="reservation.personCount"/></th>
             <th><spring:message code="reservation.additionalServices"/></th>
             <th>foo</th>
-
         </tr>
         <c:forEach items="${reservations}" var="reservation">
             <tr>

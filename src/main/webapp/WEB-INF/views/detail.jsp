@@ -14,31 +14,38 @@
 	</jsp:attribute>
 	<jsp:body>
 		<h1>${room.name}</h1>
-		<form action="${pageContext.request.contextPath}/rooms/${room.id}/reserve" method="POST">
-			<label for="startTime"><spring:message code="reservation.startTime"/></label>
-			<input type="datetime-local" name="startTime" id="startTime" onchange="APP.updateDuration()">
-			<br>
+		<img src="http://via.placeholder.com/350x150" alt="">
+		<div class="row">
+			<div class="col">
+				<div id="calendar"></div>
+			</div>
+			<div class="col">
+				<form action="${pageContext.request.contextPath}/rooms/${room.id}/reserve" method="POST">
+					<label for="startTime"><spring:message code="reservation.startTime"/></label>
+					<input type="datetime-local" name="startTime" id="startTime" onchange="APP.updateDuration()">
+					<br>
 
-			<label for="endTime"><spring:message code="reservation.endTime"/></label>
-			<input type="datetime-local" name="endTime" id="endTime" onchange="APP.updateDuration()">
-			<br>
+					<label for="endTime"><spring:message code="reservation.endTime"/></label>
+					<input type="datetime-local" name="endTime" id="endTime" onchange="APP.updateDuration()">
+					<br>
 
-			<div><spring:message code="reservation.duration"/>: <span id="duration"></span></div>
-			<br>
+					<div><spring:message code="reservation.duration"/>: <span id="duration"></span></div>
+					<br>
 
-			<label for="count"><spring:message code="reservation.personCount"/></label>
-			<input id="count" type="number" name="count" max="${room.capacity}">
-			<br>
+					<label for="count"><spring:message code="reservation.personCount"/></label>
+					<input id="count" type="number" name="count" max="${room.capacity}">
+					<br>
 
-			<c:forEach items="${additionalServices}" var="additionalService">
-				<input type="checkbox"
-				       name="additionalServices"
-				       value="${additionalService}"><spring:message code="${additionalService}"/><br>
-			</c:forEach>
+					<c:forEach items="${additionalServices}" var="additionalService">
+						<input type="checkbox"
+						       name="additionalServices"
+						       value="${additionalService}"><spring:message code="${additionalService}"/><br>
+					</c:forEach>
 
-			<input type="submit">
-		</form>
-		<div id="calendar"></div>
+					<input type="submit">
+				</form>
+			</div>
+		</div>
 		<script>
 			(($) => {
 				const durationBetween = (start, end) => moment.duration(start.diff(end));

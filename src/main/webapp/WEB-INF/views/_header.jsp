@@ -2,7 +2,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<nav class="navbar navbar-expand-sm bg-dark text-white navbar-default mb-4">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/">
 			<img src="https://www.xamk.fi/wp-content/themes/xamk/dist/images/logo_header.png" width="150px"

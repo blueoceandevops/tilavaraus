@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ tag description="Layout" pageEncoding="UTF-8" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="footer" fragment="true" %>
@@ -10,7 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#fbba18">
 	<link rel="manifest" href="${pageContext.request.contextPath}/manifest.json">
-	<title>Document</title>
+	<title><spring:message code="title"/></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	      integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

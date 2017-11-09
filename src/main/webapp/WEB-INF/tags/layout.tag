@@ -30,7 +30,7 @@
 <div class="container">
 	<jsp:doBody/>
 </div>
-<jsp:invoke fragment="footer"/>
+<jsp:include page="/WEB-INF/views/_footer.jsp"/>
 <script>
 	if ('serviceWorker' in navigator) {
 		navigator.serviceWorker.register('/service-worker.js')

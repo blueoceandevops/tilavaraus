@@ -13,6 +13,7 @@
 			<th><spring:message code="reservation.endTime"/></th>
 			<th><spring:message code="reservation.personCount"/></th>
 			<th><spring:message code="reservation.additionalServices"/></th>
+			<th>foo</th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
 			<tr>
@@ -28,7 +29,7 @@
 						</c:forEach>
 					</ul>
 				</td>
-
+				<td><a href="${pageContext.request.contextPath}/reservations/${reservation.id}/delete">Peruuta</a></td>
 			</tr>
 		</c:forEach>
 	</table>

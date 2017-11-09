@@ -20,11 +20,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.formLogin()
 				.and()
-				.csrf().disable();
+                .logout()
+                .and()
+                .csrf().disable();
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-	}
+        auth.inMemoryAuthentication()
+                .withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("user").password("user").roles("USER");
+    }
 }

@@ -27,8 +27,14 @@ public class DemoApplication {
 			Room r2 = new Room();
 			r2.setName("Vintti");
 			r2.setPrice(999.0);
+			r2.setCapacity(123);
 			r2.setId(2L);
-			roomRepository.saveAll(Arrays.asList(r1, r2));
+			Room r3 = new Room();
+			r3.setName("Kuitula");
+			r3.setPrice(123.0);
+			r3.setCapacity(999);
+			r3.setId(5L);
+			roomRepository.saveAll(Arrays.asList(r1, r2, r3));
 		};
 	}
 

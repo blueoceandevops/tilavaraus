@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -74,6 +75,7 @@ public class FooController {
 	@RequestMapping("/rooms/{id}")
 	public String roomDetail(Model model, @PathVariable("id") Room room) {
 		model.addAttribute("room", room);
+		model.addAttribute("additionalServices", Collections.singletonList("additionalServices.coffee"));
 		return "detail";
 	}
 

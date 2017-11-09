@@ -1,6 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="room" scope="request" type="fi.xamk.tilavaraus.domain.Room"/>
 
 <t:layout>
@@ -61,8 +62,11 @@
 			<input id="count" type="number" name="count" max="${room.capacity}">
 			<br>
 
-			<input type="checkbox" name="additionalServices" value="es">ES<br>
-			<input type="checkbox" name="additionalServices" value="kahvi">Kahvi<br>
+			<c:forEach items="${additionalServices}" var="additionalService">
+				<input type="checkbox"
+				       name="additionalServices"
+				       value="${additionalService}"><spring:message code="${additionalService}"/><br>
+			</c:forEach>
 
 			<input type="submit">
 		</form>

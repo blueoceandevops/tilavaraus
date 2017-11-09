@@ -22,7 +22,7 @@ public class DemoApplication {
 		r.setId(id);
 		r.setName(name);
 		r.setCapacity(capacity);
-		r.setPrice(price);
+		r.setHourlyPrice(price);
 		return r;
 	}
 

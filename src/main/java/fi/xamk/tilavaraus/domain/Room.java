@@ -14,15 +14,7 @@ public class Room {
 	private String name;
 	private String address;
 	private Integer capacity;
-	private Double price;
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+	private Double hourlyPrice;
 
 	public Integer getCapacity() {
 		return capacity;
@@ -54,5 +46,13 @@ public class Room {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Double getHourlyPrice() {
+		return hourlyPrice;
+	}
+
+	public void setHourlyPrice(Double hourlyPrice) {
+		this.hourlyPrice = hourlyPrice;
 	}
 }

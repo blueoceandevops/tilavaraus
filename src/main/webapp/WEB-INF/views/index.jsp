@@ -13,7 +13,7 @@
 					 alt="Card image cap">
 				<div class="card-body">
 					<h4 class="card-title">${room.name}</h4>
-					<p class="card-text">${room.price}€ Max. ${room.capacity} henkilöä</p>
+					<p class="card-text">${room.hourlyPrice}€/h Max. ${room.capacity} henkilöä</p>
 					<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="btn btn-primary">
 						<spring:message code="reserve"/>
 					</a>

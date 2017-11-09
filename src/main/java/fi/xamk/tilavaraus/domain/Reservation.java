@@ -22,6 +22,10 @@ public class Reservation {
 	@ElementCollection
 	private List<String> additionalServices;
 
+	public Double getTotalPrice() {
+		return getDuration().toHours() * getRoom().getHourlyPrice();
+	}
+
 	public Room getRoom() {
 		return room;
 	}

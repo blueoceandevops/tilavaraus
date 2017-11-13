@@ -16,10 +16,10 @@
 		<h1>${room.name}</h1>
 		<img src="http://via.placeholder.com/350x150" alt="">
 		<div class="row">
-			<div class="col">
+			<div class="col-sm">
 				<div id="calendar"></div>
 			</div>
-			<div class="col">
+			<div class="col-sm">
 				<form action="${pageContext.request.contextPath}/rooms/${room.id}/reserve" method="POST">
 					<label for="startTime"><spring:message code="reservation.startTime"/></label>
 					<input type="datetime-local" name="startTime" id="startTime" onchange="APP.updateDuration()">

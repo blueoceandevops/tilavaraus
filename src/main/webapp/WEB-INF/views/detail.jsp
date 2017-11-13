@@ -20,28 +20,42 @@
 			</div>
 			<div class="col-sm">
 				<form action="${pageContext.request.contextPath}/rooms/${room.id}/reserve" method="POST">
-					<label for="startTime"><spring:message code="reservation.startTime"/></label>
-					<input type="datetime-local" name="startTime" id="startTime" onchange="APP.updateDuration()">
-					<br>
+					<div class="form-group">
+						<label for="startTime"><spring:message code="reservation.startTime"/></label>
+						<input class="form-control" type="datetime-local" name="startTime" id="startTime"
+						       onchange="APP.updateDuration()">
+					</div>
 
-					<label for="endTime"><spring:message code="reservation.endTime"/></label>
-					<input type="datetime-local" name="endTime" id="endTime" onchange="APP.updateDuration()">
-					<br>
+					<div class="form-group">
+						<label for="endTime"><spring:message code="reservation.endTime"/></label>
+						<input class="form-control" type="datetime-local" name="endTime" id="endTime"
+						       onchange="APP.updateDuration()">
+						<small class="form-text text-muted"><spring:message code="reservation.duration"/>: <span
+								id="duration"></span></small>
+					</div>
 
-					<div><spring:message code="reservation.duration"/>: <span id="duration"></span></div>
-					<br>
+					<div class="form-group">
+						<label for="count"><spring:message code="reservation.personCount"/></label>
+						<input class="form-control" id="count" type="number" name="count" min="0"
+						       max="${room.capacity}">
+					</div>
 
-					<label for="count"><spring:message code="reservation.personCount"/></label>
-					<input id="count" type="number" name="count" min="0" max="${room.capacity}">
-					<br>
+					<fieldset class="form-group">
+						<legend><spring:message code="reservation.additionalServices"/></legend>
+						<c:forEach items="${additionalServices}" var="additionalService">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input type="checkbox"
+									       name="additionalServices"
+									       class="form-check-input"
+									       value="${additionalService}">
+									<spring:message code="${additionalService}"/>
+								</label>
+							</div>
+						</c:forEach>
+					</fieldset>
 
-					<c:forEach items="${additionalServices}" var="additionalService">
-						<input type="checkbox"
-						       name="additionalServices"
-						       value="${additionalService}"><spring:message code="${additionalService}"/><br>
-					</c:forEach>
-
-					<input type="submit">
+					<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
 				</form>
 			</div>
 		</div>

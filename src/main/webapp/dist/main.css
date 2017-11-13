@@ -94,7 +94,6 @@
     .table {
         border-collapse: collapse !important;
     }
-
     .table td,
     .table th {
         background-color: #fff !important;
@@ -567,7 +566,7 @@ mark,
     padding: 0.25rem;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 0.25rem;
+    border-radius: 0;
     transition: all 0.2s ease-in-out;
     max-width: 100%;
     height: auto;
@@ -599,7 +598,7 @@ code {
     font-size: 90%;
     color: #bd4147;
     background-color: #f8f9fa;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 a > code {
@@ -1810,7 +1809,6 @@ pre code {
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
-
     .table-responsive-sm.table-bordered {
         border: 0;
     }
@@ -1824,7 +1822,6 @@ pre code {
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
-
     .table-responsive-md.table-bordered {
         border: 0;
     }
@@ -1838,7 +1835,6 @@ pre code {
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
-
     .table-responsive-lg.table-bordered {
         border: 0;
     }
@@ -1852,7 +1848,6 @@ pre code {
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
-
     .table-responsive-xl.table-bordered {
         border: 0;
     }
@@ -1881,7 +1876,7 @@ pre code {
     background-image: none;
     background-clip: padding-box;
     border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border-radius: 0;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
@@ -2206,7 +2201,6 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
         justify-content: center;
         margin-bottom: 0;
     }
-
     .form-inline .form-group {
         display: flex;
         flex: 0 0 auto;
@@ -2214,21 +2208,17 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
         align-items: center;
         margin-bottom: 0;
     }
-
     .form-inline .form-control {
         display: inline-block;
         width: auto;
         vertical-align: middle;
     }
-
     .form-inline .form-control-plaintext {
         display: inline-block;
     }
-
     .form-inline .input-group {
         width: auto;
     }
-
     .form-inline .form-check {
         display: flex;
         align-items: center;
@@ -2237,32 +2227,27 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
         margin-top: 0;
         margin-bottom: 0;
     }
-
     .form-inline .form-check-label {
         padding-left: 0;
     }
-
     .form-inline .form-check-input {
         position: relative;
         margin-top: 0;
         margin-right: 0.25rem;
         margin-left: 0;
     }
-
     .form-inline .custom-control {
         display: flex;
         align-items: center;
         justify-content: center;
         padding-left: 0;
     }
-
     .form-inline .custom-control-indicator {
         position: static;
         display: inline-block;
         margin-right: 0.25rem;
         vertical-align: text-bottom;
     }
-
     .form-inline .has-feedback .form-control-feedback {
         top: 0;
     }
@@ -2279,7 +2264,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
+    border-radius: 0;
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -2899,7 +2884,7 @@ tbody.collapse.show {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .dropup .dropdown-menu {
@@ -3181,7 +3166,7 @@ tbody.collapse.show {
     text-align: center;
     background-color: #e9ecef;
     border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .input-group-addon.form-control-sm,
@@ -3333,7 +3318,7 @@ tbody.collapse.show {
 }
 
 .custom-checkbox .custom-control-indicator {
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-indicator {
@@ -3377,7 +3362,7 @@ tbody.collapse.show {
     background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
     background-size: 8px 10px;
     border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border-radius: 0;
     appearance: none;
 }
 
@@ -3446,7 +3431,7 @@ tbody.collapse.show {
     user-select: none;
     background-color: #fff;
     border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .custom-file-control:lang(en):empty::after {
@@ -3466,7 +3451,7 @@ tbody.collapse.show {
     color: #495057;
     background-color: #e9ecef;
     border: 1px solid #ced4da;
-    border-radius: 0 0.25rem 0.25rem 0;
+    border-radius: 0 0 0 0;
 }
 
 .custom-file-control:lang(en)::before {
@@ -3504,8 +3489,8 @@ tbody.collapse.show {
 
 .nav-tabs .nav-link {
     border: 1px solid transparent;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
@@ -3532,7 +3517,7 @@ tbody.collapse.show {
 }
 
 .nav-pills .nav-link {
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .nav-pills .nav-link.active,
@@ -3627,7 +3612,7 @@ tbody.collapse.show {
     line-height: 1;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .navbar-toggler:focus, .navbar-toggler:hover {
@@ -3657,7 +3642,6 @@ tbody.collapse.show {
         flex-flow: row nowrap;
         justify-content: flex-start;
     }
-
     .navbar-expand-sm .navbar-nav {
         flex-direction: row;
     }
@@ -3675,21 +3659,17 @@ tbody.collapse.show {
         padding-right: .5rem;
         padding-left: .5rem;
     }
-
     .navbar-expand-sm > .container,
     .navbar-expand-sm > .container-fluid {
         flex-wrap: nowrap;
     }
-
     .navbar-expand-sm .navbar-collapse {
         display: flex !important;
         flex-basis: auto;
     }
-
     .navbar-expand-sm .navbar-toggler {
         display: none;
     }
-
     .navbar-expand-sm .dropup .dropdown-menu {
         top: auto;
         bottom: 100%;
@@ -3709,7 +3689,6 @@ tbody.collapse.show {
         flex-flow: row nowrap;
         justify-content: flex-start;
     }
-
     .navbar-expand-md .navbar-nav {
         flex-direction: row;
     }
@@ -3727,21 +3706,17 @@ tbody.collapse.show {
         padding-right: .5rem;
         padding-left: .5rem;
     }
-
     .navbar-expand-md > .container,
     .navbar-expand-md > .container-fluid {
         flex-wrap: nowrap;
     }
-
     .navbar-expand-md .navbar-collapse {
         display: flex !important;
         flex-basis: auto;
     }
-
     .navbar-expand-md .navbar-toggler {
         display: none;
     }
-
     .navbar-expand-md .dropup .dropdown-menu {
         top: auto;
         bottom: 100%;
@@ -3761,7 +3736,6 @@ tbody.collapse.show {
         flex-flow: row nowrap;
         justify-content: flex-start;
     }
-
     .navbar-expand-lg .navbar-nav {
         flex-direction: row;
     }
@@ -3779,21 +3753,17 @@ tbody.collapse.show {
         padding-right: .5rem;
         padding-left: .5rem;
     }
-
     .navbar-expand-lg > .container,
     .navbar-expand-lg > .container-fluid {
         flex-wrap: nowrap;
     }
-
     .navbar-expand-lg .navbar-collapse {
         display: flex !important;
         flex-basis: auto;
     }
-
     .navbar-expand-lg .navbar-toggler {
         display: none;
     }
-
     .navbar-expand-lg .dropup .dropdown-menu {
         top: auto;
         bottom: 100%;
@@ -3813,7 +3783,6 @@ tbody.collapse.show {
         flex-flow: row nowrap;
         justify-content: flex-start;
     }
-
     .navbar-expand-xl .navbar-nav {
         flex-direction: row;
     }
@@ -3831,21 +3800,17 @@ tbody.collapse.show {
         padding-right: .5rem;
         padding-left: .5rem;
     }
-
     .navbar-expand-xl > .container,
     .navbar-expand-xl > .container-fluid {
         flex-wrap: nowrap;
     }
-
     .navbar-expand-xl .navbar-collapse {
         display: flex !important;
         flex-basis: auto;
     }
-
     .navbar-expand-xl .navbar-toggler {
         display: none;
     }
-
     .navbar-expand-xl .dropup .dropdown-menu {
         top: auto;
         bottom: 100%;
@@ -4005,7 +3970,7 @@ tbody.collapse.show {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .card > hr {
@@ -4014,13 +3979,13 @@ tbody.collapse.show {
 }
 
 .card > .list-group:first-child .list-group-item:first-child {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .card > .list-group:last-child .list-group-item:last-child {
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .card-body {
@@ -4057,7 +4022,7 @@ tbody.collapse.show {
 }
 
 .card-header:first-child {
-    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+    border-radius: calc(0 - 1px) calc(0 - 1px) 0 0;
 }
 
 .card-header + .list-group .list-group-item:first-child {
@@ -4071,7 +4036,7 @@ tbody.collapse.show {
 }
 
 .card-footer:last-child {
-    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+    border-radius: 0 0 calc(0 - 1px) calc(0 - 1px);
 }
 
 .card-header-tabs {
@@ -4097,19 +4062,19 @@ tbody.collapse.show {
 
 .card-img {
     width: 100%;
-    border-radius: calc(0.25rem - 1px);
+    border-radius: calc(0 - 1px);
 }
 
 .card-img-top {
     width: 100%;
-    border-top-left-radius: calc(0.25rem - 1px);
-    border-top-right-radius: calc(0.25rem - 1px);
+    border-top-left-radius: calc(0 - 1px);
+    border-top-right-radius: calc(0 - 1px);
 }
 
 .card-img-bottom {
     width: 100%;
-    border-bottom-right-radius: calc(0.25rem - 1px);
-    border-bottom-left-radius: calc(0.25rem - 1px);
+    border-bottom-right-radius: calc(0 - 1px);
+    border-bottom-left-radius: calc(0 - 1px);
 }
 
 .card-deck {
@@ -4189,17 +4154,17 @@ tbody.collapse.show {
     }
 
     .card-group .card:only-child {
-        border-radius: 0.25rem;
+        border-radius: 0;
     }
 
     .card-group .card:only-child .card-img-top {
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 
     .card-group .card:only-child .card-img-bottom {
-        border-bottom-right-radius: 0.25rem;
-        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
     .card-group .card:not(:first-child):not(:last-child):not(:only-child) {
@@ -4221,7 +4186,6 @@ tbody.collapse.show {
         column-count: 3;
         column-gap: 1.25rem;
     }
-
     .card-columns .card {
         display: inline-block;
         width: 100%;
@@ -4235,7 +4199,7 @@ tbody.collapse.show {
     margin-bottom: 1rem;
     list-style: none;
     background-color: #e9ecef;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -4262,18 +4226,18 @@ tbody.collapse.show {
     display: flex;
     padding-left: 0;
     list-style: none;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .page-item:first-child .page-link {
     margin-left: 0;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .page-item:last-child .page-link {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .page-item.active .page-link {
@@ -4349,7 +4313,7 @@ tbody.collapse.show {
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .badge:empty {
@@ -4479,7 +4443,7 @@ tbody.collapse.show {
     padding: 0.75rem 1.25rem;
     margin-bottom: 1rem;
     border: 1px solid transparent;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .alert-heading {
@@ -4625,7 +4589,7 @@ tbody.collapse.show {
     overflow: hidden;
     font-size: 0.75rem;
     background-color: #e9ecef;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .progress-bar {
@@ -4688,14 +4652,14 @@ tbody.collapse.show {
 }
 
 .list-group-item:first-child {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .list-group-item:last-child {
     margin-bottom: 0;
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .list-group-item:focus, .list-group-item:hover {
@@ -5185,7 +5149,7 @@ button.close {
     color: #fff;
     text-align: center;
     background-color: #000;
-    border-radius: 0.25rem;
+    border-radius: 0;
 }
 
 .popover {
@@ -5704,27 +5668,27 @@ a.bg-dark:focus, a.bg-dark:hover {
 }
 
 .rounded {
-    border-radius: 0.25rem !important;
+    border-radius: 0 !important;
 }
 
 .rounded-top {
-    border-top-left-radius: 0.25rem !important;
-    border-top-right-radius: 0.25rem !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
 
 .rounded-right {
-    border-top-right-radius: 0.25rem !important;
-    border-bottom-right-radius: 0.25rem !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 .rounded-bottom {
-    border-bottom-right-radius: 0.25rem !important;
-    border-bottom-left-radius: 0.25rem !important;
+    border-bottom-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
 }
 
 .rounded-left {
-    border-top-left-radius: 0.25rem !important;
-    border-bottom-left-radius: 0.25rem !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
 }
 
 .rounded-circle {

@@ -97,6 +97,7 @@
 						allDaySlot: false,
 						selectable: true,
 						selectHelper: true,
+						selectLongPressDelay: 500,
 						select: (start, end) => {
 							console.log({start, end});
 							$startTime.val(start.format(FORMAT));

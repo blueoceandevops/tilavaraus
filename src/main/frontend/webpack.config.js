@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry: {
@@ -16,7 +17,7 @@ module.exports = {
 			{
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
-					use: [{loader: 'css-loader'}, {loader: 'sass-loader'}],
+					use: [{loader: 'css-loader', options: {minimize: true}}, {loader: 'sass-loader'}],
 					fallback: 'style-loader'
 				})
 			},
@@ -24,7 +25,7 @@ module.exports = {
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: ['css-loader']
+					use: [{loader: 'css-loader', options: {minimize: true}}]
 				})
 			}
 		]
@@ -36,6 +37,7 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'main',
 			minChunks: 2
-		})
+		}),
+		new UglifyJSPlugin()
 	]
 };

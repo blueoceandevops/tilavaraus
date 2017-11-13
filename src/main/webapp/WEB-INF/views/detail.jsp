@@ -33,7 +33,7 @@
 					<br>
 
 					<label for="count"><spring:message code="reservation.personCount"/></label>
-					<input id="count" type="number" name="count" max="${room.capacity}">
+					<input id="count" type="number" name="count" min="0" max="${room.capacity}">
 					<br>
 
 					<c:forEach items="${additionalServices}" var="additionalService">

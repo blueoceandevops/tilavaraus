@@ -2,6 +2,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
 	<div class="container">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/">

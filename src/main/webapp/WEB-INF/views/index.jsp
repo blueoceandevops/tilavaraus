@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<jsp:useBean id="rooms" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Room>"/>
 
 <t:layout>
 	<jsp:attribute name="head">

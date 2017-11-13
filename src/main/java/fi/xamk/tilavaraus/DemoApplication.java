@@ -20,13 +20,13 @@ public class DemoApplication {
 	}
 
 
-	private Room createRoom(Long id, String name, Integer capacity, Double price) {
+	private Room createRoom(Long id, String name, Integer capacity, Double price, String thumbnailSrc) {
 		Room r = new Room();
 		r.setId(id);
 		r.setName(name);
 		r.setCapacity(capacity);
 		r.setHourlyPrice(BigDecimal.valueOf(price));
-		r.setThumbnailSrc("https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg");
+		r.setThumbnailSrc(thumbnailSrc);
 		return r;
 	}
 
@@ -34,11 +34,11 @@ public class DemoApplication {
 	public CommandLineRunner populateRooms(RoomRepository roomRepository) {
 		return (args) ->
 				roomRepository.saveAll(Arrays.asList(
-						createRoom(1L, "Mikpolisali", 100, 160.0),
-						createRoom(2L, "Kuitula", 40, 200.0),
-						createRoom(3L, "Tallin vintti", 20, 90.0),
-						createRoom(4L, "MA325", 50, 80.0),
-						createRoom(5L, "MB124", 50, 60.0)
+						createRoom(1L, "Mikpolisali", 117, 160.0, "https://www.mamk.fi/instancedata/prime_product_julkaisu/mamk/embeds/mamkwwwstructure/4d66e38507bc56bd4e080110da7cd9a53e9d899a.jpg"),
+						createRoom(2L, "Kuitula", 22, 200.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"),
+						createRoom(3L, "Tallin vintti", 40, 90.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/talli_ylakerta-1920x725.jpg"),
+						createRoom(4L, "MA325", 9999, 80.0, "https://via.placeholder.com/350x150"),
+						createRoom(5L, "MB124", 9999, 60.0, "https://via.placeholder.com/350x150")
 				));
 	}
 

@@ -34,7 +34,7 @@ public class DemoApplication {
 	public CommandLineRunner populateRooms(RoomRepository roomRepository) {
 		return (args) ->
 				roomRepository.saveAll(Arrays.asList(
-						createRoom(1L, "Mikpolisali", 117, 160.0, "https://www.mamk.fi/instancedata/prime_product_julkaisu/mamk/embeds/mamkwwwstructure/4d66e38507bc56bd4e080110da7cd9a53e9d899a.jpg"),
+						createRoom(1L, "Mikpolisali", 117, 160.0, "/img/mikpolisali.jpg"),
 						createRoom(2L, "Kuitula", 22, 200.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"),
 						createRoom(3L, "Tallin vintti", 40, 90.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/talli_ylakerta-1920x725.jpg"),
 						createRoom(4L, "MA325", 9999, 80.0, "https://via.placeholder.com/350x150"),

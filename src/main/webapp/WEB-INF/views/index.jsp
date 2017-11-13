@@ -18,7 +18,7 @@
 				<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="link-unstyled">
 					<div class="card">
 						<img class="card-img-top"
-						     src="${room.thumbnailSrc}"
+						     src="<spring:url value="${room.thumbnailSrc}"/>"
 						     alt="Card image cap">
 						<div class="card-body">
 							<h4 class="card-title">${room.name}</h4>

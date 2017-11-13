@@ -6,12 +6,13 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
 	devtool: 'source-map',
 	entry: {
-		detail: './src/detail.js',
-		main: ['bootstrap/js/src/index', './src/main.js'],
+		'dist/detail': './src/detail.js',
+		'service-worker': './src/service-worker.js',
+		'dist/main': ['bootstrap/js/src/index', './src/main.js'],
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, '../webapp/dist/')
+		path: path.resolve(__dirname, '../webapp/')
 	},
 	module: {
 		rules: [
@@ -36,11 +37,14 @@ module.exports = {
 			filename: '[name].css'
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'main',
-			minChunks: 2
+			name: 'dist/main',
+			chunks: ['dist/main', 'dist/detail']
 		}),
 		new UglifyJSPlugin({
 			sourceMap: true
+		}),
+		new webpack.DefinePlugin({
+			PRECACHE: JSON.stringify(new Date().toISOString())
 		})
 	]
 };

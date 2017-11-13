@@ -86,6 +86,8 @@
 						}
 					};
 
+					const FORMAT = 'YYYY-MM-DD[T]hh:mm';
+
 					$('#calendar').fullCalendar({
 						defaultView: 'agendaWeek',
 						events: '${pageContext.request.contextPath}/rooms/${room.id}/events',
@@ -93,9 +95,17 @@
 						firstDay: 1,
 						hiddenDays: [0],
 						allDaySlot: false,
+						selectable: true,
+						selectHelper: true,
+						select: (start, end) => {
+							console.log({start, end});
+							$startTime.val(start.format(FORMAT));
+							$endTime.val(end.format(FORMAT));
+							APP.updateDuration();
+						},
 						dayClick: function (date) {
-							$startTime.val(date.format());
-							$endTime.val(date.add({hours: 1}).format());
+							$startTime.val(date.format(FORMAT));
+							$endTime.val(date.add({hours: 1}).format(FORMAT));
 							APP.updateDuration();
 						}
 					});

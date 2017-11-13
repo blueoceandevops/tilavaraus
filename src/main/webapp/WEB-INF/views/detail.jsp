@@ -5,11 +5,11 @@
 
 <t:layout>
 	<jsp:attribute name="head">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/fullcalendar.css">
-		<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/lib/jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/lib/moment.min.js"></script>
-		<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/fullcalendar.js"></script>
-		<script src="${pageContext.request.contextPath}/lib/fullcalendar-3.6.2/locale-all.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/detail.css">
+		<script>
+			window.eventsUrl = '${pageContext.request.contextPath}/rooms/${room.id}/events';
+			window.locale = '${pageContext.response.locale}';
+		</script>
 	</jsp:attribute>
 	<jsp:body>
 		<h1>${room.name}</h1>
@@ -73,46 +73,6 @@
 				</form>
 			</div>
 		</div>
-		<script>
-			(($) => {
-				const durationBetween = (start, end) => moment.duration(start.diff(end));
-
-				$(() => {
-					const [$startTime, $endTime, $duration] = [$('#startTime'), $('#endTime'), $('#duration')];
-
-					window.APP = {
-						updateDuration: () => {
-							$duration.text(durationBetween(moment($startTime.val()), moment($endTime.val())).humanize());
-						}
-					};
-
-					const FORMAT = 'YYYY-MM-DD[T]hh:mm';
-
-					$('#calendar').fullCalendar({
-						defaultView: 'agendaWeek',
-						events: '${pageContext.request.contextPath}/rooms/${room.id}/events',
-						locale: '${pageContext.response.locale}',
-						firstDay: 1,
-						hiddenDays: [0],
-						allDaySlot: false,
-						selectable: true,
-						selectHelper: true,
-						selectLongPressDelay: 500,
-						unselectCancel: '#reservationForm',
-						select: (start, end) => {
-							console.log({start, end});
-							$startTime.val(start.format(FORMAT));
-							$endTime.val(end.format(FORMAT));
-							APP.updateDuration();
-						},
-						dayClick: function (date) {
-							$startTime.val(date.format(FORMAT));
-							$endTime.val(date.add({hours: 1}).format(FORMAT));
-							APP.updateDuration();
-						}
-					});
-				});
-			})(window.jQuery);
-		</script>
+		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:body>
 </t:layout>

@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "4.0.0-beta.2",
+    "fullcalendar": "^3.6.2"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "jquery": "^3.2.1",
+    "moment": "^2.19.2",
+    "node-sass": "^4.6.1",
+    "popper.js": "^1.12.7",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1"
+  }
+}

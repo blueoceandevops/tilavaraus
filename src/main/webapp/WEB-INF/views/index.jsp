@@ -19,7 +19,7 @@
 				<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="link-unstyled">
 					<div class="card">
 						<img class="card-img-top"
-						     src="https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"
+						     src="${room.thumbnailSrc}"
 						     alt="Card image cap">
 						<div class="card-body">
 							<h4 class="card-title">${room.name}</h4>

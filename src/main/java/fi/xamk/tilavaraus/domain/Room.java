@@ -16,6 +16,7 @@ public class Room {
 	private String address;
 	private Integer capacity;
 	private BigDecimal hourlyPrice;
+	private String thumbnailSrc;
 
 	public Integer getCapacity() {
 		return capacity;
@@ -55,5 +56,13 @@ public class Room {
 
 	public void setHourlyPrice(BigDecimal hourlyPrice) {
 		this.hourlyPrice = hourlyPrice;
+	}
+
+	public String getThumbnailSrc() {
+		return thumbnailSrc;
+	}
+
+	public void setThumbnailSrc(String thumbnailSrc) {
+		this.thumbnailSrc = thumbnailSrc;
 	}
 }

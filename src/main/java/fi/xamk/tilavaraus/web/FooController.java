@@ -57,7 +57,7 @@ public class FooController {
 	                          @RequestParam("count") Integer count,
 	                          @RequestParam("startTime") String startTime,
 	                          @RequestParam("endTime") String endTime,
-	                          @RequestParam("additionalServices") List<String> additionalServices,
+	                          @RequestParam(value = "additionalServices", required = false) List<String> additionalServices,
 	                          @AuthenticationPrincipal MyUserDetails myUserDetails) {
 		Instant start = Instant.parse(startTime + ":00.00Z");
 		Instant end = Instant.parse(endTime + ":00.00Z");

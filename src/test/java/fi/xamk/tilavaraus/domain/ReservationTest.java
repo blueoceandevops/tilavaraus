@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
@@ -19,8 +20,8 @@ public class ReservationTest {
 		reservation.setStartTime(epoch);
 		reservation.setEndTime(epoch.plus(2, ChronoUnit.HOURS));
 		Room room = new Room();
-		room.setHourlyPrice(15.0);
+		room.setHourlyPrice(BigDecimal.valueOf(15.0));
 		reservation.setRoom(room);
-		assertEquals(30.0, reservation.getTotalPrice(), 0.001);
+		assertEquals(BigDecimal.valueOf(30.0), reservation.getTotalPrice());
 	}
 }

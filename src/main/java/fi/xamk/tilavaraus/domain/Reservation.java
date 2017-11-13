@@ -2,6 +2,7 @@ package fi.xamk.tilavaraus.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
@@ -23,8 +24,8 @@ public class Reservation {
 	@ElementCollection
 	private List<String> additionalServices;
 
-	public Double getTotalPrice() {
-		return getDuration().toHours() * getRoom().getHourlyPrice();
+	public BigDecimal getTotalPrice() {
+		return getRoom().getHourlyPrice().multiply(BigDecimal.valueOf(getDuration().toHours()));
 	}
 
 	public Room getRoom() {

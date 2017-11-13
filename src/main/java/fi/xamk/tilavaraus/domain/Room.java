@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Entity
 public class Room {
@@ -14,7 +15,7 @@ public class Room {
 	private String name;
 	private String address;
 	private Integer capacity;
-	private Double hourlyPrice;
+	private BigDecimal hourlyPrice;
 
 	public Integer getCapacity() {
 		return capacity;
@@ -48,11 +49,11 @@ public class Room {
 		this.id = id;
 	}
 
-	public Double getHourlyPrice() {
+	public BigDecimal getHourlyPrice() {
 		return hourlyPrice;
 	}
 
-	public void setHourlyPrice(Double hourlyPrice) {
+	public void setHourlyPrice(BigDecimal hourlyPrice) {
 		this.hourlyPrice = hourlyPrice;
 	}
 }

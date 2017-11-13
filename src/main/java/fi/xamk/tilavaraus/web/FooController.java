@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,17 +58,12 @@ public class FooController {
 	                          @RequestParam("startTime") String startTime,
 	                          @RequestParam("endTime") String endTime,
 	                          @RequestParam("additionalServices") List<String> additionalServices,
-	                          BindingResult bindingResult,
 	                          Principal principal) {
 		Instant start = Instant.parse(startTime + ":00.00Z");
 		Instant end = Instant.parse(endTime + ":00.00Z");
 
 		if (!reservationRepository.findOverlapping(start, end, room).isEmpty()) {
 			throw new RuntimeException("Cannot make overlapping reservations!");
-		}
-
-		if (bindingResult.hasErrors()) {
-			return "redirect:/rooms/" + room.getId();
 		}
 
 		Reservation reservation = new Reservation();

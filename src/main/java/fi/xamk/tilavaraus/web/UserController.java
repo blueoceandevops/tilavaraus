@@ -22,6 +22,11 @@ public class UserController {
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	@GetMapping("/login")
+	public String showLoginForm() {
+		return "login";
+	}
+
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());

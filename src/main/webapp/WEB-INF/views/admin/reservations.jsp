@@ -24,7 +24,7 @@
 				<td>
 					<ul>
 						<c:forEach items="${reservation.additionalServices}" var="additionalService">
-							<li>${additionalService}</li>
+							<li><spring:message code="${additionalService}"/></li>
 						</c:forEach>
 					</ul>
 				</td>

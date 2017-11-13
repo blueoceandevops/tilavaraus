@@ -51,7 +51,7 @@ public class FooController {
 				.collect(Collectors.toList());
 	}
 
-	@PostMapping("/rooms/{id}/reserve")
+	@PostMapping("/rooms/{id}")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String reserveRoom(@PathVariable("id") Room room,
 	                          @RequestParam("count") Integer count,
@@ -78,14 +78,14 @@ public class FooController {
 	}
 
 	@RequestMapping("/rooms/{id}")
-	public String roomDetail(Model model, @PathVariable("id") Room room) {
+	public String roomDetail(@PathVariable("id") Room room, Model model) {
 		model.addAttribute("room", room);
 		model.addAttribute("additionalServices", Collections.singletonList("additionalServices.coffee"));
 		return "detail";
 	}
 
 	@RequestMapping("/")
-	public String foo(Model model) {
+	public String index(Model model) {
 		model.addAttribute("rooms", roomRepository.findAll());
 		return "index";
 	}

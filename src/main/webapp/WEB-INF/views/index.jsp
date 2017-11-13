@@ -15,7 +15,7 @@
 	<jsp:body>
 		<div class="card-columns">
 			<c:forEach items="${rooms}" var="room">
-				<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="link-unstyled">
+				<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}" class="link-unstyled">
 					<div class="card">
 						<img class="card-img-top"
 						     src="<spring:url value="${room.thumbnailSrc}"/>"
@@ -26,7 +26,7 @@
 								<li>${room.hourlyPrice}€/h</li>
 								<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
 							</ul>
-							<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="btn btn-primary">
+							<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}" class="btn btn-primary">
 								<spring:message code="reserve"/>
 							</a>
 						</div>

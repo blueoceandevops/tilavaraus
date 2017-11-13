@@ -19,7 +19,7 @@
 				<div id="calendar"></div>
 			</div>
 			<div class="col-sm">
-				<form action="${pageContext.request.contextPath}/rooms/${room.id}" method="POST">
+				<form id="reservationForm" action="${pageContext.request.contextPath}/rooms/${room.id}" method="POST">
 					<div class="form-group">
 						<label for="startTime"><spring:message code="reservation.startTime"/></label>
 						<input class="form-control"
@@ -98,6 +98,7 @@
 						selectable: true,
 						selectHelper: true,
 						selectLongPressDelay: 500,
+						unselectCancel: '#reservationForm',
 						select: (start, end) => {
 							console.log({start, end});
 							$startTime.val(start.format(FORMAT));

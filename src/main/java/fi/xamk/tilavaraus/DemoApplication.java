@@ -2,10 +2,13 @@ package fi.xamk.tilavaraus;
 
 import fi.xamk.tilavaraus.domain.Room;
 import fi.xamk.tilavaraus.domain.RoomRepository;
+import fi.xamk.tilavaraus.domain.User;
+import fi.xamk.tilavaraus.domain.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -37,6 +40,17 @@ public class DemoApplication {
 						createRoom(4L, "MA325", 50, 80.0),
 						createRoom(5L, "MB124", 50, 60.0)
 				));
+	}
+
+	@Bean
+	public CommandLineRunner addAdminUser(UserRepository userRepository) {
+		return (args) -> {
+			User user = new User();
+			user.setEmail("admin@admin");
+			user.setPassword("$2a$10$QcKi3mvVHXrgPX1leqbbqO6s2UQCYKME3aU6KcLjVSjDb3gj1NsNe");
+			user.setRole("ROLE_ADMIN");
+			userRepository.save(user);
+		};
 	}
 
 }

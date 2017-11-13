@@ -16,7 +16,7 @@
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
 			<tr>
-				<td>${reservation.user}</td>
+				<td>${reservation.user.email}</td>
 				<td>${reservation.room.name}</td>
 				<td>${reservation.startTime}</td>
 				<td>${reservation.endTime}</td>

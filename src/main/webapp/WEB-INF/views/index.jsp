@@ -13,7 +13,10 @@
 					 alt="Card image cap">
 				<div class="card-body">
 					<h4 class="card-title">${room.name}</h4>
-					<p class="card-text">${room.hourlyPrice}€/h Max. ${room.capacity} henkilöä</p>
+					<ul class="list-unstyled">
+						<li>${room.hourlyPrice}€/h</li>
+						<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
+					</ul>
 					<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="btn btn-primary">
 						<spring:message code="reserve"/>
 					</a>
@@ -21,7 +24,6 @@
 			</div>
 		</c:forEach>
 	</div>
-
 </t:layout>
 
 

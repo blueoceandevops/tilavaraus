@@ -7,7 +7,8 @@
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/">
 			<img src="https://www.xamk.fi/wp-content/themes/xamk/dist/images/logo_header.png"
 			     width="150px"
-			     alt="placeholder.png">
+			     alt="<spring:message code="title"/>">
+			<spring:message code="title"/>
 		</a>
 		<button class="navbar-toggler"
 		        type="button"
@@ -28,7 +29,7 @@
 						   data-toggle="dropdown"
 						   aria-haspopup="true"
 						   aria-expanded="false">
-							authenticated as <security:authentication property="principal.username"/>
+							<security:authentication property="principal.username"/>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item"
@@ -52,6 +53,8 @@
 						<a class="nav-link" href="${pageContext.request.contextPath}/register">
 							<spring:message code="register"/>
 						</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link" href="${pageContext.request.contextPath}/login">
 							<spring:message code="login"/>
 						</a>

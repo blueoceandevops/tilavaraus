@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Long> {
 	List<Reservation> findByRoom(Room room);
-	List<Reservation> findByUser(String user);
+
+	List<Reservation> findByUser(User user);
 
 	@Query("select r from Reservation r where " +
 			"(r.startTime between ?1 and ?2 or r.endTime between ?1 and ?2) or " +

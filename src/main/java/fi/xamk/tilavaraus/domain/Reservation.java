@@ -18,7 +18,8 @@ public class Reservation {
 	private Instant startTime;
 	@NotNull
 	private Instant endTime;
-	private String user;
+	@ManyToOne
+	private User user;
 	@ElementCollection
 	private List<String> additionalServices;
 
@@ -62,11 +63,11 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public String getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(String user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

@@ -15,10 +15,10 @@
 		<h1>${room.name}</h1>
 		<img src="http://via.placeholder.com/350x150" alt="">
 		<div class="row">
-			<div class="col-sm">
+			<div class="col-md-8">
 				<div id="calendar"></div>
 			</div>
-			<div class="col-sm">
+			<div class="col-md-4">
 				<form id="reservationForm" action="${pageContext.request.contextPath}/rooms/${room.id}" method="POST">
 					<div class="form-group">
 						<label for="startTime"><spring:message code="reservation.startTime"/></label>

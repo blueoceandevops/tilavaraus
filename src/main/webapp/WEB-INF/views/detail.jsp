@@ -22,22 +22,36 @@
 				<form action="${pageContext.request.contextPath}/rooms/${room.id}/reserve" method="POST">
 					<div class="form-group">
 						<label for="startTime"><spring:message code="reservation.startTime"/></label>
-						<input class="form-control" type="datetime-local" name="startTime" id="startTime"
-						       onchange="APP.updateDuration()">
+						<input class="form-control"
+						       type="datetime-local"
+						       name="startTime"
+						       id="startTime"
+						       onchange="APP.updateDuration()"
+						       required>
 					</div>
 
 					<div class="form-group">
 						<label for="endTime"><spring:message code="reservation.endTime"/></label>
-						<input class="form-control" type="datetime-local" name="endTime" id="endTime"
-						       onchange="APP.updateDuration()">
-						<small class="form-text text-muted"><spring:message code="reservation.duration"/>: <span
-								id="duration"></span></small>
+						<input class="form-control"
+						       type="datetime-local"
+						       name="endTime"
+						       id="endTime"
+						       onchange="APP.updateDuration()"
+						       required>
+						<small class="form-text text-muted">
+							<spring:message code="reservation.duration"/>: <span id="duration"></span>
+						</small>
 					</div>
 
 					<div class="form-group">
 						<label for="count"><spring:message code="reservation.personCount"/></label>
-						<input class="form-control" id="count" type="number" name="count" min="0"
-						       max="${room.capacity}">
+						<input class="form-control"
+						       id="count"
+						       type="number"
+						       name="count"
+						       min="0"
+						       max="${room.capacity}"
+						       required>
 					</div>
 
 					<fieldset class="form-group">

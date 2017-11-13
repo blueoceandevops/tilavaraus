@@ -19,11 +19,11 @@
 	<form method="POST" action="${pageContext.request.contextPath}/login">
 		<div class="form-group col-4">
 			<label for="username"><spring:message code="user.email"/></label>
-			<input name="username" id="username" class="form-control"/>
+			<input name="username" id="username" class="form-control" required/>
 		</div>
 		<div class="form-group col-4">
 			<label for="password"><spring:message code="user.password"/></label>
-			<input id="password" name="password" type="password" class="form-control"/>
+			<input id="password" name="password" type="password" class="form-control" required/>
 		</div>
 		<button type="submit" class="btn btn-primary"><spring:message code="login"/></button>
 	</form>

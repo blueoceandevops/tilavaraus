@@ -9,11 +9,11 @@
 	<form:form method="POST" action="${spring:mvcUrl('UC#register').build()}" modelAttribute="user">
 		<div class="form-group col-4">
 			<form:label path="email"><spring:message code="user.email"/></form:label>
-			<form:input path="email" class="form-control"/>
+			<form:input path="email" class="form-control" required="true"/>
 		</div>
 		<div class="form-group col-4">
 			<form:label path="password"><spring:message code="user.password"/></form:label>
-			<form:password path="password" class="form-control"/>
+			<form:password path="password" class="form-control" required="true"/>
 		</div>
 		<div class="form-check col-4">
 			<label class="form-check-label">

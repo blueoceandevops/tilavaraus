@@ -5,25 +5,37 @@
 <jsp:useBean id="rooms" scope="request" type="java.util.List<fi.xamk.tilavaraus.domain.Room>"/>
 
 <t:layout>
-	<div class="card-columns">
-		<c:forEach items="${rooms}" var="room">
-			<div class="card">
-				<img class="card-img-top"
-					 src="https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"
-					 alt="Card image cap">
-				<div class="card-body">
-					<h4 class="card-title">${room.name}</h4>
-					<ul class="list-unstyled">
-						<li>${room.hourlyPrice}€/h</li>
-						<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
-					</ul>
-					<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="btn btn-primary">
-						<spring:message code="reserve"/>
-					</a>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
+	<jsp:attribute name="head">
+		<style>
+			a.link-unstyled, a.link-unstyled:hover {
+				color: inherit;
+				text-decoration: inherit;
+			}
+		</style>
+	</jsp:attribute>
+	<jsp:body>
+		<div class="card-columns">
+			<c:forEach items="${rooms}" var="room">
+				<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="link-unstyled">
+					<div class="card">
+						<img class="card-img-top"
+						     src="https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"
+						     alt="Card image cap">
+						<div class="card-body">
+							<h4 class="card-title">${room.name}</h4>
+							<ul class="list-unstyled">
+								<li>${room.hourlyPrice}€/h</li>
+								<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
+							</ul>
+							<a href="${pageContext.request.contextPath}/rooms/${room.id}" class="btn btn-primary">
+								<spring:message code="reserve"/>
+							</a>
+						</div>
+					</div>
+				</a>
+			</c:forEach>
+		</div>
+	</jsp:body>
 </t:layout>
 
 

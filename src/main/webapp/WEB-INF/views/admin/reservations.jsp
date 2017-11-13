@@ -28,7 +28,12 @@
 						</c:forEach>
 					</ul>
 				</td>
-				<td><a href="${pageContext.request.contextPath}/reservations/${reservation.id}/delete">Peruuta</a></td>
+				<td>
+					<a class="btn btn-danger"
+					   href="${spring:mvcUrl('FC#deleteReservations').arg(0, reservation).build()}">
+						<spring:message code="cancelReservation"/>
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

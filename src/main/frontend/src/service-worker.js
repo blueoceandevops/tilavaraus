@@ -28,8 +28,19 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+
+	if (event.request.method === 'POST') {
+		return;
+	}
+
 	event.respondWith(
-		fetch(event.request)
+		caches.open(PRECACHE)
+			.then(cache => fetch(event.request)
+				.then(response => {
+					cache.put(event.request, response.clone());
+					return response;
+				}))
 			.catch(() => caches.match(event.request))
 	);
+
 });

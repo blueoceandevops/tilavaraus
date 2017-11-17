@@ -15,11 +15,11 @@ public class FutureValidator implements ConstraintValidator<Future, Instant> {
     }
 
     public boolean isValid(Instant instant, ConstraintValidatorContext context) {
-        return instant
-                .minus(Duration.ofDays(constraint.days()))
+	    return instant == null || instant.minus(Duration.ofDays(constraint.days()))
                 .minus(Duration.ofHours(constraint.hours()))
                 .minus(Duration.ofMinutes(constraint.minutes()))
                 .minus(Duration.ofSeconds(constraint.seconds()))
                 .isAfter(Instant.now());
+
     }
 }

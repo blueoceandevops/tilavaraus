@@ -13,7 +13,7 @@
 	</jsp:attribute>
 	<jsp:body>
 		<h1>${room.name}</h1>
-		<img src="https://via.placeholder.com/350x150" alt="">
+		<img class="img-fluid mb-4" src="${room.thumbnailSrc}" alt="">
 		<div class="row">
 			<div class="col-md-8">
 				<div id="calendar"></div>

@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import moment from 'moment';
 import 'fullcalendar';
+import 'fullcalendar/dist/locale-all';
 import 'fullcalendar/dist/fullcalendar.css';
 
 const durationBetween = (start, end) => moment.duration(start.diff(end));
@@ -24,6 +25,8 @@ $(() => {
 		validRange: {
 			start: moment().add(6, 'days')
 		},
+		minTime: "08:00:00",
+		maxTime: "20:00:00",
 		hiddenDays: [0],
 		allDaySlot: false,
 		selectable: true,

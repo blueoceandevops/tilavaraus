@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/detail.css">
 		<script>
 			window.eventsUrl = '${pageContext.request.contextPath}/rooms/${room.id}/events';
-			window.locale = '${pageContext.response.locale}';
+			window.locale = '${pageContext.response.locale.language}';
 		</script>
 	</jsp:attribute>
 	<jsp:body>

@@ -1,12 +1,14 @@
 package fi.xamk.tilavaraus.domain;
 
 import fi.xamk.tilavaraus.domain.validation.Future;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,13 +18,17 @@ public class Reservation {
 	private Long id;
 	@ManyToOne
 	private Room room;
+	@NotNull
+	@Min(0)
 	private Integer personCount;
 	@NotNull
     @Future(days = 7)
-    private Instant startTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime startTime;
 	@NotNull
     @Future(days = 7, hours = 1)
-    private Instant endTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime endTime;
 	@ManyToOne
 	private User user;
 	@ElementCollection
@@ -40,11 +46,11 @@ public class Reservation {
 		this.room = room;
 	}
 
-	public Instant getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Instant startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
@@ -52,11 +58,11 @@ public class Reservation {
 		return Duration.between(startTime, endTime);
 	}
 
-	public Instant getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Instant endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 

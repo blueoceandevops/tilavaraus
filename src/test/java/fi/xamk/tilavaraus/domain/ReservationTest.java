@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +16,7 @@ public class ReservationTest {
 	@Test
 	public void getTotalPrice() {
 		Reservation reservation = new Reservation();
-		Instant epoch = Instant.EPOCH;
+		LocalDateTime epoch = LocalDateTime.MIN;
 		reservation.setStartTime(epoch);
 		reservation.setEndTime(epoch.plus(2, ChronoUnit.HOURS));
 		Room room = new Room();

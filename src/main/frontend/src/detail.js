@@ -28,6 +28,7 @@ $(() => {
 		allDaySlot: false,
 		selectable: true,
 		selectHelper: true,
+		selectOverlap: false,
 		selectLongPressDelay: 500,
 		unselectCancel: '#reservationForm',
 		select: (start, end) => {

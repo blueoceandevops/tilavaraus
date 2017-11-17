@@ -8,8 +8,7 @@
 		<tr>
 			<th><spring:message code="reservation.user"/></th>
 			<th><spring:message code="room.name"/></th>
-			<th><spring:message code="reservation.startTime"/></th>
-			<th><spring:message code="reservation.endTime"/></th>
+			<th><spring:message code="reservation.time"/></th>
 			<th><spring:message code="reservation.personCount"/></th>
 			<th><spring:message code="reservation.additionalServices"/></th>
 			<th><spring:message code="actions"/></th>
@@ -18,8 +17,8 @@
 			<tr>
 				<td>${reservation.user.email}</td>
 				<td>${reservation.room.name}</td>
-				<td>${reservation.startTime}</td>
-				<td>${reservation.endTime}</td>
+				<td><t:formatDate value="${reservation.startTime}"/> - <t:formatDate
+						value="${reservation.endTime}"/></td>
 				<td>${reservation.personCount}</td>
 				<td>
 					<ul>

@@ -18,7 +18,7 @@
 				</div>
 			</c:if>
 			<h1><spring:message code="login"/></h1>
-			<form method="POST" action="${pageContext.request.contextPath}/login">
+			<form:form method="POST" action="${pageContext.request.contextPath}/login">
 				<div class="form-group">
 					<label for="username"><spring:message code="user.email"/></label>
 					<input name="username" id="username" class="form-control" required/>
@@ -28,7 +28,7 @@
 					<input id="password" name="password" type="password" class="form-control" required/>
 				</div>
 				<button type="submit" class="btn btn-primary"><spring:message code="login"/></button>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </t:layout>

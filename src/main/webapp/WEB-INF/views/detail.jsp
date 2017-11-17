@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <t:layout>
 	<jsp:attribute name="head">
@@ -19,7 +20,8 @@
 				<div id="calendar"></div>
 			</div>
 			<div class="col-md-4">
-				<form id="reservationForm" action="${pageContext.request.contextPath}/rooms/${room.id}" method="POST">
+				<form:form id="reservationForm" action="${pageContext.request.contextPath}/rooms/${room.id}"
+				           method="POST">
 					<div class="form-group">
 						<label for="startTime"><spring:message code="reservation.startTime"/></label>
 						<input class="form-control"
@@ -70,7 +72,7 @@
 					</fieldset>
 
 					<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>

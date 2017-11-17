@@ -1,5 +1,7 @@
 package fi.xamk.tilavaraus.domain;
 
+import fi.xamk.tilavaraus.domain.validation.Future;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -16,9 +18,11 @@ public class Reservation {
 	private Room room;
 	private Integer personCount;
 	@NotNull
-	private Instant startTime;
+    @Future(days = 7)
+    private Instant startTime;
 	@NotNull
-	private Instant endTime;
+    @Future(days = 7, hours = 1)
+    private Instant endTime;
 	@ManyToOne
 	private User user;
 	@ElementCollection

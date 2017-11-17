@@ -2,6 +2,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
 	<div class="container">
@@ -43,9 +44,12 @@
 									<spring:message code="allReservations"/>
 								</a>
 							</security:authorize>
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
-								<spring:message code="logout"/>
-							</a>
+							<form:form action="${pageContext.request.contextPath}/logout">
+								<button type="submit" class="dropdown-item"
+								        href="${pageContext.request.contextPath}/logout">
+									<spring:message code="logout"/>
+								</button>
+							</form:form>
 						</div>
 					</li>
 				</security:authorize>

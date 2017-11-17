@@ -6,7 +6,7 @@ import 'fullcalendar/dist/fullcalendar.css';
 const durationBetween = (start, end) => moment.duration(start.diff(end));
 
 $(() => {
-	const [$startTime, $endTime, $duration] = [$('#startTime'), $('#endTime'), $('#duration')];
+	const [$calendar, $startTime, $endTime, $duration] = [$('#calendar'), $('#startTime'), $('#endTime'), $('#duration')];
 	const FORMAT = 'YYYY-MM-DD[T]hh:mm';
 
 	window.APP = {
@@ -15,11 +15,15 @@ $(() => {
 		}
 	};
 
-	$('#calendar').fullCalendar({
+	$calendar.fullCalendar({
 		defaultView: 'agendaWeek',
 		events: window.eventsUrl,
 		locale: window.locale,
 		firstDay: 1,
+		defaultDate: moment().add(7, 'days'),
+		validRange: {
+			start: moment().add(6, 'days')
+		},
 		hiddenDays: [0],
 		allDaySlot: false,
 		selectable: true,
@@ -37,4 +41,9 @@ $(() => {
 			APP.updateDuration();
 		}
 	});
+
+	setInterval(() => {
+		$calendar.fullCalendar('refetchEvents');
+	}, 3000);
+
 });

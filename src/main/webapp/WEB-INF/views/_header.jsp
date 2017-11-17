@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
 	<div class="container">
 		<a class="navbar-brand" href="${spring:mvcUrl('FC#index').build()}">
-			<img src="https://www.xamk.fi/wp-content/themes/xamk/dist/images/logo_header.png"
+			<img class="mr-2" src="https://www.xamk.fi/wp-content/themes/xamk/dist/images/logo_header.png"
 			     width="150px"
 			     alt="<spring:message code="title"/>">
 			<spring:message code="title"/>

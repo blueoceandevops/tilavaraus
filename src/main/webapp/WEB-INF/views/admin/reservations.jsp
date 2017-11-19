@@ -29,8 +29,12 @@
 				</td>
 				<td>
 					<a class="btn btn-danger"
-					   href="${spring:mvcUrl('FC#deleteReservations').arg(0, reservation).build()}">
+					   href="${spring:mvcUrl('AC#deleteReservations').arg(0, reservation).build()}">
 						<spring:message code="cancelReservation"/>
+					</a>
+					<a class="btn btn-primary"
+					   href="${spring:mvcUrl('AC#showReservationEditForm').arg(0, reservation).build()}">
+						<spring:message code="editReservation"/>
 					</a>
 				</td>
 			</tr>

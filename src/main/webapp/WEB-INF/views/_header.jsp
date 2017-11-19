@@ -40,7 +40,7 @@
 							</a>
 							<security:authorize access="hasRole('ADMIN')">
 								<a class="dropdown-item"
-								   href="${spring:mvcUrl('AC#listOrders').build()}">
+								   href="${spring:mvcUrl('AC#listReservations').build()}">
 									<spring:message code="allReservations"/>
 								</a>
 							</security:authorize>

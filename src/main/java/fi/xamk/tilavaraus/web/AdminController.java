@@ -1,12 +1,12 @@
 package fi.xamk.tilavaraus.web;
 
+import fi.xamk.tilavaraus.domain.Reservation;
 import fi.xamk.tilavaraus.domain.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Secured("ROLE_ADMIN")
@@ -20,8 +20,30 @@ public class AdminController {
 		this.reservationRepository = reservationRepository;
 	}
 
+	@GetMapping("/reservations/{id}/edit")
+	public String showReservationEditForm(@PathVariable("id") Reservation reservation, Model model) {
+		model.addAttribute("reservation", reservation);
+		return "admin/editreservation";
+	}
+
+	@GetMapping("/reservations/{id}/delete")
+	public String deleteReservations(@PathVariable("id") Reservation reservation) {
+		reservationRepository.delete(reservation);
+		return "redirect:/admin/reservations";
+	}
+
+	@PostMapping("/reservations/{id}/edit")
+	public String editReservation(@PathVariable("id") Reservation existingReservation,
+	                              @ModelAttribute("reservation") Reservation reservation) {
+		existingReservation.setStartTime(reservation.getStartTime());
+		existingReservation.setEndTime(reservation.getEndTime());
+		existingReservation.setPersonCount(reservation.getPersonCount());
+		reservationRepository.save(existingReservation);
+		return "redirect:/admin/reservations";
+	}
+
 	@GetMapping("/reservations")
-	public String listOrders(Model model) {
+	public String listReservations(Model model) {
 		model.addAttribute("reservations", reservationRepository.findAll());
 		return "admin/reservations";
 	}

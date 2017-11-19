@@ -40,13 +40,6 @@ public class FooController {
 		this.reservationValidator = reservationValidator;
 	}
 
-	@GetMapping("/reservations/{id}/delete")
-	@Secured("ROLE_ADMIN")
-	public String deleteReservations(@PathVariable("id") Reservation reservation) {
-		reservationRepository.delete(reservation);
-		return "redirect:/";
-	}
-
 	@GetMapping("/reservations/{id}/cancel")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String cancelReservation(@PathVariable("id") Reservation reservation) {

@@ -33,6 +33,7 @@ $(() => {
 		selectHelper: true,
 		selectOverlap: false,
 		selectLongPressDelay: 500,
+		selectMinDistance: 5,
 		unselectCancel: '#reservationForm',
 		select: (start, end) => {
 			$startTime.val(start.format(FORMAT));
@@ -40,8 +41,9 @@ $(() => {
 			APP.updateDuration();
 		},
 		dayClick: function (date) {
+			const end = date.add({hours: 1});
 			$startTime.val(date.format(FORMAT));
-			$endTime.val(date.add({hours: 1}).format(FORMAT));
+			$endTime.val(end.format(FORMAT));
 			APP.updateDuration();
 		}
 	});

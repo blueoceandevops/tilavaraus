@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -83,8 +84,15 @@ public class FooController {
 			bindingResult.reject("validation.overLappingReservation", "Cannot make overlapping reservations!");
 		}
 
+		if (reservation.getDuration().minus(Duration.ofHours(1)).isNegative()) {
+			bindingResult.reject("validation.tooShortReservation", "Too short reservation!");
+		}
+
 		if (bindingResult.hasErrors()) {
-			return roomDetail(room, model, request);
+			model.addAttribute("reservation", reservation);
+			model.addAttribute("room", room);
+			model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
+			return "detail";
 		}
 
 		reservation.setUser(myUserDetails.getUser());

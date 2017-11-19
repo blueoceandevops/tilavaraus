@@ -1,6 +1,7 @@
 package fi.xamk.tilavaraus.domain;
 
 import fi.xamk.tilavaraus.domain.validation.Future;
+import fi.xamk.tilavaraus.domain.validation.TimeWindow;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -24,10 +25,12 @@ public class Reservation {
 	@NotNull
     @Future(days = 7)
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@TimeWindow(from = 8, to = 20)
 	private LocalDateTime startTime;
 	@NotNull
     @Future(days = 7, hours = 1)
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@TimeWindow(from = 8, to = 20)
 	private LocalDateTime endTime;
 	@ManyToOne
 	private User user;

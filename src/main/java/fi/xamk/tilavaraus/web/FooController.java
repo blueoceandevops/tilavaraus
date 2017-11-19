@@ -103,12 +103,14 @@ public class FooController {
 		reservation.setRoom(room);
 		reservationRepository.save(reservation);
 
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setSubject("Varausvahvistus");
-		mailMessage.setTo(myUserDetails.getUser().getEmail());
-		mailMessage.setText("Tila " + room.getName() + " varattu " + reservation.getPersonCount() + " henkilölle ajalle " +
-				reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
-		mailSender.send(mailMessage); // TODO: Make email sending async
+		new Thread(() -> {
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setSubject("Varausvahvistus");
+			mailMessage.setTo(myUserDetails.getUser().getEmail());
+			mailMessage.setText("Tila " + room.getName() + " varattu " + reservation.getPersonCount() + " henkilölle ajalle " +
+					reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
+			mailSender.send(mailMessage);
+		}).start();
 
 		return "redirect:/rooms/" + room.getId();
 	}

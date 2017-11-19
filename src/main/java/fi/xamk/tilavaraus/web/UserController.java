@@ -1,8 +1,11 @@
 package fi.xamk.tilavaraus.web;
 
+import fi.xamk.tilavaraus.domain.MyUserDetails;
 import fi.xamk.tilavaraus.domain.User;
 import fi.xamk.tilavaraus.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +34,13 @@ public class UserController {
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
 		return "register";
+	}
+
+	@GetMapping("/profile")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	public String showProfile(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
+		model.addAttribute("user", userDetails.getUser());
+		return "profile";
 	}
 
 	@PostMapping("/register")

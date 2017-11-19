@@ -35,6 +35,10 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item"
+							   href="${spring:mvcUrl('UC#showProfile').build()}">
+								<spring:message code="profile"/>
+							</a>
+							<a class="dropdown-item"
 							   href="${spring:mvcUrl('FC#myReservations').build()}">
 								<spring:message code="myReservations"/>
 							</a>

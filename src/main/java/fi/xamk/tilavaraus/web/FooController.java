@@ -3,6 +3,7 @@ package fi.xamk.tilavaraus.web;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.xamk.tilavaraus.domain.*;
+import fi.xamk.tilavaraus.domain.validation.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -29,13 +29,15 @@ public class FooController {
 	private final ReservationRepository reservationRepository;
 	private final ObjectMapper objectMapper;
 	private final JavaMailSender mailSender;
+	private final ReservationValidator reservationValidator;
 
 	@Autowired
-	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper, JavaMailSender mailSender) {
+	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper, JavaMailSender mailSender, ReservationValidator reservationValidator) {
 		this.roomRepository = roomRepository;
 		this.reservationRepository = reservationRepository;
 		this.objectMapper = objectMapper;
 		this.mailSender = mailSender;
+		this.reservationValidator = reservationValidator;
 	}
 
 	@GetMapping("/reservations/{id}/delete")
@@ -83,14 +85,9 @@ public class FooController {
 	                          Model model,
 	                          @AuthenticationPrincipal MyUserDetails myUserDetails,
 	                          HttpServletRequest request) throws JsonProcessingException {
-
-		if (!reservationRepository.findOverlapping(reservation.getStartTime(), reservation.getEndTime(), room).isEmpty()) {
-			bindingResult.reject("validation.overLappingReservation", "Cannot make overlapping reservations!");
-		}
-
-		if (reservation.getDuration().minus(Duration.ofHours(1)).isNegative()) {
-			bindingResult.reject("validation.tooShortReservation", "Too short reservation!");
-		}
+		reservation.setUser(myUserDetails.getUser());
+		reservation.setRoom(room);
+		reservationValidator.validate(reservation, bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("reservation", reservation);
@@ -99,8 +96,7 @@ public class FooController {
 			return "detail";
 		}
 
-		reservation.setUser(myUserDetails.getUser());
-		reservation.setRoom(room);
+
 		reservationRepository.save(reservation);
 
 		new Thread(() -> {

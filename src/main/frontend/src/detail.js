@@ -8,7 +8,7 @@ const durationBetween = (start, end) => moment.duration(start.diff(end));
 
 $(() => {
 	const [$calendar, $startTime, $endTime, $duration] = [$('#calendar'), $('#startTime'), $('#endTime'), $('#duration')];
-	const FORMAT = 'YYYY-MM-DD[T]hh:mm';
+	const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
 	window.APP = {
 		updateDuration: () => {

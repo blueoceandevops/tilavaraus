@@ -12,7 +12,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, '../webapp/')
+		path: path.resolve(__dirname, '../../../target/classes/static/')
 	},
 	module: {
 		rules: [

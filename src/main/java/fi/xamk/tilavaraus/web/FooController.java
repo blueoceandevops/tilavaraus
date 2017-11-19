@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.xamk.tilavaraus.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -26,12 +28,14 @@ public class FooController {
 	private final RoomRepository roomRepository;
 	private final ReservationRepository reservationRepository;
 	private final ObjectMapper objectMapper;
+	private final JavaMailSender mailSender;
 
 	@Autowired
-	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper) {
+	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper, JavaMailSender mailSender) {
 		this.roomRepository = roomRepository;
 		this.reservationRepository = reservationRepository;
 		this.objectMapper = objectMapper;
+		this.mailSender = mailSender;
 	}
 
 	@GetMapping("/reservations/{id}/delete")
@@ -98,6 +102,14 @@ public class FooController {
 		reservation.setUser(myUserDetails.getUser());
 		reservation.setRoom(room);
 		reservationRepository.save(reservation);
+
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setSubject("Varausvahvistus");
+		mailMessage.setTo(myUserDetails.getUser().getEmail());
+		mailMessage.setText("Tila " + room.getName() + " varattu " + reservation.getPersonCount() + " henkilölle ajalle " +
+				reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
+		mailSender.send(mailMessage); // TODO: Make email sending async
+
 		return "redirect:/rooms/" + room.getId();
 	}
 

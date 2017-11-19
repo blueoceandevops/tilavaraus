@@ -1,5 +1,7 @@
 package fi.xamk.tilavaraus.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.xamk.tilavaraus.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -22,11 +24,13 @@ public class FooController {
 
 	private final RoomRepository roomRepository;
 	private final ReservationRepository reservationRepository;
+	private final ObjectMapper objectMapper;
 
 	@Autowired
-	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository) {
+	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper) {
 		this.roomRepository = roomRepository;
 		this.reservationRepository = reservationRepository;
+		this.objectMapper = objectMapper;
 	}
 
 	@GetMapping("/reservations/{id}/delete")
@@ -72,15 +76,15 @@ public class FooController {
 	                          BindingResult bindingResult,
 	                          @PathVariable("id") Room room,
 	                          Model model,
-	                          @AuthenticationPrincipal MyUserDetails myUserDetails) {
+	                          @AuthenticationPrincipal MyUserDetails myUserDetails,
+	                          HttpServletRequest request) throws JsonProcessingException {
 
 		if (!reservationRepository.findOverlapping(reservation.getStartTime(), reservation.getEndTime(), room).isEmpty()) {
 			bindingResult.reject("validation.overLappingReservation", "Cannot make overlapping reservations!");
 		}
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("room", room);
-			return "detail";
+			return roomDetail(room, model, request);
 		}
 
 		reservation.setUser(myUserDetails.getUser());
@@ -90,9 +94,10 @@ public class FooController {
 	}
 
 	@RequestMapping("/rooms/{id}")
-	public String roomDetail(@PathVariable("id") Room room, Model model) {
+	public String roomDetail(@PathVariable("id") Room room, Model model, HttpServletRequest request) throws JsonProcessingException {
 		model.addAttribute("reservation", new Reservation());
 		model.addAttribute("room", room);
+		model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
 		return "detail";
 	}
 

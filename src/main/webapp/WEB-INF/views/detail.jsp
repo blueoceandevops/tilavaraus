@@ -10,8 +10,8 @@
 	</jsp:attribute>
 	<jsp:attribute name="scripts">
 		<script>
-			window.eventsUrl = '${pageContext.request.contextPath}/rooms/${room.id}/events';
 			window.locale = '${pageContext.response.locale.language}';
+			window.eventsJson = JSON.parse('${eventsJson}');
 		</script>
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:attribute>

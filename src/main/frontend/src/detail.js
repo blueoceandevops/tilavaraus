@@ -18,7 +18,7 @@ $(() => {
 
 	$calendar.fullCalendar({
 		defaultView: 'agendaWeek',
-		events: window.eventsUrl,
+		events: window.eventsJson,
 		locale: window.locale,
 		firstDay: 1,
 		defaultDate: moment().add(8, 'days'),

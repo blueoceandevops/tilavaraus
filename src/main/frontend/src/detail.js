@@ -21,7 +21,7 @@ $(() => {
 		events: window.eventsUrl,
 		locale: window.locale,
 		firstDay: 1,
-		defaultDate: moment().add(7, 'days'),
+		defaultDate: moment().add(8, 'days'),
 		validRange: {
 			start: moment().add(6, 'days')
 		},

@@ -7,10 +7,13 @@
 <t:layout>
 	<jsp:attribute name="head">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/detail.css">
+	</jsp:attribute>
+	<jsp:attribute name="scripts">
 		<script>
 			window.eventsUrl = '${pageContext.request.contextPath}/rooms/${room.id}/events';
 			window.locale = '${pageContext.response.locale.language}';
 		</script>
+		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:attribute>
 	<jsp:body>
 		<h1>${room.name}</h1>
@@ -85,6 +88,5 @@
 				</div>
 			</div>
 		</form:form>
-		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:body>
 </t:layout>

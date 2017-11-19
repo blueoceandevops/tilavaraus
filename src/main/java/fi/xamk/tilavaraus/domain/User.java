@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class User {
@@ -13,7 +14,9 @@ public class User {
 	private Long id;
 	@Column(unique = true)
 	@Email
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
 	private String role;
 

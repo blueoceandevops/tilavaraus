@@ -74,14 +74,15 @@ public class FooController {
 	                          Model model,
 	                          @AuthenticationPrincipal MyUserDetails myUserDetails) {
 
+		if (!reservationRepository.findOverlapping(reservation.getStartTime(), reservation.getEndTime(), room).isEmpty()) {
+			bindingResult.reject("validation.overLappingReservation", "Cannot make overlapping reservations!");
+		}
+
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("room", room);
 			return "detail";
 		}
 
-		if (!reservationRepository.findOverlapping(reservation.getStartTime(), reservation.getEndTime(), room).isEmpty()) {
-			throw new RuntimeException("Cannot make overlapping reservations!");
-		}
 		reservation.setUser(myUserDetails.getUser());
 		reservation.setRoom(room);
 		reservationRepository.save(reservation);

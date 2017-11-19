@@ -19,7 +19,7 @@
 		<form:form id="reservationForm" action="${pageContext.request.contextPath}/rooms/${room.id}"
 		           method="POST" modelAttribute="reservation">
 			<div class="row">
-				<form:errors path="*" cssClass="alert alert-danger"/>
+				<form:errors cssClass="alert alert-danger"/>
 			</div>
 			<div class="row">
 				<div class="col-md-8">
@@ -28,23 +28,25 @@
 				<div class="col-md-4">
 
 						<div class="form-group">
-							<label for="startTime"><spring:message code="reservation.startTime"/></label>
-							<input class="form-control"
-							       type="datetime-local"
-							       name="startTime"
-							       id="startTime"
-							       onchange="APP.updateDuration()"
-							       required>
+							<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>
+							<form:input class="form-control"
+							            type="datetime-local"
+							            path="startTime"
+							            onchange="APP.updateDuration()"
+							            required="true"
+							            cssErrorClass="form-control is-invalid"/>
+							<form:errors path="startTime" cssClass="invalid-feedback"/>
 						</div>
 
 						<div class="form-group">
-							<label for="endTime"><spring:message code="reservation.endTime"/></label>
-							<input class="form-control"
-							       type="datetime-local"
-							       name="endTime"
-							       id="endTime"
-							       onchange="APP.updateDuration()"
-							       required>
+							<form:label path="endTime"><spring:message code="reservation.endTime"/></form:label>
+							<form:input class="form-control"
+							            type="datetime-local"
+							            path="endTime"
+							            onchange="APP.updateDuration()"
+							            required="true"
+							            cssErrorClass="form-control is-invalid"/>
+							<form:errors path="endTime" cssClass="invalid-feedback"/>
 							<small class="form-text text-muted">
 								<spring:message code="reservation.duration"/>: <span id="duration"></span>
 							</small>
@@ -58,7 +60,9 @@
 							            name="count"
 							            min="0"
 							            max="${room.capacity}"
-							            required="true" cssErrorClass="form-control is-invalid"/>
+							            required="true"
+							            cssErrorClass="form-control is-invalid"/>
+							<form:errors path="personCount" cssClass="invalid-feedback"/>
 						</div>
 
 						<fieldset class="form-group">

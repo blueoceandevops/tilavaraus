@@ -40,10 +40,9 @@ $(() => {
 			$endTime.val(end.format(FORMAT));
 			APP.updateDuration();
 		},
-		dayClick: function (date) {
-			const end = date.add({hours: 1});
+		dayClick: date => {
 			$startTime.val(date.format(FORMAT));
-			$endTime.val(end.format(FORMAT));
+			$endTime.val(date.add({hours: 1}).format(FORMAT));
 			APP.updateDuration();
 		}
 	});

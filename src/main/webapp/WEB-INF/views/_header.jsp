@@ -1,10 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	<div class="container">
 		<a class="navbar-brand" href="${spring:mvcUrl('FC#index').build()}">
 			<img class="mr-2" src="https://www.xamk.fi/wp-content/themes/xamk/dist/images/logo_header.png"

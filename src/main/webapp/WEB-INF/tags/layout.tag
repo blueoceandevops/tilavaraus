@@ -2,6 +2,7 @@
 <%@ tag description="Layout" pageEncoding="UTF-8" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="scripts" fragment="true" %>
+<%@ attribute name="noContainer" type="java.lang.Boolean" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/_header.jsp"/>
-<div class="container">
+<div class="${noContainer ? '' : 'container'}">
 	<jsp:doBody/>
 </div>
 <jsp:include page="/WEB-INF/views/_footer.jsp"/>

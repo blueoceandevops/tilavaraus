@@ -1,10 +1,8 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout>
-	<div class="alert alert-success" role="alert">
+	<div class="alert alert-success mt-4" role="alert">
 		<spring:message code="reservationSuccess"/>
 	</div>
 	<ul>

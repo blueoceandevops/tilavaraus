@@ -1,10 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<t:layout>
+<t:layout noContainer="true">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/detail.css">
 	</jsp:attribute>
@@ -16,9 +13,13 @@
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:attribute>
 	<jsp:body>
-		<h1>${room.name}</h1>
-		<img class="img-fluid mb-4" src="${room.thumbnailSrc}" alt="">
-
+		<div class="bg-dark">
+			<img class="img-fluid mx-auto d-block" src="${room.thumbnailSrc}" alt="">
+		</div>
+		<div class="p-2 bg-warning mb-4">
+			<h1 class="text-uppercase text-center">${room.name}</h1>
+		</div>
+		<div class="container">
 		<form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
 		           method="POST" modelAttribute="reservation">
 			<div class="row">
@@ -88,5 +89,6 @@
 				</div>
 			</div>
 		</form:form>
+		</div>
 	</jsp:body>
 </t:layout>

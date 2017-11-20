@@ -1,7 +1,17 @@
 $border-radius: 0;
+$xamk-yellow: #fbba18;
 $theme-colors: (
         "dark": black
 );
 $navbar-dark-color: white;
+$card-border-width: 0;
+$navbar-padding-y: 1.5rem;
 
 @import "~bootstrap/scss/bootstrap";
+
+.nav-item:hover {
+  background-color: $xamk-yellow;
+  .nav-link {
+    color: black !important;
+  }
+}

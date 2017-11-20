@@ -23,6 +23,7 @@ public class AdminController {
 	@GetMapping("/reservations/{id}/edit")
 	public String showReservationEditForm(@PathVariable("id") Reservation reservation, Model model) {
 		model.addAttribute("reservation", reservation);
+		model.addAttribute("additionalServices", FooController.getAdditionalServices());
 		return "admin/editreservation";
 	}
 
@@ -38,6 +39,7 @@ public class AdminController {
 		existingReservation.setStartTime(reservation.getStartTime());
 		existingReservation.setEndTime(reservation.getEndTime());
 		existingReservation.setPersonCount(reservation.getPersonCount());
+		existingReservation.setAdditionalServices(reservation.getAdditionalServices());
 		reservationRepository.save(existingReservation);
 		return "redirect:/admin/reservations";
 	}

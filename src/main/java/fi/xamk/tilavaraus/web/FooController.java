@@ -111,7 +111,7 @@ public class FooController {
 	}
 
 	@ModelAttribute("additionalServices")
-	public List<String> getAdditionalServices() {
+	public static List<String> getAdditionalServices() {
 		return Collections.singletonList("additionalServices.coffee");
 	}
 

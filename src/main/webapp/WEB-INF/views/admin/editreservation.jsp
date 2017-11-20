@@ -52,10 +52,8 @@
 					<c:forEach items="${additionalServices}" var="additionalService">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input type="checkbox"
-								       name="additionalServices"
-								       class="form-check-input"
-								       value="${additionalService}">
+								<form:checkbox path="additionalServices" class="form-check-input"
+								               value="${additionalService}"/>
 								<spring:message code="${additionalService}"/>
 							</label>
 						</div>

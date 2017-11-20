@@ -5,9 +5,11 @@
 	<div class="card-columns mt-4">
 		<c:forEach items="${rooms}" var="room">
 			<div class="card text-warning bg-dark">
-				<img class="card-img-top"
-				     src="<spring:url value="${room.thumbnailSrc}"/>"
-				     alt="Card image cap">
+				<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}">
+					<img class="card-img-top"
+					     src="<spring:url value="${room.thumbnailSrc}"/>"
+					     alt="Card image cap">
+				</a>
 				<div class="card-body">
 					<h4 class="card-title">${room.name}</h4>
 					<ul class="list-unstyled">

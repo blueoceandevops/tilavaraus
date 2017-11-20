@@ -6,7 +6,7 @@
 <t:layout>
 	<div class="card-columns">
 		<c:forEach items="${rooms}" var="room">
-			<div class="card">
+			<div class="card text-warning bg-dark">
 				<img class="card-img-top"
 				     src="<spring:url value="${room.thumbnailSrc}"/>"
 				     alt="Card image cap">
@@ -16,7 +16,8 @@
 						<li>${room.hourlyPrice}€/h</li>
 						<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
 					</ul>
-					<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}" class="btn btn-primary">
+					<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}"
+					   class="btn btn-outline-light text-uppercase font-weight-bold">
 						<spring:message code="reserve"/>
 					</a>
 				</div>

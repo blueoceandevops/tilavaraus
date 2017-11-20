@@ -1,2 +1,7 @@
 $border-radius: 0;
+$theme-colors: (
+        "dark": black
+);
+$navbar-dark-color: white;
+
 @import "~bootstrap/scss/bootstrap";

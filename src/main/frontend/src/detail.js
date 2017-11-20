@@ -34,6 +34,7 @@ $(() => {
 		selectOverlap: false,
 		selectLongPressDelay: 500,
 		selectMinDistance: 5,
+		height: 'auto',
 		unselectCancel: '#reservationForm',
 		select: (start, end) => {
 			$startTime.val(start.format(FORMAT));

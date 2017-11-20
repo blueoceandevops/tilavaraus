@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout>
-	<form:form id="reservationForm"
+	<form:form cssClass="mt-3"
 	           action="${pageContext.request.contextPath}/admin/reservations/${reservation.id}/edit"
 	           method="POST" modelAttribute="reservation">
 		<div class="row">
@@ -32,9 +32,6 @@
 					            required="true"
 					            cssErrorClass="form-control is-invalid"/>
 					<form:errors path="endTime" cssClass="invalid-feedback"/>
-					<small class="form-text text-muted">
-						<spring:message code="reservation.duration"/>: <span id="duration"></span>
-					</small>
 				</div>
 
 				<div class="form-group">
@@ -64,9 +61,7 @@
 						</div>
 					</c:forEach>
 				</fieldset>
-
 				<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
-
 			</div>
 		</div>
 	</form:form>

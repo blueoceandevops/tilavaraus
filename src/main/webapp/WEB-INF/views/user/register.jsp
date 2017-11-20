@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout>
-	<div class="row justify-content-md-center">
+	<div class="row justify-content-md-center mt-3">
 		<div class="col-md-6">
 			<h1><spring:message code="register.title"/></h1>
 			<form:form method="POST" action="${spring:mvcUrl('UC#register').build()}" modelAttribute="user">

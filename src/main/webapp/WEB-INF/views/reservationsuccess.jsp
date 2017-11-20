@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout>
-	<div class="alert alert-success mt-4" role="alert">
+	<div class="alert alert-success mt-3" role="alert">
 		<spring:message code="reservationSuccess"/>
 	</div>
 	<ul>

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout>
-	<div class="card-columns mt-4">
+	<div class="card-columns mt-3">
 		<c:forEach items="${rooms}" var="room">
 			<div class="card text-warning bg-dark">
 				<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}">

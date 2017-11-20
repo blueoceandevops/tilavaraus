@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout>
-	<div class="row justify-content-md-center">
+	<div class="row justify-content-md-center mt-3">
 		<div class="col-md-6">
 			<c:if test="${param.error != null}">
 				<div class="alert alert-danger" role="alert">

@@ -59,7 +59,7 @@
 						</div>
 					</c:forEach>
 				</fieldset>
-				<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
+				<button type="submit" class="btn btn-primary"><spring:message code="save"/></button>
 			</div>
 		</div>
 	</form:form>

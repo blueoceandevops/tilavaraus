@@ -83,12 +83,10 @@ public class FooController {
 		reservationValidator.validate(reservation, bindingResult);
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("reservation", reservation);
 			model.addAttribute("room", room);
 			model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
 			return "detail";
 		}
-
 
 		reservationRepository.save(reservation);
 
@@ -101,7 +99,7 @@ public class FooController {
 			mailSender.send(mailMessage);
 		}).start();
 
-		return "redirect:/rooms/" + room.getId();
+		return "reservationsuccess";
 	}
 
 	@RequestMapping("/rooms/{id}")

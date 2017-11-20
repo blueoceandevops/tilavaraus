@@ -9,13 +9,18 @@
 		<div class="col-md-6">
 			<h1><spring:message code="register.title"/></h1>
 			<form:form method="POST" action="${spring:mvcUrl('UC#register').build()}" modelAttribute="user">
+				<form:errors cssClass="alert alert-danger"/>
 				<div class="form-group">
 					<form:label path="email"><spring:message code="user.email"/></form:label>
-					<form:input path="email" class="form-control" required="true"/>
+					<form:input path="email" class="form-control" required="true"
+					            cssErrorClass="form-control is-invalid"/>
+					<form:errors path="email" cssClass="invalid-feedback"/>
 				</div>
 				<div class="form-group">
 					<form:label path="password"><spring:message code="user.password"/></form:label>
-					<form:password path="password" class="form-control" required="true"/>
+					<form:password path="password" class="form-control" required="true"
+					               cssErrorClass="form-control is-invalid"/>
+					<form:errors path="password" cssClass="invalid-feedback"/>
 				</div>
 				<div class="form-check">
 					<label class="form-check-label">

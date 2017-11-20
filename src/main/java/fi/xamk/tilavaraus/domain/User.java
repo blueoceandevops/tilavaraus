@@ -1,5 +1,7 @@
 package fi.xamk.tilavaraus.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,7 @@ public class User {
 	@NotNull
 	private String email;
 	@NotNull
+	@Length(min = 6)
 	private String password;
 	private String role;
 

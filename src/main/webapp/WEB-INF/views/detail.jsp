@@ -19,7 +19,7 @@
 		<h1>${room.name}</h1>
 		<img class="img-fluid mb-4" src="${room.thumbnailSrc}" alt="">
 
-		<form:form id="reservationForm" action="${pageContext.request.contextPath}/rooms/${room.id}"
+		<form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
 		           method="POST" modelAttribute="reservation">
 			<div class="row">
 				<form:errors cssClass="alert alert-danger"/>
@@ -28,7 +28,7 @@
 				<div class="col-md-8">
 					<div id="calendar"></div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" id="reservationForm">
 
 						<div class="form-group">
 							<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>

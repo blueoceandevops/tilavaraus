@@ -30,20 +30,20 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String showLoginForm() {
-		return "login";
+		return "user/login";
 	}
 
 	@GetMapping("/register")
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
-		return "register";
+		return "user/register";
 	}
 
 	@GetMapping("/profile")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String showProfile(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
 		model.addAttribute("user", userDetails.getUser());
-		return "profile";
+		return "user/profile";
 	}
 
 	@PostMapping("/register")
@@ -54,7 +54,7 @@ public class UserController {
 		}
 
 		if (bindingResult.hasErrors()) {
-			return "register";
+			return "user/register";
 		}
 
 		user.setRole("ROLE_USER");

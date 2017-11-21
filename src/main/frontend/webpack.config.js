@@ -2,6 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const dist = '../../../target/classes/static/';
 
 module.exports = {
 	devtool: 'source-map',
@@ -12,7 +17,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, '../../../target/classes/static/')
+		path: path.resolve(__dirname, dist)
 	},
 	module: {
 		rules: [
@@ -33,6 +38,7 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new CleanPlugin([dist], {allowExternal: true}),
 		new ExtractTextPlugin({
 			filename: '[name].css'
 		}),
@@ -40,11 +46,20 @@ module.exports = {
 			name: 'dist/main',
 			chunks: ['dist/main', 'dist/detail']
 		}),
+		new webpack.DefinePlugin({
+			PRECACHE: JSON.stringify(new Date().toISOString())
+		}),
 		new UglifyJSPlugin({
 			sourceMap: true
 		}),
-		new webpack.DefinePlugin({
-			PRECACHE: JSON.stringify(new Date().toISOString())
+		new CopyWebpackPlugin([{
+			from: './node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js', to: dist
+		}]),
+		new WorkboxPlugin({
+			globDirectory: dist,
+			globPatterns: ['dist/**/*.{css,js}'],
+			swDest: path.join(dist, 'service-worker.js'),
+			swSrc: './src/service-worker.js'
 		})
 	]
 };

@@ -13,6 +13,7 @@
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#fbba18">
+	<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/favicon.ico"/>
 	<link rel="manifest" href="${pageContext.request.contextPath}/manifest.json">
 	<title><spring:message code="${empty title ? 'title' : title}" text="${title}"/></title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/main.css">

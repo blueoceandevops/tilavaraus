@@ -1,6 +1,6 @@
 {
-  "name": "XAMK Tilavaraus",
-  "short_name": "XAMK Tilavaraus",
+  "name": "Tilavaraus",
+  "short_name": "Tilavaraus",
   "start_url": "/?utm_source=homescreen",
   "theme_color": "#fbba18",
   "display": "standalone",

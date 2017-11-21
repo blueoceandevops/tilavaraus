@@ -86,7 +86,7 @@
 							</c:forEach>
 						</fieldset>
 
-					<p><spring:message code="reservation.totalPrice"/> : <span id="price">-</span></p>
+					<p><spring:message code="reservation.totalPrice"/>: <span id="price">-</span></p>
 
 					<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
 

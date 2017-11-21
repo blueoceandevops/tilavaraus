@@ -2,14 +2,12 @@ package fi.xamk.tilavaraus.domain;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "users")
 public class User {
 	@Id
 	@GeneratedValue

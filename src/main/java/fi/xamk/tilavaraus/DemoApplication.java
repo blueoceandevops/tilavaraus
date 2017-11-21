@@ -45,11 +45,13 @@ public class DemoApplication {
 	@Bean
 	public CommandLineRunner addAdminUser(UserRepository userRepository) {
 		return (args) -> {
-			User user = new User();
-			user.setEmail("admin@admin");
-			user.setPassword("$2a$10$QcKi3mvVHXrgPX1leqbbqO6s2UQCYKME3aU6KcLjVSjDb3gj1NsNe");
-			user.setRole("ROLE_ADMIN");
-			userRepository.save(user);
+			if (!userRepository.findByEmail("admin@admin").isPresent()) {
+				User user = new User();
+				user.setEmail("admin@admin");
+				user.setPassword("$2a$10$QcKi3mvVHXrgPX1leqbbqO6s2UQCYKME3aU6KcLjVSjDb3gj1NsNe");
+				user.setRole("ROLE_ADMIN");
+				userRepository.save(user);
+			}
 		};
 	}
 

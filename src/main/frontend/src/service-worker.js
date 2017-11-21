@@ -5,8 +5,10 @@ const workbox = new WorkboxSW({
 	clientsClaim: true
 });
 
-workbox.router.registerRoute('/', workbox.strategies.networkFirst());
-workbox.router.registerRoute(/\/\?utm_source=homescreen/, workbox.strategies.networkFirst());
+const networkFirstStrategy = workbox.strategies.networkFirst();
+
+workbox.router.registerRoute('/', networkFirstStrategy);
+workbox.router.registerRoute(/\/\?utm_source=homescreen/, networkFirstStrategy);
 workbox.router.registerRoute(/\/img\/(.*?)/, workbox.strategies.cacheFirst());
 
 workbox.precache([]);

@@ -4,6 +4,7 @@ import fi.xamk.tilavaraus.domain.Reservation;
 import fi.xamk.tilavaraus.domain.Room;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @RequestMapping("/api")
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 public class ApiController {
 
 	@PostMapping("/calculatePrice")
-	public BigDecimal calculatePrice(@ModelAttribute("reservation") Reservation reservation, @RequestParam("roomId") Room room) {
+	public BigDecimal calculatePrice(@Valid @ModelAttribute("reservation") Reservation reservation, @RequestParam("roomId") Room room) {
 		reservation.setRoom(room);
 		return reservation.getTotalPrice();
 	}

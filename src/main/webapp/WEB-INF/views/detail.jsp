@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<t:layout noContainer="true">
+<t:layout noContainer="true" title="${room.name}">
 	<jsp:attribute name="head">
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/detail.css">
 	</jsp:attribute>

@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<t:layout>
+<t:layout title="register">
 	<div class="row justify-content-md-center mt-3">
 		<div class="col-md-6">
 			<h1><spring:message code="register.title"/></h1>

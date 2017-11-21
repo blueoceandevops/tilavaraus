@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<t:layout>
+<t:layout title="myReservations">
     <h1><spring:message code="myReservations"/></h1>
     <table class="table table-responsive">
         <tr>

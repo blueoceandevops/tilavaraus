@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<t:layout>
+<t:layout title="profile">
 	<form:form modelAttribute="user" cssClass="mt-2">
 		<div class="form-group">
 			<form:label path="email"><spring:message code="user.email"/></form:label>

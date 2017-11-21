@@ -2,7 +2,9 @@
 <%@ tag description="Layout" pageEncoding="UTF-8" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="scripts" fragment="true" %>
+<%@ attribute name="title" %>
 <%@ attribute name="noContainer" type="java.lang.Boolean" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +14,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="theme-color" content="#fbba18">
 	<link rel="manifest" href="${pageContext.request.contextPath}/manifest.json">
-	<title><spring:message code="title"/></title>
+	<title><spring:message code="${empty title ? 'title' : title}" text="${title}"/></title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/main.css">
 	<jsp:invoke fragment="head"/>
 </head>

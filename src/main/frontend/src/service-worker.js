@@ -7,5 +7,6 @@ const workbox = new WorkboxSW({
 
 workbox.router.registerRoute('/', workbox.strategies.networkFirst());
 workbox.router.registerRoute(/\/\?utm_source=homescreen/, workbox.strategies.networkFirst());
+workbox.router.registerRoute(/\/img\/(.*?)/, workbox.strategies.cacheFirst());
 
 workbox.precache([]);

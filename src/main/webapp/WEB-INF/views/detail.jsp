@@ -16,7 +16,7 @@
 		<div class="bg-dark">
 			<img class="img-fluid mx-auto d-block" src="${room.thumbnailSrc}" alt="">
 		</div>
-		<div class="p-2 bg-warning mb-4">
+		<div class="p-4 bg-warning mb-4">
 			<h1 class="text-uppercase text-center">${room.name}</h1>
 		</div>
 		<div class="container">

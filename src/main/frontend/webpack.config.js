@@ -8,7 +8,7 @@ module.exports = {
 	entry: {
 		'dist/detail': './src/detail.js',
 		'service-worker': './src/service-worker.js',
-		'dist/main': ['bootstrap/js/src/index', './src/main.js'],
+		'dist/main': './src/main.js'
 	},
 	output: {
 		filename: '[name].js',

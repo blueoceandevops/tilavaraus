@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700');
 $border-radius: 0;
 $xamk-yellow: #fbba18;
 $theme-colors: (
@@ -6,6 +7,7 @@ $theme-colors: (
 $navbar-dark-color: white;
 $card-border-width: 0;
 $navbar-padding-y: 1.5rem;
+$font-family-base: Montserrat, sans-serif;
 
 @import "~bootstrap/scss/bootstrap";
 

@@ -7,7 +7,15 @@ import 'fullcalendar/dist/fullcalendar.css';
 const durationBetween = (start, end) => moment.duration(start.diff(end));
 
 $(() => {
-	const [$calendar, $startTime, $endTime, $duration] = [$('#calendar'), $('#startTime'), $('#endTime'), $('#duration')];
+	const [
+		$calendar,
+		$startTime,
+		$endTime,
+		$duration,
+		$form,
+		$price
+	] = [$('#calendar'), $('#startTime'), $('#endTime'), $('#duration'), $('#reservationForm'), $('#price')];
+
 	const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
 	window.APP = {
@@ -15,6 +23,22 @@ $(() => {
 			$duration.text(durationBetween(moment($startTime.val()), moment($endTime.val())).humanize());
 		}
 	};
+
+	const updatePrice = () => {
+		const formData = $form.serializeArray();
+		formData.push({name: 'roomId', value: window.roomId});
+		$.ajax({
+			method: 'POST',
+			url: '/api/calculatePrice',
+			data: formData
+		}).then(data => {
+			$price.text(data + ' €');
+		}, err => {
+			$price.text('-');
+		});
+	};
+
+	$form.find(':input').change(updatePrice);
 
 	$calendar.fullCalendar({
 		defaultView: 'agendaWeek',
@@ -35,21 +59,19 @@ $(() => {
 		selectLongPressDelay: 500,
 		selectMinDistance: 5,
 		height: 'auto',
-		unselectCancel: '#reservationForm',
+		unselectCancel: '#unselectCancel',
 		select: (start, end) => {
 			$startTime.val(start.format(FORMAT));
 			$endTime.val(end.format(FORMAT));
 			APP.updateDuration();
+			updatePrice();
 		},
 		dayClick: date => {
 			$startTime.val(date.format(FORMAT));
 			$endTime.val(date.add({hours: 1}).format(FORMAT));
 			APP.updateDuration();
+			updatePrice();
 		}
 	});
-
-	setInterval(() => {
-		$calendar.fullCalendar('refetchEvents');
-	}, 3000);
 
 });

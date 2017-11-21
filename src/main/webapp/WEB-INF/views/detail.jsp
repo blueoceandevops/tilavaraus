@@ -8,6 +8,7 @@
 	<jsp:attribute name="scripts">
 		<script>
 			window.locale = '${pageContext.response.locale.language}';
+			window.roomId = '${room.id}';
 			window.eventsJson = JSON.parse('${eventsJson}');
 		</script>
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
@@ -21,6 +22,7 @@
 		</div>
 		<div class="container">
 		<form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
+		           id="reservationForm"
 		           method="POST" modelAttribute="reservation">
 			<div class="row">
 				<form:errors cssClass="alert alert-danger"/>
@@ -29,7 +31,7 @@
 				<div class="col-md-8">
 					<div id="calendar"></div>
 				</div>
-				<div class="col-md-4" id="reservationForm">
+				<div class="col-md-4" id="unselectCancel">
 
 						<div class="form-group">
 							<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>
@@ -84,7 +86,9 @@
 							</c:forEach>
 						</fieldset>
 
-						<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
+					<p><spring:message code="reservation.totalPrice"/> : <span id="price">-</span></p>
+
+					<button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
 
 				</div>
 			</div>

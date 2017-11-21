@@ -19,6 +19,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="ml-auto nav navbar-nav navbar-right">
+				<c:forTokens items="fi,en" delims="," var="lang">
+					<li class="nav-item">
+						<a href="?lang=${lang}" class="nav-link text-uppercase ">${lang}</a>
+					</li>
+				</c:forTokens>
 				<security:authorize access="isAuthenticated()">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-uppercase font-weight-bold"

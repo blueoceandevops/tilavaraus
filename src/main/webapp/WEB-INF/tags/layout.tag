@@ -23,7 +23,6 @@
 <div class="${noContainer ? '' : 'container'}">
 	<jsp:doBody/>
 </div>
-<jsp:include page="/WEB-INF/views/_footer.jsp"/>
 <script src="${pageContext.request.contextPath}/dist/main.js"></script>
 <jsp:invoke fragment="scripts"/>
 </body>

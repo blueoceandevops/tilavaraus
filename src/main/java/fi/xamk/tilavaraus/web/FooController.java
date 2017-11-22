@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,7 @@ public class FooController {
 
 	@GetMapping("/reservations/{id}/cancel")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@PreAuthorize("principal.username == #reservation.user.email")
 	public String cancelReservation(@PathVariable("id") Reservation reservation) {
 		if (reservation.getStartTime().isBefore(LocalDateTime.now().plus(7, ChronoUnit.DAYS))) {
 			throw new RuntimeException("Cannot cancel reservation because it starts too soon!");
@@ -50,7 +52,7 @@ public class FooController {
 
 		reservationRepository.delete(reservation);
 
-		return "redirect:/";
+		return "redirect:/myreservations";
 	}
 
 	@GetMapping("/myreservations")

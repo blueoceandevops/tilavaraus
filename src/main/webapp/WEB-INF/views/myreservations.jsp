@@ -24,7 +24,7 @@
                     </ul>
                 </td>
                 <td>
-                    <a class="btn btn-danger"
+                    <a class="btn btn-danger${reservation.cancellable ? '' : ' disabled'}"
                        href="${spring:mvcUrl('FC#cancelReservation').arg(0, reservation).build()}">
                         <spring:message code="cancelReservation"/>
                     </a>

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -44,14 +42,9 @@ public class FooController {
 
 	@GetMapping("/reservations/{id}/cancel")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	@PreAuthorize("principal.username == #reservation.user.email")
+	@PreAuthorize("(principal.username == #reservation.user.email) && #reservation.cancellable")
 	public String cancelReservation(@PathVariable("id") Reservation reservation) {
-		if (reservation.getStartTime().isBefore(LocalDateTime.now().plus(7, ChronoUnit.DAYS))) {
-			throw new RuntimeException("Cannot cancel reservation because it starts too soon!");
-		}
-
 		reservationRepository.delete(reservation);
-
 		return "redirect:/myreservations";
 	}
 

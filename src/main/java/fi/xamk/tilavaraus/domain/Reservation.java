@@ -22,23 +22,29 @@ public class Reservation {
 	@NotNull
 	@Min(0)
 	private Integer personCount;
-	@NotNull
-    @Future(days = 7)
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	@TimeWindow(from = 8, to = 20)
-	private LocalDateTime startTime;
-	@NotNull
-    @Future(days = 7, hours = 1)
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	@TimeWindow(from = 8, to = 20)
-	private LocalDateTime endTime;
+	public static final int PREPARATION_DAYS = 7;
+	public static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
 	@ManyToOne
 	private User user;
 	@ElementCollection
 	private List<String> additionalServices;
+	@NotNull
+	@Future(days = PREPARATION_DAYS)
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@TimeWindow(from = 8, to = 20)
+	private LocalDateTime startTime;
+	@NotNull
+	@Future(days = PREPARATION_DAYS, hours = 1)
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@TimeWindow(from = 8, to = 20)
+	private LocalDateTime endTime;
 
 	public BigDecimal getTotalPrice() {
 		return getRoom().getHourlyPrice().multiply(BigDecimal.valueOf(getDuration().toHours()));
+	}
+
+	public boolean isCancellable() {
+		return this.startTime.isAfter(LocalDateTime.now().plus(PREPARATION_DURATION));
 	}
 
 	public Room getRoom() {

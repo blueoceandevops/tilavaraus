@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -28,11 +29,11 @@ public class FooController {
 	private final RoomRepository roomRepository;
 	private final ReservationRepository reservationRepository;
 	private final ObjectMapper objectMapper;
-	private final JavaMailSender mailSender;
+	private final Optional<JavaMailSender> mailSender;
 	private final ReservationValidator reservationValidator;
 
 	@Autowired
-	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper, JavaMailSender mailSender, ReservationValidator reservationValidator) {
+	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper, Optional<JavaMailSender> mailSender, ReservationValidator reservationValidator) {
 		this.roomRepository = roomRepository;
 		this.reservationRepository = reservationRepository;
 		this.objectMapper = objectMapper;
@@ -90,14 +91,14 @@ public class FooController {
 
 		reservationRepository.save(reservation);
 
-		new Thread(() -> {
+		mailSender.ifPresent(javaMailSender -> new Thread(() -> {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setSubject("Varausvahvistus");
 			mailMessage.setTo(myUserDetails.getUser().getEmail());
 			mailMessage.setText("Tila " + room.getName() + " varattu " + reservation.getPersonCount() + " henkilölle ajalle " +
 					reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
-			mailSender.send(mailMessage);
-		}).start();
+			javaMailSender.send(mailMessage);
+		}).start());
 
 		return "reservationsuccess";
 	}

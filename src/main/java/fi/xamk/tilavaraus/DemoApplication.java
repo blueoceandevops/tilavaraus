@@ -50,6 +50,10 @@ public class DemoApplication {
 				user.setEmail("admin@admin");
 				user.setPassword("$2a$10$QcKi3mvVHXrgPX1leqbbqO6s2UQCYKME3aU6KcLjVSjDb3gj1NsNe");
 				user.setRole("ROLE_ADMIN");
+				user.setAddress("Admin address");
+				user.setCity("Admin city");
+				user.setZip("12345");
+				user.setName("Admin User");
 				userRepository.save(user);
 			}
 		};

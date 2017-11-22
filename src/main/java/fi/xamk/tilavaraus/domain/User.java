@@ -19,7 +19,19 @@ public class User {
 	@NotNull
 	@Length(min = 6)
 	private String password;
+	@NotNull
+	@Length(min = 1)
+	private String name;
 	private String role;
+	@NotNull
+	@Length(min = 1)
+	private String address;
+	@NotNull
+	@Length(min = 1)
+	private String city;
+	@NotNull
+	@Length(min = 5, max = 5)
+	private String zip;
 
 	public String getEmail() {
 		return email;
@@ -51,5 +63,37 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

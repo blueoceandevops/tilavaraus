@@ -46,6 +46,20 @@ public class UserController {
 		return "user/profile";
 	}
 
+	@PostMapping("/profile")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	public String updateProfile(@AuthenticationPrincipal MyUserDetails userDetails,
+	                            @ModelAttribute("user") @Valid User updatedUser,
+	                            Model model) {
+		User currentUser = userDetails.getUser();
+		currentUser.setName(updatedUser.getName());
+		currentUser.setAddress(updatedUser.getAddress());
+		currentUser.setZip(updatedUser.getZip());
+		currentUser.setCity(updatedUser.getCity());
+		model.addAttribute("user", userRepository.save(currentUser));
+		return "user/profile";
+	}
+
 	@PostMapping("/register")
 	public String register(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
 

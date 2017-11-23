@@ -12,7 +12,7 @@
 		<li>
 			<ul>
 				<c:forEach items="${reservation.additionalServices}" var="additionalService">
-					<li><spring:message code="${additionalService}"/></li>
+                    <li><spring:message code="additionalService.name.${additionalService.name}"/></li>
 				</c:forEach>
 			</ul>
 		</li>

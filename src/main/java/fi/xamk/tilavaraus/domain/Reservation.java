@@ -10,7 +10,8 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Entity
 public class Reservation {
@@ -27,8 +28,8 @@ public class Reservation {
 	private String notes;
 	@ManyToOne
 	private User user;
-	@ElementCollection
-	private List<String> additionalServices;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<AdditionalService> additionalServices;
 	@NotNull
 	@Future(days = PREPARATION_DAYS)
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -44,8 +45,8 @@ public class Reservation {
 		return notes;
 	}
 
-	public BigDecimal getTotalPrice() {
-		return getRoom().getHourlyPrice().multiply(BigDecimal.valueOf(getDuration().toHours()));
+    public Set<AdditionalService> getAdditionalServices() {
+        return additionalServices;
 	}
 
 	public boolean isCancellable() {
@@ -108,11 +109,18 @@ public class Reservation {
 		this.personCount = personCount;
 	}
 
-	public List<String> getAdditionalServices() {
-		return additionalServices;
-	}
-
-	public void setAdditionalServices(List<String> additionalServices) {
+    public void setAdditionalServices(Set<AdditionalService> additionalServices) {
 		this.additionalServices = additionalServices;
 	}
+
+    public BigDecimal getTotalPrice() {
+        BigDecimal additionalServicesPrice = Optional.ofNullable(getAdditionalServices())
+                .map(Set::stream)
+                .map(stream -> stream.map(AdditionalService::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add))
+                .orElse(BigDecimal.ZERO);
+
+        return getRoom().getHourlyPrice()
+                .multiply(BigDecimal.valueOf(getDuration().toHours()))
+                .add(additionalServicesPrice);
+    }
 }

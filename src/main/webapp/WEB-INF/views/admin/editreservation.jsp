@@ -53,8 +53,8 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<form:checkbox path="additionalServices" class="form-check-input"
-								               value="${additionalService}"/>
-								<spring:message code="${additionalService}"/>
+											   value="${additionalService.id}"/>
+								<spring:message code="additionalService.name.${additionalService.name}"/>
 							</label>
 						</div>
 					</c:forEach>

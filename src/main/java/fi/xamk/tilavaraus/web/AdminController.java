@@ -1,5 +1,6 @@
 package fi.xamk.tilavaraus.web;
 
+import fi.xamk.tilavaraus.domain.AdditionalServiceRepository;
 import fi.xamk.tilavaraus.domain.Reservation;
 import fi.xamk.tilavaraus.domain.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,18 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
 	private final ReservationRepository reservationRepository;
+	private final AdditionalServiceRepository additionalServiceRepository;
 
 	@Autowired
-	public AdminController(ReservationRepository reservationRepository) {
+	public AdminController(ReservationRepository reservationRepository, AdditionalServiceRepository additionalServiceRepository) {
 		this.reservationRepository = reservationRepository;
+		this.additionalServiceRepository = additionalServiceRepository;
 	}
 
 	@GetMapping("/reservations/{id}/edit")
 	public String showReservationEditForm(@PathVariable("id") Reservation reservation, Model model) {
 		model.addAttribute("reservation", reservation);
-		model.addAttribute("additionalServices", FooController.getAdditionalServices());
+		model.addAttribute("additionalServices", additionalServiceRepository.findAll());
 		return "admin/editreservation";
 	}
 

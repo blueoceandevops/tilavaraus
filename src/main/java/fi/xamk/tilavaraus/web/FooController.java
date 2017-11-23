@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -30,14 +28,21 @@ public class FooController {
 	private final ObjectMapper objectMapper;
 	private final Optional<JavaMailSender> mailSender;
 	private final ReservationValidator reservationValidator;
+	private final AdditionalServiceRepository additionalServiceRepository;
 
 	@Autowired
-	public FooController(RoomRepository roomRepository, ReservationRepository reservationRepository, ObjectMapper objectMapper, Optional<JavaMailSender> mailSender, ReservationValidator reservationValidator) {
+	public FooController(RoomRepository roomRepository,
+						 ReservationRepository reservationRepository,
+						 ObjectMapper objectMapper,
+						 Optional<JavaMailSender> mailSender,
+						 ReservationValidator reservationValidator,
+						 AdditionalServiceRepository additionalServiceRepository) {
 		this.roomRepository = roomRepository;
 		this.reservationRepository = reservationRepository;
 		this.objectMapper = objectMapper;
 		this.mailSender = mailSender;
 		this.reservationValidator = reservationValidator;
+		this.additionalServiceRepository = additionalServiceRepository;
 	}
 
 	@GetMapping("/reservations/{id}/cancel")
@@ -107,8 +112,8 @@ public class FooController {
 	}
 
 	@ModelAttribute("additionalServices")
-	public static List<String> getAdditionalServices() {
-		return Collections.singletonList("additionalServices.coffee");
+	public Iterable<AdditionalService> getAdditionalServices() {
+		return additionalServiceRepository.findAll();
 	}
 
 	@RequestMapping("/")

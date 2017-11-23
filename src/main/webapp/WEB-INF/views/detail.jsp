@@ -81,8 +81,9 @@
                                             <input type="checkbox"
                                                    name="additionalServices"
                                                    class="form-check-input"
-                                                   value="${additionalService}">
-                                            <spring:message code="${additionalService}"/>
+                                                   value="${additionalService.id}">
+                                            <spring:message code="additionalService.name.${additionalService.name}"/>
+                                            (${additionalService.price} €)
                                         </label>
                                     </div>
                                 </c:forEach>

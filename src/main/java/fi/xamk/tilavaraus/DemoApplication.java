@@ -54,6 +54,7 @@ public class DemoApplication {
 				user.setCity("Admin city");
 				user.setZip("12345");
 				user.setName("Admin User");
+				user.setPhone("123456789");
 				userRepository.save(user);
 			}
 		};

@@ -26,6 +26,9 @@ public class User {
 	@NotNull
 	@Length(min = 1)
 	private String address;
+    @NotNull
+    @Length(min = 1)
+    private String phone;
 	@NotNull
 	@Length(min = 1)
 	private String city;
@@ -33,9 +36,13 @@ public class User {
 	@Length(min = 5, max = 5)
 	private String zip;
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -60,6 +67,10 @@ public class User {
 	public String getRole() {
 		return role;
 	}
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
 	public void setRole(String role) {
 		this.role = role;

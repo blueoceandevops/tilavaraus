@@ -17,6 +17,10 @@
 			<form:input path="name" cssClass="form-control"/>
 		</div>
 		<div class="form-group">
+			<form:label path="phone"><spring:message code="user.phone"/></form:label>
+			<form:input type="tel" path="phone" cssClass="form-control"/>
+		</div>
+		<div class="form-group">
 			<form:label path="address"><spring:message code="user.address"/></form:label>
 			<form:input path="address" cssClass="form-control"/>
 		</div>

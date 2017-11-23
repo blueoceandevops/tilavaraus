@@ -33,6 +33,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.loginPage("/login")
                 .and()
+				.cors()
+				.and()
 				.headers().frameOptions().disable();
 	}
 

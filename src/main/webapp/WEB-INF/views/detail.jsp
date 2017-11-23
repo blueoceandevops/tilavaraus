@@ -17,11 +17,10 @@
 		<div class="bg-dark">
 			<img class="img-fluid mx-auto d-block" src="${room.thumbnailSrc}" alt="">
 		</div>
-		<div class="p-4 bg-warning mb-4">
+		<div class="p-4 bg-warning">
 			<h1 class="text-uppercase text-center">${room.name}</h1>
 		</div>
 		<div class="container">
-
             <form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
                        id="reservationForm"
                        method="POST" modelAttribute="reservation">
@@ -29,10 +28,10 @@
                     <form:errors cssClass="alert alert-danger"/>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+	                <div class="col-md-8 mt-4">
                         <div id="calendar"></div>
                     </div>
-                    <div class="col-md-4" id="unselectCancel">
+	                <div class="col-md-4 mt-4" id="unselectCancel">
                         <security:authorize access="isAuthenticated()">
                             <div class="form-group">
                                 <form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>

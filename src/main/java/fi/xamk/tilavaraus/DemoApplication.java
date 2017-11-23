@@ -17,14 +17,11 @@ public class DemoApplication {
 	}
 
 
-	private Room createRoom(Long id, String name, Integer capacity, Double price, String thumbnailSrc) {
-		Room r = new Room();
-		r.setId(id);
-		r.setName(name);
-		r.setCapacity(capacity);
-		r.setHourlyPrice(BigDecimal.valueOf(price));
-		r.setThumbnailSrc(thumbnailSrc);
-		return r;
+    private AdditionalService createAdditionalService(String name, BigDecimal price) {
+        AdditionalService as = new AdditionalService();
+        as.setName(name);
+        as.setPrice(price);
+        return as;
 	}
 
 	@Bean
@@ -45,25 +42,26 @@ public class DemoApplication {
 		};
 	}
 
+    private Room createRoom(String name, Integer capacity, Double price, String thumbnailSrc) {
+        Room r = new Room();
+        r.setName(name);
+        r.setCapacity(capacity);
+        r.setHourlyPrice(BigDecimal.valueOf(price));
+        r.setThumbnailSrc(thumbnailSrc);
+        return r;
+    }
+
 	@Bean
 	public CommandLineRunner populateAdditionalServices(AdditionalServiceRepository additionalServiceRepository) {
 		return (args) -> {
 			if (additionalServiceRepository.count() == 0) {
 				additionalServiceRepository.saveAll(Arrays.asList(
-						createAdditionalService(1L, "foodAndDrink", BigDecimal.valueOf(10.00)),
-						createAdditionalService(2L, "itSupport", BigDecimal.valueOf(10.00)),
-						createAdditionalService(3L, "janitor", BigDecimal.valueOf(10.00))
+                        createAdditionalService("foodAndDrink", BigDecimal.valueOf(10.00)),
+                        createAdditionalService("itSupport", BigDecimal.valueOf(10.00)),
+                        createAdditionalService("janitor", BigDecimal.valueOf(10.00))
 				));
 			}
 		};
-	}
-
-	private AdditionalService createAdditionalService(Long id, String name, BigDecimal price) {
-		AdditionalService as = new AdditionalService();
-		as.setId(id);
-		as.setName(name);
-		as.setPrice(price);
-		return as;
 	}
 
 	@Bean
@@ -72,11 +70,11 @@ public class DemoApplication {
 		{
 			if (roomRepository.count() == 0) {
 				roomRepository.saveAll(Arrays.asList(
-						createRoom(1L, "Mikpolisali", 117, 160.0, "/img/mikpolisali.jpg"),
-						createRoom(2L, "Kuitula", 22, 200.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"),
-						createRoom(3L, "Tallin vintti", 40, 90.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/talli_ylakerta-1920x725.jpg"),
-						createRoom(4L, "MA325", 9999, 80.0, "https://via.placeholder.com/350x150"),
-						createRoom(5L, "MB124", 9999, 60.0, "https://via.placeholder.com/350x150")
+                        createRoom("Mikpolisali", 117, 160.0, "/img/mikpolisali.jpg"),
+                        createRoom("Kuitula", 22, 200.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"),
+                        createRoom("Tallin vintti", 40, 90.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/talli_ylakerta-1920x725.jpg"),
+                        createRoom("MA325", 9999, 80.0, "https://via.placeholder.com/350x150"),
+                        createRoom("MB124", 9999, 60.0, "https://via.placeholder.com/350x150")
 				));
 			}
 		};

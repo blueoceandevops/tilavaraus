@@ -74,7 +74,7 @@ public class DemoApplication {
                         createRoom("Kuitula", 22, 200.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg"),
                         createRoom("Tallin vintti", 40, 90.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/talli_ylakerta-1920x725.jpg"),
                         createRoom("MA325", 9999, 80.0, "https://via.placeholder.com/350x150"),
-                        createRoom("MB124", 9999, 60.0, "https://via.placeholder.com/350x150")
+						createRoom("MB124", 9999, 60.0, "/img/mb124.jpg")
 				));
 			}
 		};

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body, #vrview {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="vrview"></div>
+<script src="//storage.googleapis.com/vrview/2.0/build/vrview.min.js"></script>
+<script>
+    window.addEventListener('load', onVrViewLoad);
+
+    function onVrViewLoad() {
+        const vrView = new VRView.Player('#vrview', {
+            image: './IMG_20171123_140012.vr-converted.jpg',
+            width: '100%',
+            height: '100%',
+            is_stereo: true
+        });
+    }
+</script>
+</body>
+</html>
+
+

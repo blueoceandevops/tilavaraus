@@ -26,7 +26,7 @@ $(() => {
 
 	const updatePrice = () => {
 		const formData = $form.serializeArray();
-		formData.push({name: 'roomId', value: window.roomId});
+		formData.push({name: 'room', value: window.roomId});
 		$.ajax({
 			method: 'POST',
 			url: '/api/calculatePrice',
@@ -60,6 +60,7 @@ $(() => {
 		selectMinDistance: 5,
 		height: 'auto',
 		unselectCancel: '#unselectCancel',
+		selectAllow: ({start, end}) => start.isSame(end, 'day'),
 		select: (start, end) => {
 			$startTime.val(start.format(FORMAT));
 			$endTime.val(end.format(FORMAT));

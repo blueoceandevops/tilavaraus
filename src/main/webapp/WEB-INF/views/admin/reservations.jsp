@@ -9,6 +9,8 @@
 			<th><spring:message code="reservation.time"/></th>
 			<th><spring:message code="reservation.personCount"/></th>
 			<th><spring:message code="reservation.additionalServices"/></th>
+			<th><spring:message code="reservation.totalPrice"/></th>
+			<th><spring:message code="reservation.notes"/></th>
 			<th><spring:message code="actions"/></th>
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
@@ -25,6 +27,8 @@
 						</c:forEach>
 					</ul>
 				</td>
+				<td>${reservation.totalPrice} €</td>
+				<td><c:out value="${reservation.notes}"/></td>
 				<td>
 					<a class="btn btn-danger"
 					   href="${spring:mvcUrl('AC#deleteReservations').arg(0, reservation).build()}">

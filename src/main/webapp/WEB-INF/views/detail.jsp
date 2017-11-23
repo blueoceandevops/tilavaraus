@@ -88,6 +88,15 @@
                                 </c:forEach>
                             </fieldset>
 
+                            <div class="form-group">
+                                <form:label path="notes"><spring:message
+                                        code="reservation.notes"/></form:label>
+                                <form:textarea class="form-control"
+                                               path="notes"
+                                               cssErrorClass="form-control is-invalid"/>
+                                <form:errors path="notes" cssClass="invalid-feedback"/>
+                            </div>
+
                             <p><spring:message code="reservation.totalPrice"/>: <span id="price">-</span></p>
 
                             <button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>

@@ -22,8 +22,9 @@ public class Reservation {
 	@NotNull
 	@Min(0)
 	private Integer personCount;
-	public static final int PREPARATION_DAYS = 7;
-	public static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
+	private static final int PREPARATION_DAYS = 7;
+	private static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
+	private String notes;
 	@ManyToOne
 	private User user;
 	@ElementCollection
@@ -39,6 +40,10 @@ public class Reservation {
 	@TimeWindow(from = 8, to = 20)
 	private LocalDateTime endTime;
 
+	public String getNotes() {
+		return notes;
+	}
+
 	public BigDecimal getTotalPrice() {
 		return getRoom().getHourlyPrice().multiply(BigDecimal.valueOf(getDuration().toHours()));
 	}
@@ -49,6 +54,10 @@ public class Reservation {
 
 	public Room getRoom() {
 		return room;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 	public void setRoom(Room room) {

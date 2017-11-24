@@ -57,7 +57,7 @@ $(() => {
 			token: token => {
 				$('<input>', {
 					type: 'hidden',
-					name: 'reservation.stripeToken',
+					name: 'stripeToken',
 					value: token.id
 				}).appendTo($form);
 				$form.submit();

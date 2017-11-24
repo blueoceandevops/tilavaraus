@@ -42,7 +42,6 @@
                                 <form:input class="form-control"
                                             type="datetime-local"
                                             path="startTime"
-                                            onchange="APP.updateDuration()"
                                             required="true"
                                             cssErrorClass="form-control is-invalid"/>
                                 <form:errors path="startTime" cssClass="invalid-feedback"/>
@@ -53,7 +52,6 @@
                                 <form:input class="form-control"
                                             type="datetime-local"
                                             path="endTime"
-                                            onchange="APP.updateDuration()"
                                             required="true"
                                             cssErrorClass="form-control is-invalid"/>
                                 <form:errors path="endTime" cssClass="invalid-feedback"/>
@@ -103,9 +101,8 @@
 
                             <p><spring:message code="reservation.totalPrice"/>: <span id="price">-</span></p>
 
-                            <button id="customButton"><spring:message code="pay"/></button>
-
-                            <button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
+	                        <button id="customButton" class="btn btn-primary" disabled><spring:message
+			                        code="pay"/></button>
                         </security:authorize>
                         <security:authorize access="isAnonymous()">
                             <div class="alert alert-info" role="alert">Sinun täytyy kirjautua sisään tehdäksesi

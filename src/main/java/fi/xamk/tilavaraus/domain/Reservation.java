@@ -26,6 +26,7 @@ public class Reservation {
 	private static final int PREPARATION_DAYS = 7;
 	private static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
 	private String notes;
+	private String stripeToken;
 	@ManyToOne
 	private User user;
     @ManyToMany(cascade = CascadeType.ALL)
@@ -123,4 +124,12 @@ public class Reservation {
                 .multiply(BigDecimal.valueOf(getDuration().toHours()))
                 .add(additionalServicesPrice);
     }
+
+	public String getStripeToken() {
+		return stripeToken;
+	}
+
+	public void setStripeToken(String stripeToken) {
+		this.stripeToken = stripeToken;
+	}
 }

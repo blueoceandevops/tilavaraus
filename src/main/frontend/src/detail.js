@@ -7,42 +7,47 @@ import 'fullcalendar/dist/fullcalendar.css';
 const durationBetween = (start, end) => moment.duration(start.diff(end));
 
 $(() => {
+
 	const [
 		$calendar,
 		$startTime,
 		$endTime,
 		$duration,
 		$form,
-		$price
-	] = [$('#calendar'), $('#startTime'), $('#endTime'), $('#duration'), $('#reservationForm'), $('#price')];
+		$price,
+		$payButton
+	] = [
+		$('#calendar'),
+		$('#startTime'),
+		$('#endTime'),
+		$('#duration'),
+		$('#reservationForm'),
+		$('#price'),
+		$('#customButton')
+	];
 
-
-    let price = null;
-
+	const store = {price: null};
 	const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
-	window.APP = {
-		updateDuration: () => {
-			$duration.text(durationBetween(moment($startTime.val()), moment($endTime.val())).humanize());
-		}
-	};
-
-	const updatePrice = () => {
+	const refresh = () => {
+		const setPrice = (price) => {
+			store.price = price;
+			$price.text(price ? price + ' €' : '-');
+			$payButton.prop('disabled', !price);
+		};
+		$duration.text(durationBetween(moment($startTime.val()), moment($endTime.val())).humanize());
 		$.ajax({
 			method: 'POST',
 			url: '/api/calculatePrice',
 			data: $form.serializeArray()
 		}).then(data => {
-            price = parseInt(data);
-            $price.text(price + ' €');
+			setPrice(parseInt(data));
 		}, err => {
-            price = null;
-			$price.text('-');
+			setPrice(null);
 		});
 	};
 
 	if (window.userEmail) {
-
 		const handler = StripeCheckout.configure({
 			key: 'pk_test_nxRS0g5Ve6rZAfRu3Jt6Bm6n',
 			locale: window.locale,
@@ -52,25 +57,25 @@ $(() => {
 			token: token => {
 				$('<input>', {
 					type: 'hidden',
-					name: 'stripeToken',
+					name: 'reservation.stripeToken',
 					value: token.id
 				}).appendTo($form);
 				$form.submit();
 			}
 		});
-		document.getElementById('customButton').addEventListener('click', function (e) {
+		document.getElementById('customButton').addEventListener('click', e => {
 			handler.open({
 				name: 'Tilavaraus',
-				amount: price * 100
+				amount: store.price * 100
 			});
 			e.preventDefault();
 		});
-		window.addEventListener('popstate', function () {
+		window.addEventListener('popstate', () => {
 			handler.close();
 		});
 	}
 
-	$form.find(':input').change(updatePrice);
+	$form.find(':input').change(refresh);
 
 	$calendar.fullCalendar({
 		defaultView: 'agendaWeek',
@@ -96,14 +101,12 @@ $(() => {
 		select: (start, end) => {
 			$startTime.val(start.format(FORMAT));
 			$endTime.val(end.format(FORMAT));
-			APP.updateDuration();
-			updatePrice();
+			refresh();
 		},
 		dayClick: date => {
 			$startTime.val(date.format(FORMAT));
 			$endTime.val(date.add({hours: 1}).format(FORMAT));
-			APP.updateDuration();
-			updatePrice();
+			refresh();
 		}
 	});
 

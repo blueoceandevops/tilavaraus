@@ -55,6 +55,7 @@ $(() => {
 			email: window.userEmail,
 			bitcoin: true,
 			token: token => {
+				$payButton.prop('disabled', true);
 				$('<input>', {
 					type: 'hidden',
 					name: 'stripeToken',

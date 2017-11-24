@@ -27,24 +27,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.anyRequest()
-				.permitAll()
-				.and()
-				.formLogin()
-				.loginPage("/login")
-                .and()
-				.cors()
-				.and()
-				.headers().frameOptions().disable();
+			.anyRequest()
+			.permitAll()
+			.and()
+			.formLogin()
+			.loginPage("/login")
+			.and()
+			.cors()
+			.and()
+			.headers().frameOptions().disable();
+	}
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
 }

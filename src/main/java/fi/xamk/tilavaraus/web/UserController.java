@@ -28,38 +28,6 @@ public class UserController {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	@GetMapping("/login")
-	public String showLoginForm() {
-		return "user/login";
-	}
-
-	@GetMapping("/register")
-	public String showRegisterForm(Model model) {
-		model.addAttribute("user", new User());
-		return "user/register";
-	}
-
-	@GetMapping("/profile")
-	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String showProfile(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
-		model.addAttribute("user", userDetails.getUser());
-		return "user/profile";
-	}
-
-	@PostMapping("/profile")
-	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String updateProfile(@AuthenticationPrincipal MyUserDetails userDetails,
-	                            @ModelAttribute("user") @Valid User updatedUser,
-	                            Model model) {
-		User currentUser = userDetails.getUser();
-		currentUser.setName(updatedUser.getName());
-		currentUser.setAddress(updatedUser.getAddress());
-		currentUser.setZip(updatedUser.getZip());
-		currentUser.setCity(updatedUser.getCity());
-		model.addAttribute("user", userRepository.save(currentUser));
-		return "user/profile";
-	}
-
 	@PostMapping("/register")
 	public String register(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
 
@@ -75,6 +43,38 @@ public class UserController {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 		return "redirect:/login";
+	}
+
+	@GetMapping("/login")
+	public String showLoginForm() {
+		return "user/login";
+	}
+
+	@GetMapping("/profile")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	public String showProfile(@AuthenticationPrincipal MyUserDetails userDetails, Model model) {
+		model.addAttribute("user", userDetails.getUser());
+		return "user/profile";
+	}
+
+	@GetMapping("/register")
+	public String showRegisterForm(Model model) {
+		model.addAttribute("user", new User());
+		return "user/register";
+	}
+
+	@PostMapping("/profile")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	public String updateProfile(@AuthenticationPrincipal MyUserDetails userDetails,
+	                            @ModelAttribute("user") @Valid User updatedUser,
+	                            Model model) {
+		User currentUser = userDetails.getUser();
+		currentUser.setName(updatedUser.getName());
+		currentUser.setAddress(updatedUser.getAddress());
+		currentUser.setZip(updatedUser.getZip());
+		currentUser.setCity(updatedUser.getCity());
+		model.addAttribute("user", userRepository.save(currentUser));
+		return "user/profile";
 	}
 
 

@@ -18,12 +18,12 @@
 				<td>${reservation.user.email}</td>
 				<td>${reservation.room.name}</td>
 				<td><t:formatDate value="${reservation.startTime}"/> - <t:formatDate
-						value="${reservation.endTime}"/></td>
+					value="${reservation.endTime}"/></td>
 				<td>${reservation.personCount}</td>
 				<td>
 					<ul>
 						<c:forEach items="${reservation.additionalServices}" var="additionalService">
-                            <li><spring:message code="additionalService.name.${additionalService.name}"/></li>
+							<li><spring:message code="additionalService.name.${additionalService.name}"/></li>
 						</c:forEach>
 					</ul>
 				</td>

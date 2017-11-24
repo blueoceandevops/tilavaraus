@@ -19,14 +19,14 @@ public class ApiController {
 		this.reservationValidator = reservationValidator;
 	}
 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.addValidators(reservationValidator);
-	}
-
 	@PostMapping("/calculatePrice")
 	public BigDecimal calculatePrice(@Valid @ModelAttribute("reservation") Reservation reservation) {
 		return reservation.getTotalPrice();
+	}
+
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(reservationValidator);
 	}
 
 }

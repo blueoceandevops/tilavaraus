@@ -16,20 +16,20 @@ public class FullCalendarEvent {
 		this.end = end;
 	}
 
+	public LocalDateTime getEnd() {
+		return end;
+	}
+
+	public void setEnd(LocalDateTime end) {
+		this.end = end;
+	}
+
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public LocalDateTime getStart() {
@@ -40,12 +40,12 @@ public class FullCalendarEvent {
 		this.start = start;
 	}
 
-	public LocalDateTime getEnd() {
-		return end;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setEnd(LocalDateTime end) {
-		this.end = end;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

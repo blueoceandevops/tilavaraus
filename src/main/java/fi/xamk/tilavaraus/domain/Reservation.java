@@ -15,6 +15,8 @@ import java.util.Set;
 
 @Entity
 public class Reservation {
+	private static final int PREPARATION_DAYS = 7;
+	private static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -23,14 +25,12 @@ public class Reservation {
 	@NotNull
 	@Min(0)
 	private Integer personCount;
-	private static final int PREPARATION_DAYS = 7;
-	private static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
 	private String notes;
 	private String stripeToken;
 	@ManyToOne
 	private User user;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<AdditionalService> additionalServices;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private Set<AdditionalService> additionalServices;
 	@NotNull
 	@Future(days = PREPARATION_DAYS)
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -42,36 +42,12 @@ public class Reservation {
 	@TimeWindow(from = 8, to = 20)
 	private LocalDateTime endTime;
 
-	public String getNotes() {
-		return notes;
+	public Set<AdditionalService> getAdditionalServices() {
+		return additionalServices;
 	}
 
-    public Set<AdditionalService> getAdditionalServices() {
-        return additionalServices;
-	}
-
-	public boolean isCancellable() {
-		return this.startTime.isAfter(LocalDateTime.now().plus(PREPARATION_DURATION));
-	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
-	}
-
-	public LocalDateTime getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(LocalDateTime startTime) {
-		this.startTime = startTime;
+	public void setAdditionalServices(Set<AdditionalService> additionalServices) {
+		this.additionalServices = additionalServices;
 	}
 
 	public Duration getDuration() {
@@ -94,12 +70,12 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public String getNotes() {
+		return notes;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 	public Integer getPersonCount() {
@@ -110,20 +86,21 @@ public class Reservation {
 		this.personCount = personCount;
 	}
 
-    public void setAdditionalServices(Set<AdditionalService> additionalServices) {
-		this.additionalServices = additionalServices;
+	public Room getRoom() {
+		return room;
 	}
 
-    public BigDecimal getTotalPrice() {
-        BigDecimal additionalServicesPrice = Optional.ofNullable(getAdditionalServices())
-                .map(Set::stream)
-                .map(stream -> stream.map(AdditionalService::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add))
-                .orElse(BigDecimal.ZERO);
+	public void setRoom(Room room) {
+		this.room = room;
+	}
 
-        return getRoom().getHourlyPrice()
-                .multiply(BigDecimal.valueOf(getDuration().toHours()))
-                .add(additionalServicesPrice);
-    }
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
 
 	public String getStripeToken() {
 		return stripeToken;
@@ -131,5 +108,28 @@ public class Reservation {
 
 	public void setStripeToken(String stripeToken) {
 		this.stripeToken = stripeToken;
+	}
+
+	public BigDecimal getTotalPrice() {
+		BigDecimal additionalServicesPrice = Optional.ofNullable(getAdditionalServices())
+			.map(Set::stream)
+			.map(stream -> stream.map(AdditionalService::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add))
+			.orElse(BigDecimal.ZERO);
+
+		return getRoom().getHourlyPrice()
+			.multiply(BigDecimal.valueOf(getDuration().toHours()))
+			.add(additionalServicesPrice);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public boolean isCancellable() {
+		return this.startTime.isAfter(LocalDateTime.now().plus(PREPARATION_DURATION));
 	}
 }

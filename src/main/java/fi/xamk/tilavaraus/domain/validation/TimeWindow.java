@@ -11,13 +11,13 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TimeWindow {
-	String message() default "Time is not allowed";
+	int from();
 
 	Class<?>[] groups() default {};
 
-	Class<? extends Payload>[] payload() default {};
+	String message() default "Time is not allowed";
 
-	int from();
+	Class<? extends Payload>[] payload() default {};
 
 	int to();
 }

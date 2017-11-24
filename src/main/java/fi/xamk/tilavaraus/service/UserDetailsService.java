@@ -22,7 +22,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return userRepository.findByEmail(username)
-				.map(MyUserDetails::new)
-				.orElseThrow(() -> new UsernameNotFoundException(""));
+			.map(MyUserDetails::new)
+			.orElseThrow(() -> new UsernameNotFoundException(""));
 	}
 }

@@ -45,7 +45,7 @@ public class ReservationService {
 			mailMessage.setSubject("Varausvahvistus");
 			mailMessage.setTo(reservation.getUser().getEmail());
 			mailMessage.setText("Tila " + reservation.getRoom().getName() + " varattu " + reservation.getPersonCount() + " henkilölle ajalle " +
-					reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
+				reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
 			javaMailSender.send(mailMessage);
 		}).start());
 	}

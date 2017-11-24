@@ -35,18 +35,18 @@
 				<div class="form-group">
 					<form:label path="phone"><spring:message code="user.phone"/></form:label>
 					<form:input path="phone"
-								type="tel"
-								class="form-control"
-								required="true"
-								cssErrorClass="form-control is-invalid"/>
+					            type="tel"
+					            class="form-control"
+					            required="true"
+					            cssErrorClass="form-control is-invalid"/>
 					<form:errors path="phone" cssClass="invalid-feedback"/>
 				</div>
 				<div class="form-group">
 					<form:label path="address"><spring:message code="user.address"/></form:label>
 					<form:input path="address"
-								class="form-control"
-								required="true"
-								cssErrorClass="form-control is-invalid"/>
+					            class="form-control"
+					            required="true"
+					            cssErrorClass="form-control is-invalid"/>
 					<form:errors path="address" cssClass="invalid-feedback"/>
 				</div>
 				<div class="form-row">

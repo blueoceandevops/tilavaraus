@@ -26,55 +26,15 @@ public class User {
 	@NotNull
 	@Length(min = 1)
 	private String address;
-    @NotNull
-    @Length(min = 1)
-    private String phone;
+	@NotNull
+	@Length(min = 1)
+	private String phone;
 	@NotNull
 	@Length(min = 1)
 	private String city;
 	@NotNull
 	@Length(min = 5, max = 5)
 	private String zip;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 	public String getAddress() {
 		return address;
@@ -92,12 +52,20 @@ public class User {
 		this.city = city;
 	}
 
-	public String getZip() {
-		return zip;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setZip(String zip) {
-		this.zip = zip;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -106,5 +74,37 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
 	}
 }

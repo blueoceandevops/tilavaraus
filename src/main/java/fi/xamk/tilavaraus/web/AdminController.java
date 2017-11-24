@@ -23,13 +23,6 @@ public class AdminController {
 		this.additionalServiceRepository = additionalServiceRepository;
 	}
 
-	@GetMapping("/reservations/{id}/edit")
-	public String showReservationEditForm(@PathVariable("id") Reservation reservation, Model model) {
-		model.addAttribute("reservation", reservation);
-		model.addAttribute("additionalServices", additionalServiceRepository.findAll());
-		return "admin/editreservation";
-	}
-
 	@GetMapping("/reservations/{id}/delete")
 	public String deleteReservations(@PathVariable("id") Reservation reservation) {
 		reservationRepository.delete(reservation);
@@ -51,5 +44,12 @@ public class AdminController {
 	public String listReservations(Model model) {
 		model.addAttribute("reservations", reservationRepository.findAll());
 		return "admin/reservations";
+	}
+
+	@GetMapping("/reservations/{id}/edit")
+	public String showReservationEditForm(@PathVariable("id") Reservation reservation, Model model) {
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("additionalServices", additionalServiceRepository.findAll());
+		return "admin/editreservation";
 	}
 }

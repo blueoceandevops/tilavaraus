@@ -11,18 +11,18 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Future {
-    String message() default "Field is not enough in future";
+	long days() default 0;
 
-    Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	long hours() default 0;
 
-    long days() default 0;
+	String message() default "Field is not enough in future";
 
-    long hours() default 0;
+	long minutes() default 0;
 
-    long minutes() default 0;
+	Class<? extends Payload>[] payload() default {};
 
-    long seconds() default 0;
+	long seconds() default 0;
 
 }

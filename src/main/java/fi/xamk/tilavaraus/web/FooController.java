@@ -51,22 +51,33 @@ public class FooController {
 		return "redirect:/myreservations";
 	}
 
-	@GetMapping("/myreservations")
-	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String myReservations(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		model.addAttribute("reservations", reservationRepository.findByUser(myUserDetails.getUser()));
-		return "myreservations";
+	@ModelAttribute("additionalServices")
+	public Iterable<AdditionalService> getAdditionalServices() {
+		return additionalServiceRepository.findAll();
 	}
 
 	@GetMapping("/rooms/{id}/events")
 	@ResponseBody
 	public Iterable<FullCalendarEvent> getEvents(@PathVariable("id") Room room, HttpServletRequest httpServletRequest) {
 		return reservationRepository.findByRoom(room).stream()
-				.map(reservation -> new FullCalendarEvent(reservation.getId().toString(),
-						httpServletRequest.isUserInRole("ADMIN") ? reservation.getUser().getEmail() : "",
-						reservation.getStartTime(),
-						reservation.getEndTime()))
-				.collect(Collectors.toList());
+			.map(reservation -> new FullCalendarEvent(reservation.getId().toString(),
+				httpServletRequest.isUserInRole("ADMIN") ? reservation.getUser().getEmail() : "",
+				reservation.getStartTime(),
+				reservation.getEndTime()))
+			.collect(Collectors.toList());
+	}
+
+	@RequestMapping("/")
+	public String index(Model model) {
+		model.addAttribute("rooms", roomRepository.findAll());
+		return "index";
+	}
+
+	@GetMapping("/myreservations")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	public String myReservations(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+		model.addAttribute("reservations", reservationRepository.findByUser(myUserDetails.getUser()));
+		return "myreservations";
 	}
 
 	@PostMapping("/rooms/{id}")
@@ -94,16 +105,5 @@ public class FooController {
 		model.addAttribute("room", room);
 		model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
 		return "detail";
-	}
-
-	@ModelAttribute("additionalServices")
-	public Iterable<AdditionalService> getAdditionalServices() {
-		return additionalServiceRepository.findAll();
-	}
-
-	@RequestMapping("/")
-	public String index(Model model) {
-		model.addAttribute("rooms", roomRepository.findAll());
-		return "index";
 	}
 }

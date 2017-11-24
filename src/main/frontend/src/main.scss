@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700');
+
 $border-radius: 0;
 $xamk-yellow: #fbba18;
 $theme-colors: (
-        "dark": black,
-        "primary": $xamk-yellow
+	"dark": black,
+	"primary": $xamk-yellow
 );
 $navbar-dark-color: white;
 $card-border-width: 0;
@@ -13,8 +14,8 @@ $font-family-base: Montserrat, sans-serif;
 @import "~bootstrap/scss/bootstrap";
 
 .nav-item:hover {
-  background-color: $xamk-yellow;
-  .nav-link {
-    color: black !important;
-  }
+	background-color: $xamk-yellow;
+	.nav-link {
+		color: black !important;
+	}
 }

@@ -14,10 +14,6 @@ public class MyUserDetails implements UserDetails {
 		this.user = user;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
@@ -26,6 +22,10 @@ public class MyUserDetails implements UserDetails {
 	@Override
 	public String getPassword() {
 		return user.getPassword();
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	@Override

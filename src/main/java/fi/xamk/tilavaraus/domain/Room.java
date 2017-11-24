@@ -18,14 +18,6 @@ public class Room {
 	private BigDecimal hourlyPrice;
 	private String thumbnailSrc;
 
-	public Integer getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(Integer capacity) {
-		this.capacity = capacity;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -34,12 +26,20 @@ public class Room {
 		this.address = address;
 	}
 
-	public String getName() {
-		return name;
+	public Integer getCapacity() {
+		return capacity;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+
+	public BigDecimal getHourlyPrice() {
+		return hourlyPrice;
+	}
+
+	public void setHourlyPrice(BigDecimal hourlyPrice) {
+		this.hourlyPrice = hourlyPrice;
 	}
 
 	public Long getId() {
@@ -50,12 +50,12 @@ public class Room {
 		this.id = id;
 	}
 
-	public BigDecimal getHourlyPrice() {
-		return hourlyPrice;
+	public String getName() {
+		return name;
 	}
 
-	public void setHourlyPrice(BigDecimal hourlyPrice) {
-		this.hourlyPrice = hourlyPrice;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getThumbnailSrc() {

@@ -15,20 +15,9 @@ import java.util.Locale;
 @Configuration
 public class LocaleConfig implements WebMvcConfigurer {
 
-	@Bean
-	public LocaleResolver localeResolver() {
-		SessionLocaleResolver slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.forLanguageTag("fi-FI"));
-        return slr;
-	}
-
-	@Bean
-	public MessageSource messageSource() {
-		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setDefaultEncoding("UTF-8");
-		messageSource.setBasename("classpath:messages");
-		messageSource.setFallbackToSystemLocale(false);
-		return messageSource;
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
 	}
 
 	@Bean
@@ -38,9 +27,20 @@ public class LocaleConfig implements WebMvcConfigurer {
 		return lci;
 	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(localeChangeInterceptor());
+	@Bean
+	public LocaleResolver localeResolver() {
+		SessionLocaleResolver slr = new SessionLocaleResolver();
+		slr.setDefaultLocale(Locale.forLanguageTag("fi-FI"));
+		return slr;
+	}
+
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setBasename("classpath:messages");
+		messageSource.setFallbackToSystemLocale(false);
+		return messageSource;
 	}
 
 }

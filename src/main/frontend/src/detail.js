@@ -75,7 +75,10 @@ $(() => {
 		});
 	}
 
-	$form.find(':input').change(refresh);
+	$('input').on({
+		change: refresh,
+		keyup: refresh
+	});
 
 	$calendar.fullCalendar({
 		defaultView: 'agendaWeek',

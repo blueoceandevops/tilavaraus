@@ -15,7 +15,11 @@
 		</tr>
 		<c:forEach items="${reservations}" var="reservation">
 			<tr>
-				<td>${reservation.user.email}</td>
+				<td>
+					<a href="${spring:mvcUrl('AC#showUser').arg(0, reservation.user).build()}">
+							${reservation.user.email}
+					</a>
+				</td>
 				<td>${reservation.room.name}</td>
 				<td><t:formatDate value="${reservation.startTime}"/> - <t:formatDate
 					value="${reservation.endTime}"/></td>

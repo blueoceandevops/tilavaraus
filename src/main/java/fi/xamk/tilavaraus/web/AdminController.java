@@ -3,6 +3,7 @@ package fi.xamk.tilavaraus.web;
 import fi.xamk.tilavaraus.domain.AdditionalServiceRepository;
 import fi.xamk.tilavaraus.domain.Reservation;
 import fi.xamk.tilavaraus.domain.ReservationRepository;
+import fi.xamk.tilavaraus.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,12 @@ public class AdminController {
 	public AdminController(ReservationRepository reservationRepository, AdditionalServiceRepository additionalServiceRepository) {
 		this.reservationRepository = reservationRepository;
 		this.additionalServiceRepository = additionalServiceRepository;
+	}
+
+	@GetMapping("/users/{id}")
+	public String showUser(@PathVariable("id") User user, Model model) {
+		model.addAttribute("user", user);
+		return "user/profile";
 	}
 
 	@GetMapping("/reservations/{id}/delete")

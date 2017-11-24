@@ -21,12 +21,6 @@
 	<jsp:invoke fragment="head"/>
 </head>
 <body>
-<!--[if IE]>
-<div class="alert alert-danger mb-0">
-	<strong>Huomio</strong> Käytät vanhentunutta selainta! Sivusto ei todennäköisesti toimi käyttämälläsi selaimella.
-	<a href="http://whatbrowser.org/" class="text-info" target="_blank">Päivitä selaimesi</a>
-</div>
-<![endif]-->
 <jsp:include page="/WEB-INF/views/_header.jsp"/>
 <div class="${noContainer ? '' : 'container'}">
 	<jsp:doBody/>

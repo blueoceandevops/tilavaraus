@@ -13,7 +13,8 @@ module.exports = {
 	entry: {
 		'dist/detail': './src/detail.js',
 		'service-worker': './src/service-worker.js',
-		'dist/main': './src/main.js'
+		'dist/main': './src/main.js',
+		'outdatedbrowser': ['outdatedbrowser/outdatedbrowser/outdatedbrowser.scss']
 	},
 	output: {
 		filename: '[name].js',
@@ -52,9 +53,11 @@ module.exports = {
 		new UglifyJSPlugin({
 			sourceMap: true
 		}),
-		new CopyWebpackPlugin([{
-			from: './node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js', to: dist
-		}]),
+		new CopyWebpackPlugin([
+			{from: './node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js', to: dist},
+			{from: './node_modules/outdatedbrowser/outdatedbrowser/outdatedbrowser.js', to: dist},
+			{from: './node_modules/outdatedbrowser/outdatedbrowser/lang/', to: dist + 'lang/'}
+		]),
 		new WorkboxPlugin({
 			globDirectory: dist,
 			globPatterns: ['dist/**/*.{css,js}'],

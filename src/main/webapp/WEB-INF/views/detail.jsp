@@ -99,7 +99,9 @@
 								<form:errors path="notes" cssClass="invalid-feedback"/>
 							</div>
 
-							<p><spring:message code="reservation.totalPrice"/>: <span id="price">-</span></p>
+							<p><spring:message code="reservation.totalPrice"/>: <span id="price"
+							                                                          class="font-weight-bold">-</span>
+							</p>
 
 							<button id="customButton" class="btn btn-primary" disabled><spring:message
 								code="pay"/></button>

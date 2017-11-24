@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<div class="bg-dark container-fluid pt-4" style="height: 300px">
+<div class="bg-dark container-fluid pt-4 mt-4" style="height: 300px">
 	<div class="row">
 		<div class="col">
 			<a href="${pageContext.request.contextPath}/Rekisteriseloste.pdf" target="_blank">Rekisteriseloste</a>

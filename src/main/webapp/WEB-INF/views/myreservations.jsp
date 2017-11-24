@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout title="myReservations">
-    <h1><spring:message code="myReservations"/></h1>
+    <h1 class="mt-3"><spring:message code="myReservations"/></h1>
     <table class="table table-responsive">
         <tr>
             <th><spring:message code="room.name"/></th>

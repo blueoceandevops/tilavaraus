@@ -60,8 +60,7 @@ $(() => {
 		});
 		document.getElementById('customButton').addEventListener('click', function (e) {
 			handler.open({
-				name: 'Demo Site',
-				description: '2 widgets',
+				name: 'Tilavaraus',
 				amount: price * 100
 			});
 			e.preventDefault();

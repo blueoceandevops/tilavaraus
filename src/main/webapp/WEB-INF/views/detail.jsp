@@ -10,7 +10,9 @@
 			window.locale = '${pageContext.response.locale.language}';
 			window.roomId = '${room.id}';
 			window.eventsJson = JSON.parse('${eventsJson}');
+            window.userEmail = '<security:authentication property="principal.username" htmlEscape="false"/>';
 		</script>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:attribute>
 	<jsp:body>
@@ -18,7 +20,7 @@
 			<img class="img-fluid mx-auto d-block" src="${room.thumbnailSrc}" alt="">
 		</div>
 		<div class="p-4 bg-warning">
-			<h1 class="text-uppercase text-center">${room.name}</h1>
+			<h1 class="text-uppercase text-center font-weight-bold">${room.name}</h1>
 		</div>
 		<div class="container">
             <form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
@@ -98,6 +100,8 @@
                             </div>
 
                             <p><spring:message code="reservation.totalPrice"/>: <span id="price">-</span></p>
+
+                            <button id="customButton"><spring:message code="pay"/></button>
 
                             <button type="submit" class="btn btn-primary"><spring:message code="reserve"/></button>
                         </security:authorize>

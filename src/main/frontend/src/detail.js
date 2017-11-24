@@ -16,6 +16,9 @@ $(() => {
 		$price
 	] = [$('#calendar'), $('#startTime'), $('#endTime'), $('#duration'), $('#reservationForm'), $('#price')];
 
+
+    let price = null;
+
 	const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
 	window.APP = {
@@ -32,11 +35,39 @@ $(() => {
 			url: '/api/calculatePrice',
 			data: formData
 		}).then(data => {
-			$price.text(data + ' €');
+            price = parseInt(data);
+            $price.text(price + ' €');
 		}, err => {
+            price = null;
 			$price.text('-');
 		});
 	};
+    const handler = StripeCheckout.configure({
+        key: 'pk_test_nxRS0g5Ve6rZAfRu3Jt6Bm6n',
+        locale: window.locale,
+        currency: 'eur',
+        email: window.userEmail,
+        bitcoin: true,
+        token: token => {
+            $('<input>', {
+                type: 'hidden',
+                name: 'stripeToken',
+                value: token.id
+            }).appendTo($form);
+            $form.submit();
+        }
+    });
+    document.getElementById('customButton').addEventListener('click', function (e) {
+        handler.open({
+            name: 'Demo Site',
+            description: '2 widgets',
+            amount: price * 100
+        });
+        e.preventDefault();
+    });
+    window.addEventListener('popstate', function () {
+        handler.close();
+    });
 
 	$form.find(':input').change(updatePrice);
 

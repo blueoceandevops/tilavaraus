@@ -2,6 +2,9 @@ package fi.xamk.tilavaraus.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stripe.Stripe;
+import com.stripe.exception.*;
+import com.stripe.model.Charge;
 import fi.xamk.tilavaraus.domain.*;
 import fi.xamk.tilavaraus.domain.validation.ReservationValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -74,11 +80,12 @@ public class FooController {
 	@PostMapping("/rooms/{id}")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String reserveRoom(@Valid @ModelAttribute("reservation") Reservation reservation,
-	                          BindingResult bindingResult,
-	                          @PathVariable("id") Room room,
-	                          Model model,
-	                          @AuthenticationPrincipal MyUserDetails myUserDetails,
-	                          HttpServletRequest request) throws JsonProcessingException {
+							  BindingResult bindingResult,
+							  @PathVariable("id") Room room,
+							  Model model,
+							  @AuthenticationPrincipal MyUserDetails myUserDetails,
+							  HttpServletRequest request,
+							  @RequestParam("stripeToken") Optional<String> stripeToken) throws JsonProcessingException, CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
 		reservation.setUser(myUserDetails.getUser());
 		reservation.setRoom(room);
 		reservationValidator.validate(reservation, bindingResult);
@@ -87,6 +94,16 @@ public class FooController {
 			model.addAttribute("room", room);
 			model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
 			return "detail";
+		}
+
+		if (stripeToken.isPresent()) {
+			Stripe.apiKey = "sk_test_xtMoyTT9zw4LeTuY9sWRtfSH";
+			Map<String, Object> params = new HashMap<>();
+			params.put("amount", reservation.getTotalPrice().multiply(BigDecimal.valueOf(100)).intValue());
+			params.put("currency", "eur");
+			params.put("description", reservation.getUser().getEmail());
+			params.put("source", stripeToken.get());
+			Charge charge = Charge.create(params);
 		}
 
 		reservationRepository.save(reservation);

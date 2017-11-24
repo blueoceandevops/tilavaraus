@@ -33,7 +33,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-8 mt-4">
-						<div id="calendar"></div>
+						<div id="calendar" style="min-height: 680px"></div>
 					</div>
 					<div class="col-md-4 mt-4" id="unselectCancel">
 						<security:authorize access="isAuthenticated()">

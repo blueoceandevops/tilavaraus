@@ -28,12 +28,10 @@ $(() => {
 	};
 
 	const updatePrice = () => {
-		const formData = $form.serializeArray();
-		formData.push({name: 'room', value: window.roomId});
 		$.ajax({
 			method: 'POST',
 			url: '/api/calculatePrice',
-			data: formData
+			data: $form.serializeArray()
 		}).then(data => {
             price = parseInt(data);
             $price.text(price + ' €');
@@ -42,32 +40,36 @@ $(() => {
 			$price.text('-');
 		});
 	};
-    const handler = StripeCheckout.configure({
-        key: 'pk_test_nxRS0g5Ve6rZAfRu3Jt6Bm6n',
-        locale: window.locale,
-        currency: 'eur',
-        email: window.userEmail,
-        bitcoin: true,
-        token: token => {
-            $('<input>', {
-                type: 'hidden',
-                name: 'stripeToken',
-                value: token.id
-            }).appendTo($form);
-            $form.submit();
-        }
-    });
-    document.getElementById('customButton').addEventListener('click', function (e) {
-        handler.open({
-            name: 'Demo Site',
-            description: '2 widgets',
-            amount: price * 100
-        });
-        e.preventDefault();
-    });
-    window.addEventListener('popstate', function () {
-        handler.close();
-    });
+
+	if (window.userEmail) {
+
+		const handler = StripeCheckout.configure({
+			key: 'pk_test_nxRS0g5Ve6rZAfRu3Jt6Bm6n',
+			locale: window.locale,
+			currency: 'eur',
+			email: window.userEmail,
+			bitcoin: true,
+			token: token => {
+				$('<input>', {
+					type: 'hidden',
+					name: 'stripeToken',
+					value: token.id
+				}).appendTo($form);
+				$form.submit();
+			}
+		});
+		document.getElementById('customButton').addEventListener('click', function (e) {
+			handler.open({
+				name: 'Demo Site',
+				description: '2 widgets',
+				amount: price * 100
+			});
+			e.preventDefault();
+		});
+		window.addEventListener('popstate', function () {
+			handler.close();
+		});
+	}
 
 	$form.find(':input').change(updatePrice);
 

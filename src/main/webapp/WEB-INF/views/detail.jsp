@@ -8,9 +8,10 @@
 	<jsp:attribute name="scripts">
 		<script>
 			window.locale = '${pageContext.response.locale.language}';
-			window.roomId = '${room.id}';
 			window.eventsJson = JSON.parse('${eventsJson}');
-            window.userEmail = '<security:authentication property="principal.username" htmlEscape="false"/>';
+			<security:authorize access="isFullyAuthenticated()">
+			window.userEmail = '<security:authentication property="principal.username" htmlEscape="false" />';
+			</security:authorize>
 		</script>
         <script src="https://checkout.stripe.com/checkout.js"></script>
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
@@ -26,6 +27,7 @@
             <form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
                        id="reservationForm"
                        method="POST" modelAttribute="reservation">
+	            <form:hidden path="room" value="${room.id}"/>
                 <div class="row">
                     <form:errors cssClass="alert alert-danger"/>
                 </div>

@@ -60,7 +60,8 @@ module.exports = {
 		]),
 		new WorkboxPlugin({
 			globDirectory: dist,
-			globPatterns: ['dist/**/*.{css,js}'],
+			globPatterns: ['**/*.{css,js}'],
+			globIgnores: ['workbox-sw.prod.v2.1.2.js', 'service-worker.js'],
 			swDest: path.join(dist, 'service-worker.js'),
 			swSrc: './src/service-worker.js'
 		})

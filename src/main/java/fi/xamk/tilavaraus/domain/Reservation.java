@@ -18,7 +18,7 @@ public class Reservation {
 	private static final int PREPARATION_DAYS = 7;
 	private static final Duration PREPARATION_DURATION = Duration.ofDays(PREPARATION_DAYS);
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
 	private Room room;

@@ -5,19 +5,25 @@
 	<div class="alert alert-success mt-3" role="alert">
 		<spring:message code="reservationSuccess"/>
 	</div>
-	<ul>
-		<li>${reservation.room.name}</li>
-		<li><t:formatDate value="${reservation.startTime}"/> - <t:formatDate value="${reservation.endTime}"/></li>
-		<li>${reservation.personCount}</li>
-		<li>
+
+	<dl>
+		<dt><spring:message code="room.name"/></dt>
+		<dd>${reservation.room.name}</dd>
+		<dt><spring:message code="reservation.time"/></dt>
+		<dd><t:formatDate value="${reservation.startTime}"/> - <t:formatDate value="${reservation.endTime}"/></dd>
+		<dt><spring:message code="reservation.personCount"/></dt>
+		<dd>${reservation.personCount}</dd>
+		<dt><spring:message code="reservation.additionalServices"/></dt>
+		<dd>
 			<ul>
 				<c:forEach items="${reservation.additionalServices}" var="additionalService">
-                    <li><spring:message code="additionalService.name.${additionalService.name}"/></li>
+					<li><spring:message code="additionalService.name.${additionalService.name}"/></li>
 				</c:forEach>
 			</ul>
-		</li>
-		<li>${reservation.totalPrice} €</li>
-	</ul>
+		</dd>
+		<dt><spring:message code="reservation.totalPrice"/></dt>
+		<dd>${reservation.totalPrice} €</dd>
+	</dl>
 </t:layout>
 
 

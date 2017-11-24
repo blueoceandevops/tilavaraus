@@ -30,15 +30,18 @@ public class ReservationService {
 	@Transactional(rollbackOn = Exception.class)
 	public void save(Reservation reservation) throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
 
+		reservationRepository.save(reservation);
+
 		Stripe.apiKey = "sk_test_xtMoyTT9zw4LeTuY9sWRtfSH";
 		Map<String, Object> params = new HashMap<>();
 		params.put("amount", reservation.getTotalPrice().multiply(BigDecimal.valueOf(100)).intValue());
 		params.put("currency", "eur");
 		params.put("description", reservation.getUser().getEmail());
 		params.put("source", reservation.getStripeToken());
+		Map<String, Object> initialMetadata = new HashMap<>();
+		initialMetadata.put("reservation_id", reservation.getId());
+		params.put("metadata", initialMetadata);
 		Charge charge = Charge.create(params);
-
-		reservationRepository.save(reservation);
 
 		mailSender.ifPresent(javaMailSender -> new Thread(() -> {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();

@@ -13,7 +13,7 @@
 				<div class="card-body">
 					<h4 class="card-title">${room.name}</h4>
 					<ul class="list-unstyled">
-						<li>${room.hourlyPrice}€/h</li>
+						<li>${room.hourlyPrice} €/h</li>
 						<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
 					</ul>
 					<a href="${spring:mvcUrl('FC#roomDetail').arg(0, room).build()}"

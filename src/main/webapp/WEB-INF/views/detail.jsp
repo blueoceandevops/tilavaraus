@@ -20,8 +20,16 @@
 		<div class="bg-dark">
 			<img class="img-fluid mx-auto d-block" src="${room.thumbnailSrc}" alt="">
 		</div>
-		<div class="p-4 bg-warning">
-			<h1 class="text-uppercase text-center font-weight-bold">${room.name}</h1>
+		<div class="p-4 bg-dark">
+			<h1 class="text-uppercase text-center text-warning font-weight-bold">${room.name}</h1>
+		</div>
+		<div class="p-4 bg-warning row">
+			<div class="container justify-content-center d-flex">
+				<ul class="mb-0">
+					<li>${room.hourlyPrice} €/h</li>
+					<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
+				</ul>
+			</div>
 		</div>
 		<div class="container">
 			<form:form action="${pageContext.request.contextPath}/rooms/${room.id}"

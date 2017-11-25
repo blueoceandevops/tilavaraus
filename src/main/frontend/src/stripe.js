@@ -1,9 +1,4 @@
-import $ from 'jquery';
-import store from './store';
-
-const {locale, email, $form, $payButton, price} = store;
-
-export default () => {
+export default ({token, locale, email, getPrice}) => {
 
 	const handler = window.StripeCheckout.configure({
 		key: 'pk_test_nxRS0g5Ve6rZAfRu3Jt6Bm6n',
@@ -11,21 +6,13 @@ export default () => {
 		currency: 'eur',
 		email,
 		bitcoin: true,
-		token: token => {
-			$payButton.prop('disabled', true);
-			$('<input>', {
-				type: 'hidden',
-				name: 'stripeToken',
-				value: token.id
-			}).appendTo($form);
-			$form.submit();
-		}
+		token
 	});
 
 	document.getElementById('customButton').addEventListener('click', e => {
 		handler.open({
 			name: 'Tilavaraus',
-			amount: price * 100
+			amount: getPrice() * 100
 		});
 		e.preventDefault();
 	});

@@ -27,6 +27,7 @@ public class Reservation {
 	private Integer personCount;
 	private String notes;
 	private String stripeToken;
+	private String chargeToken;
 	@ManyToOne
 	private User user;
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -131,5 +132,13 @@ public class Reservation {
 
 	public boolean isCancellable() {
 		return this.startTime.isAfter(LocalDateTime.now().plus(PREPARATION_DURATION));
+	}
+
+	public String getChargeToken() {
+		return chargeToken;
+	}
+
+	public void setChargeToken(String chargeToken) {
+		this.chargeToken = chargeToken;
 	}
 }

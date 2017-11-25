@@ -8,6 +8,7 @@ import fi.xamk.tilavaraus.domain.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -40,8 +41,13 @@ public class ReservationService {
 		params.put("source", reservation.getStripeToken());
 		Map<String, Object> initialMetadata = new HashMap<>();
 		initialMetadata.put("reservation_id", reservation.getId());
+		initialMetadata.put("authentication_name", SecurityContextHolder.getContext().getAuthentication().getName());
 		params.put("metadata", initialMetadata);
+
 		Charge charge = Charge.create(params);
+
+		reservation.setChargeToken(charge.getId());
+		reservationRepository.save(reservation);
 
 		mailSender.ifPresent(javaMailSender -> new Thread(() -> {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();

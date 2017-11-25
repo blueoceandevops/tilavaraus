@@ -11,6 +11,9 @@
 		<div class="row">
 
 			<div class="col">
+				<a class="text-info" href="https://dashboard.stripe.com/test/payments/${reservation.chargeToken}">
+					<spring:message code="paymentDetails"/>
+				</a>
 
 				<div class="form-group">
 					<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>

@@ -2,7 +2,7 @@
 	"name": "Tilavaraus",
 	"short_name": "Tilavaraus",
 	"start_url": "/?utm_source=homescreen",
-	"theme_color": "#fbba18",
+	"theme_color": "#000000",
 	"display": "standalone",
 	"background_color": "#fff",
 	"description": "XAMK Tilavaraus",

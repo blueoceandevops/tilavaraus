@@ -23,7 +23,7 @@
 		<div class="p-4 bg-dark">
 			<h1 class="text-uppercase text-center text-warning font-weight-bold">${room.name}</h1>
 		</div>
-		<div class="p-4 bg-warning row">
+		<div class="p-4 bg-warning">
 			<div class="container justify-content-center d-flex">
 				<ul class="mb-0">
 					<li>${room.hourlyPrice} €/h</li>

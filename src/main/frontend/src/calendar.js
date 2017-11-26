@@ -7,6 +7,9 @@ const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
 export default ({container, events, locale, onSelect}) => {
 
+	let selected = false;
+
+
 	container.fullCalendar({
 		defaultView: 'agendaWeek',
 		events,
@@ -29,11 +32,20 @@ export default ({container, events, locale, onSelect}) => {
 		unselectAuto: false,
 		selectAllow: ({start, end}) => start.isSame(end, 'day'),
 		select: (start, end) => {
+			selected = true;
 			onSelect(start.format(FORMAT), end.format(FORMAT));
 		},
-		dayClick: start => {
+		dayClick: (start, event) => {
+			event.preventDefault();
 			const end = start.clone().add({hours: 1});
 			container.fullCalendar('select', start, end);
+		}
+	});
+
+
+	container.click(() => {
+		if (selected) {
+			container.fullCalendar('unselect');
 		}
 	});
 

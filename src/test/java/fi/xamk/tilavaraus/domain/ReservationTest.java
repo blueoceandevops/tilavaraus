@@ -18,10 +18,10 @@ public class ReservationTest {
 		Reservation reservation = new Reservation();
 		LocalDateTime epoch = LocalDateTime.MIN;
 		reservation.setStartTime(epoch);
-		reservation.setEndTime(epoch.plus(2, ChronoUnit.HOURS));
+		reservation.setEndTime(epoch.plus(90, ChronoUnit.MINUTES));
 		Room room = new Room();
 		room.setHourlyPrice(BigDecimal.valueOf(15.0));
 		reservation.setRoom(room);
-		assertEquals(BigDecimal.valueOf(30.0), reservation.getTotalPrice());
+		assertEquals(BigDecimal.valueOf(22.5), reservation.getTotalPrice());
 	}
 }

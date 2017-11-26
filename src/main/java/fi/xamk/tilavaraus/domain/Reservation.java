@@ -118,7 +118,8 @@ public class Reservation {
 			.orElse(BigDecimal.ZERO);
 
 		return getRoom().getHourlyPrice()
-			.multiply(BigDecimal.valueOf(getDuration().toHours()))
+			.multiply(BigDecimal.valueOf(getDuration().toMinutes()))
+			.divide(BigDecimal.valueOf(60), BigDecimal.ROUND_HALF_UP)
 			.add(additionalServicesPrice);
 	}
 

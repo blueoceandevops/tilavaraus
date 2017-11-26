@@ -37,6 +37,12 @@ const refresh = () => {
 	});
 };
 
+state.$startTime.add(state.$endTime).change(() => {
+	console.log('change');
+	state.$calendar.fullCalendar('unselect');
+	state.$calendar.fullCalendar('select', moment(state.$startTime.val()), moment(state.$endTime.val()));
+});
+
 $('input').on({
 	change: refresh,
 	keyup: refresh

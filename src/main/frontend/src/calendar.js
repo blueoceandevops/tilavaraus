@@ -7,8 +7,7 @@ const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
 export default ({container, events, locale, onSelect}) => {
 
-	let selected = false;
-
+	let isDayClick = false;
 
 	container.fullCalendar({
 		defaultView: 'agendaWeek',
@@ -30,22 +29,21 @@ export default ({container, events, locale, onSelect}) => {
 		selectMinDistance: 5,
 		height: 'auto',
 		unselectAuto: false,
+		eventClick: () => {
+			if (!isDayClick) {
+				container.fullCalendar('unselect');
+			}
+			isDayClick = false;
+		},
 		selectAllow: ({start, end}) => start.isSame(end, 'day'),
 		select: (start, end) => {
-			selected = true;
 			onSelect(start.format(FORMAT), end.format(FORMAT));
 		},
-		dayClick: (start, event) => {
-			event.preventDefault();
+		dayClick: start => {
+			isDayClick = true;
+			console.log('dayClick');
 			const end = start.clone().add({hours: 1});
 			container.fullCalendar('select', start, end);
-		}
-	});
-
-
-	container.click(() => {
-		if (selected) {
-			container.fullCalendar('unselect');
 		}
 	});
 

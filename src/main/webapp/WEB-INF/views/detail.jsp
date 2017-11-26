@@ -43,7 +43,7 @@
 					<div class="col-md-8 mt-4">
 						<div id="calendar" style="min-height: 680px"></div>
 					</div>
-					<div class="col-md-4 mt-4" id="unselectCancel">
+					<div class="col-md-4 mt-4">
 						<security:authorize access="isAuthenticated()">
 							<div class="form-group">
 								<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>

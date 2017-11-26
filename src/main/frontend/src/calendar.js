@@ -26,13 +26,14 @@ export default ({container, events, locale, onSelect}) => {
 		selectLongPressDelay: 500,
 		selectMinDistance: 5,
 		height: 'auto',
-		unselectCancel: '#unselectCancel',
+		unselectAuto: false,
 		selectAllow: ({start, end}) => start.isSame(end, 'day'),
 		select: (start, end) => {
 			onSelect(start.format(FORMAT), end.format(FORMAT));
 		},
-		dayClick: date => {
-			onSelect(date.format(FORMAT), date.add({hours: 1}).format(FORMAT));
+		dayClick: start => {
+			const end = start.clone().add({hours: 1});
+			container.fullCalendar('select', start, end);
 		}
 	});
 

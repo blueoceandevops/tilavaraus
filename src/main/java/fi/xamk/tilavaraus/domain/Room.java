@@ -1,9 +1,6 @@
 package fi.xamk.tilavaraus.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -18,9 +15,15 @@ public class Room {
 	private Integer capacity;
 	private BigDecimal hourlyPrice;
 	private String thumbnailSrc;
+	@Column(columnDefinition = "LONGVARCHAR")
+	private String description;
 
 	public String getAddress() {
 		return address;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public void setAddress(String address) {
@@ -37,6 +40,10 @@ public class Room {
 
 	public BigDecimal getHourlyPrice() {
 		return hourlyPrice;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setHourlyPrice(BigDecimal hourlyPrice) {

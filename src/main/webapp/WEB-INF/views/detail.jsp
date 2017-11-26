@@ -29,6 +29,7 @@
 					<li>${room.hourlyPrice} €/h</li>
 					<li><spring:message code="maxPersons" arguments="${room.capacity}"/></li>
 				</ul>
+					${room.description}
 			</div>
 		</div>
 		<div class="container">

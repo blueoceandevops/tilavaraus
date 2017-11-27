@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @RequestMapping("/api")
@@ -19,7 +20,7 @@ public class ApiController {
 	}
 
 	@PostMapping("/calculatePrice")
-	public BigDecimal calculatePrice(@ModelAttribute("reservation") Reservation reservation) {
+	public BigDecimal calculatePrice(@Valid @ModelAttribute("reservation") Reservation reservation) {
 		return reservation.getTotalPrice();
 	}
 

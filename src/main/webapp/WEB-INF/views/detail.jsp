@@ -108,11 +108,27 @@
 								<form:errors path="notes" cssClass="invalid-feedback"/>
 							</div>
 
+							<fieldset class="form-group">
+								<legend><spring:message code="reservation.paymentMethod"/></legend>
+								<spring:eval
+									expression="T(fi.xamk.tilavaraus.domain.Reservation.PaymentMethod).values()"
+									var="paymentMethods"/>
+								<c:forEach items="${paymentMethods}" var="paymentMethod">
+									<div class="form-check form-check-inline">
+										<label class="form-check-label">
+											<form:radiobutton cssClass="form-check-input" path="paymentMethod"
+											                  value="${paymentMethod}"/>
+											<spring:message code="reservation.paymentMethod.${paymentMethod}"/>
+										</label>
+									</div>
+								</c:forEach>
+							</fieldset>
+
 							<p><spring:message code="reservation.totalPrice"/>: <span id="price"
 							                                                          class="font-weight-bold">-</span>
 							</p>
 
-							<button id="customButton" class="btn btn-primary" disabled><spring:message
+							<button type="submit" id="customButton" class="btn btn-primary" disabled><spring:message
 								code="pay"/></button>
 						</security:authorize>
 						<security:authorize access="isAnonymous()">

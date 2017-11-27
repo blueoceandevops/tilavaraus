@@ -60,7 +60,7 @@ initCalendar({
 });
 
 if (state.email) {
-	initStripe({
+	const handler = initStripe({
 		token: token => {
 			state.$payButton.prop('disabled', true);
 			$('<input>', {
@@ -73,5 +73,19 @@ if (state.email) {
 		locale: state.locale,
 		getPrice: () => state.price,
 		email: state.email,
+	});
+
+	state.$payButton.click(event => {
+		if (state.$form.find('input[name="paymentMethod"]:checked').val() === 'CARD') {
+			handler.open({
+				name: 'Tilavaraus',
+				amount: state.price * 100
+			});
+			event.preventDefault();
+		}
+	});
+
+	window.addEventListener('popstate', () => {
+		handler.close();
 	});
 }

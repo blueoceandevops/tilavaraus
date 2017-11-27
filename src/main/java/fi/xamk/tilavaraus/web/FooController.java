@@ -2,7 +2,6 @@ package fi.xamk.tilavaraus.web;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stripe.exception.*;
 import fi.xamk.tilavaraus.domain.*;
 import fi.xamk.tilavaraus.domain.validation.ReservationValidator;
 import fi.xamk.tilavaraus.service.ReservationService;
@@ -87,7 +86,7 @@ public class FooController {
 	                          @PathVariable("id") Room room,
 	                          Model model,
 	                          @AuthenticationPrincipal MyUserDetails myUserDetails,
-	                          HttpServletRequest request) throws JsonProcessingException, CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+	                          HttpServletRequest request) throws JsonProcessingException {
 		reservation.setUser(myUserDetails.getUser());
 		reservationValidator.validate(reservation, bindingResult);
 		if (bindingResult.hasErrors()) {

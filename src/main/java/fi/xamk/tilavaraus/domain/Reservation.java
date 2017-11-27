@@ -42,6 +42,21 @@ public class Reservation {
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@TimeWindow(from = 8, to = 20)
 	private LocalDateTime endTime;
+	private PaymentMethod paymentMethod;
+
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+
+	public enum PaymentMethod {
+		CARD,
+		BILL
+	}
 
 	public Set<AdditionalService> getAdditionalServices() {
 		return additionalServices;

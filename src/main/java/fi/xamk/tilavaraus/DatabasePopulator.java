@@ -94,7 +94,7 @@ public class DatabasePopulator {
 					"    <li>valkokangas</li>\n" +
 					"    <li>fläppitaulu</li>\n" +
 					"</ul>"),
-				createRoom(4L, "MA325", 9999, 80.0, "https://via.placeholder.com/350x150", "<ul>\n" +
+				createRoom(4L, "MA325", 9999, 80.0, "/img/ma325.jpg", "<ul>\n" +
 					"    <li>pc</li>\n" +
 					"    <li>internetyhteys (kiinteä + WLAN)</li>\n" +
 					"    <li>dataprojektori</li>\n" +

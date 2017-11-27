@@ -17,20 +17,24 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 @Service
 public class ReservationService {
 	private final Optional<JavaMailSender> mailSender;
 	private final ReservationRepository reservationRepository;
 	private final String stripeSecret;
+	private final Executor executor;
 
 	@Autowired
 	public ReservationService(Optional<JavaMailSender> mailSender,
 	                          ReservationRepository reservationRepository,
-	                          @Value("${stripe.secret:sk_test_xtMoyTT9zw4LeTuY9sWRtfSH}") String stripeSecret) {
+	                          @Value("${stripe.secret:sk_test_xtMoyTT9zw4LeTuY9sWRtfSH}") String stripeSecret, Executor executor) {
 		this.mailSender = mailSender;
 		this.reservationRepository = reservationRepository;
 		this.stripeSecret = stripeSecret;
+		this.executor = executor;
 	}
 
 	private void chargeCard(Reservation reservation) {
@@ -68,14 +72,14 @@ public class ReservationService {
 				throw new IllegalStateException("Unimplemented payment method!");
 		}
 
-		mailSender.ifPresent(javaMailSender -> new Thread(() -> {
+		mailSender.ifPresent(javaMailSender -> CompletableFuture.runAsync(() -> {
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setSubject("Varausvahvistus");
 			mailMessage.setTo(reservation.getUser().getEmail());
 			mailMessage.setText("Tila " + reservation.getRoom().getName() + " varattu " + reservation.getPersonCount() + " henkilölle ajalle " +
 				reservation.getStartTime().toString() + " - " + reservation.getEndTime().toString() + ".");
 			javaMailSender.send(mailMessage);
-		}).start());
+		}, executor));
 	}
 
 	private void sendBill(Reservation reservation) {

@@ -15,7 +15,7 @@ public class Room {
 	private Integer capacity;
 	private BigDecimal hourlyPrice;
 	private String thumbnailSrc;
-	@Column(columnDefinition = "LONGVARCHAR")
+	@Column(columnDefinition = "TEXT")
 	private String description;
 
 	public String getAddress() {

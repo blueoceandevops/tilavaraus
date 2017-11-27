@@ -28,6 +28,10 @@ public class ReservationValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Reservation reservation = (Reservation) target;
 
+		if (reservation.getPersonCount() > reservation.getRoom().getCapacity()) {
+			errors.reject("validation.tooMuchPersons", "Too much persons!");
+		}
+
 		if (reservation.getStartTime().getDayOfMonth() != reservation.getEndTime().getDayOfMonth()) {
 			errors.reject("validation.reservationOnMultipleDays", "Reservation must start and end on the same day!");
 		}

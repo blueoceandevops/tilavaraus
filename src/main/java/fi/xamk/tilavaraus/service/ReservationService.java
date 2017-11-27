@@ -38,7 +38,6 @@ public class ReservationService {
 	}
 
 	private void chargeCard(Reservation reservation) {
-		reservationRepository.save(reservation); // Save reservation to get an ID
 		Stripe.apiKey = stripeSecret;
 		Map<String, Object> params = new HashMap<>();
 		params.put("amount", reservation.getTotalPrice().multiply(BigDecimal.valueOf(100)).intValue());
@@ -60,6 +59,8 @@ public class ReservationService {
 
 	@Transactional
 	public void save(Reservation reservation) {
+
+		reservationRepository.save(reservation);
 
 		switch (reservation.getPaymentMethod()) {
 			case CARD:

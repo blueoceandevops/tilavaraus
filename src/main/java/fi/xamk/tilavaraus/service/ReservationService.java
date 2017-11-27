@@ -60,14 +60,14 @@ public class ReservationService {
 	@Transactional
 	public void save(Reservation reservation) {
 
-		reservationRepository.save(reservation);
+		Reservation saved = reservationRepository.save(reservation);
 
 		switch (reservation.getPaymentMethod()) {
 			case CARD:
-				chargeCard(reservation);
+				chargeCard(saved);
 				break;
 			case BILL:
-				sendBill(reservation);
+				sendBill(saved);
 				break;
 			default:
 				throw new IllegalStateException("Unimplemented payment method!");

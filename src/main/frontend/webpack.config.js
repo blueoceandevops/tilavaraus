@@ -14,6 +14,7 @@ module.exports = {
 		'dist/detail': './src/detail.js',
 		'service-worker': './src/service-worker.js',
 		'dist/main': './src/main.js',
+		'dist/checkout': './src/checkout.js',
 		'outdatedbrowser': ['outdatedbrowser/outdatedbrowser/outdatedbrowser.scss']
 	},
 	output: {

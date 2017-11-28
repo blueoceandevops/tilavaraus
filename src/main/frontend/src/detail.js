@@ -1,4 +1,3 @@
-import initStripe from './stripe';
 import initCalendar from './calendar';
 import $ from 'jquery';
 import moment from 'moment';
@@ -9,7 +8,7 @@ const state = {
 	email: window.userEmail,
 	events: window.eventsJson,
 	$form: $('#reservationForm'),
-	$payButton: $('#customButton'),
+	$checkoutBtn: $('#checkoutButton'),
 	$price: $('#price'),
 	$duration: $('#duration'),
 	$startTime: $('#startTime'),
@@ -23,7 +22,7 @@ const refresh = () => {
 	const setPrice = newPrice => {
 		state.price = newPrice;
 		state.$price.text(state.price ? state.price + ' €' : '-');
-		state.$payButton.prop('disabled', !state.price);
+		state.$checkoutBtn.prop('disabled', !state.price);
 	};
 	state.$duration.text(durationBetween(moment(state.$startTime.val()), moment(state.$endTime.val())).humanize());
 	$.ajax({
@@ -58,34 +57,3 @@ initCalendar({
 		refresh();
 	}
 });
-
-if (state.email) {
-	const handler = initStripe({
-		token: token => {
-			state.$payButton.prop('disabled', true);
-			$('<input>', {
-				type: 'hidden',
-				name: 'stripeToken',
-				value: token.id
-			}).appendTo(state.$form);
-			state.$form.submit();
-		},
-		locale: state.locale,
-		getPrice: () => state.price,
-		email: state.email,
-	});
-
-	state.$payButton.click(event => {
-		if (state.$form.find('input[name="paymentMethod"]:checked').val() === 'CARD') {
-			handler.open({
-				name: 'Tilavaraus',
-				amount: state.price * 100
-			});
-			event.preventDefault();
-		}
-	});
-
-	window.addEventListener('popstate', () => {
-		handler.close();
-	});
-}

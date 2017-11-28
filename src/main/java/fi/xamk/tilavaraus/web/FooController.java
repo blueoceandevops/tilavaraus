@@ -12,10 +12,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -27,6 +29,23 @@ public class FooController {
 	private final ReservationValidator reservationValidator;
 	private final AdditionalServiceRepository additionalServiceRepository;
 	private final ReservationService reservationService;
+
+	@PostMapping("/checkout")
+	@PreAuthorize("(principal.username == #reservation.user.email)")
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	public String checkout(@Valid @ModelAttribute("reservation") Reservation reservation,
+	                       BindingResult bindingResult,
+	                       @AuthenticationPrincipal MyUserDetails userDetails,
+	                       Model model,
+	                       HttpServletRequest request) throws JsonProcessingException {
+		model.addAttribute("user", userDetails.getUser());
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("room", reservation.getRoom());
+			model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(reservation.getRoom(), request)));
+			return "detail";
+		}
+		return "checkout";
+	}
 
 	@Autowired
 	public FooController(RoomRepository roomRepository,
@@ -79,28 +98,28 @@ public class FooController {
 		return "myreservations";
 	}
 
-	@PostMapping("/rooms/{id}")
+	@InitBinder("reservation")
+	protected void initBinder(WebDataBinder binder) {
+		binder.addValidators(reservationValidator);
+	}
+
+	@PostMapping("/reserve")
+	@PreAuthorize("(principal.username == #reservation.user.email)")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String reserveRoom(@Valid @ModelAttribute("reservation") Reservation reservation,
-	                          BindingResult bindingResult,
-	                          @PathVariable("id") Room room,
-	                          Model model,
-	                          @AuthenticationPrincipal MyUserDetails myUserDetails,
-	                          HttpServletRequest request) throws JsonProcessingException {
-		reservation.setUser(myUserDetails.getUser());
-		reservationValidator.validate(reservation, bindingResult);
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("room", room);
-			model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
-			return "detail";
-		}
+	public String reserveRoom(@Valid @ModelAttribute("reservation") Reservation reservation) {
 		reservationService.save(reservation);
 		return "reservationsuccess";
 	}
 
 	@RequestMapping("/rooms/{id}")
-	public String roomDetail(@PathVariable("id") Room room, Model model, HttpServletRequest request) throws JsonProcessingException {
+	public String roomDetail(@PathVariable("id") Room room,
+	                         Model model,
+	                         HttpServletRequest request,
+	                         @AuthenticationPrincipal MyUserDetails userDetails) throws JsonProcessingException {
 		model.addAttribute("reservation", new Reservation());
+		Optional.ofNullable(userDetails)
+			.map(MyUserDetails::getUser)
+			.ifPresent(user -> model.addAttribute("user", user));
 		model.addAttribute("room", room);
 		model.addAttribute("eventsJson", objectMapper.writeValueAsString(getEvents(room, request)));
 		return "detail";

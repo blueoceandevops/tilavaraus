@@ -7,13 +7,9 @@
 	</jsp:attribute>
 	<jsp:attribute name="scripts">
 		<script>
-			window.locale = '${pageContext.response.locale.language}';
 			window.eventsJson = JSON.parse('${eventsJson}');
-			<security:authorize access="isFullyAuthenticated()">
-			window.userEmail = '<security:authentication property="principal.username" htmlEscape="false" />';
-			</security:authorize>
+
 		</script>
-        <script src="https://checkout.stripe.com/checkout.js"></script>
 		<script src="${pageContext.request.contextPath}/dist/detail.js"></script>
 	</jsp:attribute>
 	<jsp:body>
@@ -33,10 +29,11 @@
 			</div>
 		</div>
 		<div class="container">
-			<form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
+			<form:form action="${pageContext.request.contextPath}/checkout"
 			           id="reservationForm"
 			           method="POST" modelAttribute="reservation">
 				<form:hidden path="room" value="${room.id}"/>
+				<form:hidden path="user" value="${user.id}"/>
 				<div class="row">
 					<form:errors cssClass="alert alert-danger"/>
 				</div>
@@ -108,28 +105,13 @@
 								<form:errors path="notes" cssClass="invalid-feedback"/>
 							</div>
 
-							<fieldset class="form-group">
-								<legend><spring:message code="reservation.paymentMethod"/></legend>
-								<spring:eval
-									expression="T(fi.xamk.tilavaraus.domain.Reservation.PaymentMethod).values()"
-									var="paymentMethods"/>
-								<c:forEach items="${paymentMethods}" var="paymentMethod">
-									<div class="form-check form-check-inline">
-										<label class="form-check-label">
-											<form:radiobutton cssClass="form-check-input" path="paymentMethod"
-											                  value="${paymentMethod}"/>
-											<spring:message code="reservation.paymentMethod.${paymentMethod}"/>
-										</label>
-									</div>
-								</c:forEach>
-							</fieldset>
-
 							<p><spring:message code="reservation.totalPrice"/>: <span id="price"
 							                                                          class="font-weight-bold">-</span>
 							</p>
 
-							<button type="submit" id="customButton" class="btn btn-primary" disabled><spring:message
-								code="pay"/></button>
+							<button type="submit" id="checkoutButton" class="btn btn-primary" disabled>
+								<spring:message code="toCheckout"/>
+							</button>
 						</security:authorize>
 						<security:authorize access="isAnonymous()">
 							<div class="alert alert-info" role="alert">Sinun täytyy kirjautua sisään tehdäksesi

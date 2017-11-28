@@ -55,6 +55,7 @@
 			languagePath: './lang/${pageContext.response.locale.language}.html'
 		})
 	});
+	window.locale = '${pageContext.response.locale.language}';
 </script>
 <script src="${pageContext.request.contextPath}/dist/main.js"></script>
 <jsp:invoke fragment="scripts"/>

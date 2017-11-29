@@ -43,29 +43,42 @@
 					</div>
 					<div class="col-md-4 mt-4">
 						<security:authorize access="isAuthenticated()">
-							<div class="form-group">
-								<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>
-								<form:input class="form-control"
-								            type="datetime-local"
-								            path="startTime"
-								            required="true"
-								            cssErrorClass="form-control is-invalid"/>
-								<form:errors path="startTime" cssClass="invalid-feedback"/>
-							</div>
 
 							<div class="form-group">
-								<form:label path="endTime"><spring:message code="reservation.endTime"/></form:label>
+								<form:label path="date"><spring:message code="reservation.date"/></form:label>
 								<form:input class="form-control"
-								            type="datetime-local"
-								            path="endTime"
+								            type="date"
+								            path="date"
 								            required="true"
 								            cssErrorClass="form-control is-invalid"/>
-								<form:errors path="endTime" cssClass="invalid-feedback"/>
-								<small class="form-text text-muted">
-									<spring:message code="reservation.duration"/>: <span id="duration"></span>
-								</small>
+								<form:errors path="date" cssClass="invalid-feedback"/>
 							</div>
 
+							<div class="form-row">
+								<div class="form-group col">
+									<form:label path="startTime"><spring:message
+										code="reservation.startTime"/></form:label>
+									<form:input class="form-control"
+									            type="time"
+									            path="startTime"
+									            required="true"
+									            cssErrorClass="form-control is-invalid"/>
+									<form:errors path="startTime" cssClass="invalid-feedback"/>
+								</div>
+
+								<div class="form-group col">
+									<form:label path="endTime"><spring:message code="reservation.endTime"/></form:label>
+									<form:input class="form-control"
+									            type="time"
+									            path="endTime"
+									            required="true"
+									            cssErrorClass="form-control is-invalid"/>
+									<form:errors path="endTime" cssClass="invalid-feedback"/>
+									<small class="form-text text-muted">
+										<spring:message code="reservation.duration"/>: <span id="duration"></span>
+									</small>
+								</div>
+							</div>
 							<div class="form-group">
 								<form:label path="personCount"><spring:message
 									code="reservation.personCount"/></form:label>

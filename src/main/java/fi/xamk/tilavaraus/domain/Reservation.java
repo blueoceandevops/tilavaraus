@@ -4,13 +4,16 @@ import fi.xamk.tilavaraus.domain.validation.Future;
 import fi.xamk.tilavaraus.domain.validation.TimeWindow;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,6 +25,7 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
+	@NotNull
 	private Room room;
 	@NotNull
 	@Min(0)
@@ -31,34 +35,24 @@ public class Reservation {
 	private String stripeToken;
 	private String chargeToken;
 	@ManyToOne
+	@NotNull
 	private User user;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<AdditionalService> additionalServices;
-	@NotNull
+
 	@Future(days = PREPARATION_DAYS)
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	@TimeWindow(from = 8, to = 20)
-	private LocalDateTime startTime;
+	@DateTimeFormat(iso = ISO.DATE)
 	@NotNull
-	@Future(days = PREPARATION_DAYS, hours = 1)
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDate date;
+	@NotNull
 	@TimeWindow(from = 8, to = 20)
-	private LocalDateTime endTime;
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalTime startTime;
+	@TimeWindow(from = 8, to = 20)
+	@NotNull
+	@DateTimeFormat(pattern = "HH:mm")
+	private LocalTime endTime;
 	private PaymentMethod paymentMethod;
-
-	public PaymentMethod getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-
-	public enum PaymentMethod {
-		CARD,
-		BILL
-	}
 
 	public Set<AdditionalService> getAdditionalServices() {
 		return additionalServices;
@@ -68,15 +62,31 @@ public class Reservation {
 		this.additionalServices = additionalServices;
 	}
 
+	public String getChargeToken() {
+		return chargeToken;
+	}
+
+	public void setChargeToken(String chargeToken) {
+		this.chargeToken = chargeToken;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
 	public Duration getDuration() {
 		return Duration.between(startTime, endTime);
 	}
 
-	public LocalDateTime getEndTime() {
+	public LocalTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
 
@@ -96,6 +106,14 @@ public class Reservation {
 		this.notes = notes;
 	}
 
+	public PaymentMethod getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
 	public Integer getPersonCount() {
 		return personCount;
 	}
@@ -112,11 +130,11 @@ public class Reservation {
 		this.room = room;
 	}
 
-	public LocalDateTime getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 
@@ -149,14 +167,11 @@ public class Reservation {
 	}
 
 	public boolean isCancellable() {
-		return this.startTime.isAfter(LocalDateTime.now().plus(PREPARATION_DURATION));
+		return this.date.isAfter(LocalDate.now().plus(PREPARATION_DAYS, ChronoUnit.DAYS));
 	}
 
-	public String getChargeToken() {
-		return chargeToken;
-	}
-
-	public void setChargeToken(String chargeToken) {
-		this.chargeToken = chargeToken;
+	public enum PaymentMethod {
+		CARD,
+		BILL
 	}
 }

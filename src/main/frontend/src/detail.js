@@ -11,6 +11,7 @@ const state = {
 	$checkoutBtn: $('#checkoutButton'),
 	$price: $('#price'),
 	$duration: $('#duration'),
+	$date: $('#date'),
 	$startTime: $('#startTime'),
 	$endTime: $('#endTime'),
 	$calendar: $('#calendar'),
@@ -18,6 +19,7 @@ const state = {
 };
 
 const durationBetween = (start, end) => moment.duration(start.diff(end));
+const toMoment = (date, time) => moment(`${date}T${time}`);
 
 const refresh = () => {
 	const setPrice = newPrice => {
@@ -25,7 +27,10 @@ const refresh = () => {
 		state.$price.text(state.price ? state.price + ' €' : '-');
 		state.$checkoutBtn.prop('disabled', !state.price);
 	};
-	state.$duration.text(durationBetween(moment(state.$startTime.val()), moment(state.$endTime.val())).humanize());
+	const date = state.$date.val();
+	state.$duration.text(
+		durationBetween(toMoment(date, state.$startTime.val()), toMoment(date, state.$endTime.val())).humanize()
+	);
 	$.ajax({
 		method: 'POST',
 		url: '/api/calculatePrice',
@@ -40,7 +45,11 @@ const refresh = () => {
 state.$startTime.add(state.$endTime).change(() => {
 	console.log('change');
 	state.$calendar.fullCalendar('unselect');
-	state.$calendar.fullCalendar('select', moment(state.$startTime.val()), moment(state.$endTime.val()));
+	const date = state.$date.val();
+	state.$calendar.fullCalendar(
+		'select',
+		toMoment(date, state.$startTime.val()), toMoment(date, state.$endTime.val())
+	);
 });
 
 $('input').on({
@@ -58,8 +67,9 @@ initCalendar({
 	events: state.events,
 	locale: state.locale,
 	onSelect: (start, end) => {
-		state.$startTime.val(start);
-		state.$endTime.val(end);
+		state.$date.val(start.format('YYYY-MM-DD'));
+		state.$startTime.val(start.format('HH:mm'));
+		state.$endTime.val(end.format('HH:mm'));
 		refresh();
 	}
 });

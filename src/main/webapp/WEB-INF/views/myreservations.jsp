@@ -22,8 +22,9 @@
 			<c:forEach items="${reservations}" var="reservation">
 				<tr>
 					<td>${reservation.room.name}</td>
-					<td><t:formatDate value="${reservation.startTime}"/> - <t:formatDate
-						value="${reservation.endTime}"/></td>
+					<td>
+						<t:formatDate value="${reservation.date}"/> ${reservation.startTime} - ${reservation.endTime}
+					</td>
 					<td>${reservation.personCount}</td>
 					<td>
 						<ul>

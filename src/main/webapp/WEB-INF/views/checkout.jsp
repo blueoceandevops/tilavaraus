@@ -23,8 +23,8 @@
 					<dt><spring:message code="room.name"/></dt>
 					<dd>${reservation.room.name}</dd>
 					<dt><spring:message code="reservation.time"/></dt>
-					<dd><t:formatDate value="${reservation.startTime}"/> - <t:formatDate
-						value="${reservation.endTime}"/></dd>
+					<dd><t:formatDate value="${reservation.date}"/> ${reservation.startTime}
+						- ${reservation.endTime}</dd>
 					<dt><spring:message code="reservation.personCount"/></dt>
 					<dd>${reservation.personCount}</dd>
 					<dt><spring:message code="reservation.additionalServices"/></dt>
@@ -47,6 +47,7 @@
 					<form:hidden path="startTime" value="${reservation.startTime}"/>
 					<form:hidden path="room" value="${reservation.room.id}"/>
 					<form:hidden path="user" value="${user.id}"/>
+					<form:hidden path="date" value="${reservation.date}"/>
 					<form:hidden path="endTime" value="${reservation.endTime}"/>
 					<form:hidden path="personCount" value="${reservation.personCount}"/>
 					<c:if test="${not empty reservation.additionalServices}">

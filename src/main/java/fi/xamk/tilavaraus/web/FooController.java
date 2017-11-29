@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -74,8 +75,8 @@ public class FooController {
 		return reservationRepository.findByRoom(room).stream()
 			.map(reservation -> new FullCalendarEvent(reservation.getId().toString(),
 				httpServletRequest.isUserInRole("ADMIN") ? reservation.getUser().getEmail() : "",
-				reservation.getStartTime(),
-				reservation.getEndTime()))
+				LocalDateTime.of(reservation.getDate(), reservation.getStartTime()),
+				LocalDateTime.of(reservation.getDate(), reservation.getEndTime())))
 			.collect(Collectors.toList());
 	}
 

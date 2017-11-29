@@ -10,7 +10,7 @@
 		<dt><spring:message code="room.name"/></dt>
 		<dd>${reservation.room.name}</dd>
 		<dt><spring:message code="reservation.time"/></dt>
-		<dd><t:formatDate value="${reservation.startTime}"/> - <t:formatDate value="${reservation.endTime}"/></dd>
+		<dd><t:formatDate value="${reservation.date}"/> ${reservation.startTime} - ${reservation.endTime}</dd>
 		<dt><spring:message code="reservation.personCount"/></dt>
 		<dd>${reservation.personCount}</dd>
 		<dt><spring:message code="reservation.additionalServices"/></dt>

@@ -19,10 +19,6 @@ public @interface Future {
 
 	String message() default "Field is not enough in future";
 
-	long minutes() default 0;
-
 	Class<? extends Payload>[] payload() default {};
-
-	long seconds() default 0;
 
 }

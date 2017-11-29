@@ -37,7 +37,7 @@ export default ({container, events, locale, onSelect}) => {
 		},
 		selectAllow: ({start, end}) => start.isSame(end, 'day'),
 		select: (start, end) => {
-			onSelect(start.format(FORMAT), end.format(FORMAT));
+			onSelect(start, end);
 		},
 		dayClick: start => {
 			isDayClick = true;

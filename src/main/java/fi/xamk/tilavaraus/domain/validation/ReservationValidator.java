@@ -32,15 +32,16 @@ public class ReservationValidator implements Validator {
 			errors.reject("validation.tooMuchPersons", "Too much persons!");
 		}
 
-		if (reservation.getStartTime().getDayOfMonth() != reservation.getEndTime().getDayOfMonth()) {
-			errors.reject("validation.reservationOnMultipleDays", "Reservation must start and end on the same day!");
-		}
-
 		if (reservation.getDuration().minus(Duration.ofHours(1)).isNegative()) {
 			errors.reject("validation.tooShortReservation", "Too short reservation!");
 		}
 
-		if (!reservationRepository.findOverlapping(reservation.getStartTime(), reservation.getEndTime(), reservation.getRoom()).isEmpty()) {
+		if (!reservationRepository.findOverlapping(
+			reservation.getStartTime(),
+			reservation.getEndTime(),
+			reservation.getDate(),
+			reservation.getRoom()).isEmpty()
+			) {
 			errors.reject("validation.overLappingReservation", "Cannot make overlapping reservations!");
 		}
 

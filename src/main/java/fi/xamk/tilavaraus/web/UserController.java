@@ -5,6 +5,7 @@ import fi.xamk.tilavaraus.domain.User;
 import fi.xamk.tilavaraus.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -63,12 +65,12 @@ public class UserController {
 		return "user/register";
 	}
 
-	@PostMapping("/profile")
+	@PostMapping("/users/{id}")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String updateProfile(@AuthenticationPrincipal MyUserDetails userDetails,
-	                            @ModelAttribute("user") @Valid User updatedUser,
-	                            Model model) {
-		User currentUser = userDetails.getUser();
+	@PreAuthorize("hasRole('ROLE_ADMIN') || (principal.username == #currentUser.email)")
+	public String updateProfile(@ModelAttribute("user") @Valid User updatedUser,
+	                            Model model,
+	                            @PathVariable("id") User currentUser) {
 		currentUser.setName(updatedUser.getName());
 		currentUser.setAddress(updatedUser.getAddress());
 		currentUser.setZip(updatedUser.getZip());

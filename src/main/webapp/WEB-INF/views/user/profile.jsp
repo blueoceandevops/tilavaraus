@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout title="profile">
-	<form:form action="${pageContext.request.contextPath}/profile" modelAttribute="user" cssClass="mt-2">
+	<form:form action="${pageContext.request.contextPath}/users/${user.id}" modelAttribute="user" cssClass="mt-2">
 		<div class="form-group">
 			<form:label path="email"><spring:message code="user.email"/></form:label>
 			<form:input path="email" readonly="true" cssClass="form-control"/>

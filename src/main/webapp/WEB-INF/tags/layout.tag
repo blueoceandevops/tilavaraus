@@ -19,13 +19,26 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/main.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/outdatedbrowser.css">
 	<jsp:invoke fragment="head"/>
+	<style>
+		html, body {
+			height: 100%;
+		}
+	</style>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/_header.jsp"/>
-<div class="${noContainer ? '' : 'container'}">
-	<jsp:doBody/>
+
+<div class="d-flex flex-column" style="height: 100%">
+	<div>
+		<jsp:include page="/WEB-INF/views/_header.jsp"/>
+	</div>
+	<div class="${noContainer ? '' : 'container'}">
+		<jsp:doBody/>
+	</div>
+	<div class="mt-auto">
+		<jsp:include page="/WEB-INF/views/_footer.jsp"/>
+	</div>
+
 </div>
-<jsp:include page="/WEB-INF/views/_footer.jsp"/>
 <div id="outdated">
 	<h6>Your browser is out-of-date!</h6>
 	<p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update

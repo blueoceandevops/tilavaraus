@@ -74,6 +74,7 @@ public class UserController {
 		currentUser.setName(updatedUser.getName());
 		currentUser.setAddress(updatedUser.getAddress());
 		currentUser.setZip(updatedUser.getZip());
+		currentUser.setPhone(updatedUser.getPhone());
 		currentUser.setCity(updatedUser.getCity());
 		model.addAttribute("user", userRepository.save(currentUser));
 		return "user/profile";

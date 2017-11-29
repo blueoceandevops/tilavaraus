@@ -14,7 +14,7 @@
 	</jsp:attribute>
 	<jsp:body>
 		<div class="bg-dark">
-			<img class="img-fluid mx-auto d-block" src="${room.thumbnailSrc}" alt="">
+			<img class="img-fluid mx-auto d-block" src="${room.coverImageSrc}" alt="">
 		</div>
 		<div class="p-4 bg-dark">
 			<h1 class="text-uppercase text-center text-warning font-weight-bold">${room.name}</h1>

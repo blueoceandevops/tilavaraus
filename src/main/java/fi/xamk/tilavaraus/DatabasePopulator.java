@@ -40,13 +40,20 @@ public class DatabasePopulator {
 		}
 	}
 
-	private Room createRoom(Long id, String name, Integer capacity, Double price, String thumbnailSrc, String description) {
+	private Room createRoom(Long id,
+	                        String name,
+	                        Integer capacity,
+	                        Double price,
+	                        String thumbnailSrc,
+	                        String coverImageSrc,
+	                        String description) {
 		Room r = new Room();
 		r.setId(id);
 		r.setName(name);
 		r.setCapacity(capacity);
 		r.setHourlyPrice(BigDecimal.valueOf(price));
 		r.setThumbnailSrc(thumbnailSrc);
+		r.setCoverImageSrc(coverImageSrc);
 		r.setDescription(description);
 		r.setAllowedAdditionalServices(
 			id == 1L ? additionalServiceRepository.findAll().stream()
@@ -84,7 +91,14 @@ public class DatabasePopulator {
 
 	private void populateRooms() {
 		Stream.of(
-			createRoom(1L, "Mikpolisali", 117, 160.0, "/img/mikpolisali.jpg", "<ul>\n" +
+			createRoom(
+				1L,
+				"Mikpolisali",
+				117,
+				160.0,
+				"/img/mikpolisali-357w.jpg",
+				"/img/mikpolisali.jpg",
+				"<ul>\n" +
 				"    <li>dataprojektori, 1920 x 1080</li>\n" +
 				"    <li>internetyhteys (kiinteä ja WLAN)</li>\n" +
 				"    <li>kiinteä tietokone nettiyhteydellä, mahdollisuus myös ulkopuoliselle tietokoneelle</li>\n" +
@@ -96,8 +110,16 @@ public class DatabasePopulator {
 				"    <li>langattomat mikrofonit, 4 kpl</li>\n" +
 				"    <li>kiinteät mikrofonit, 3 kpl</li>\n" +
 				"    <li>piano</li>\n" +
-				"</ul>\n"),
-			createRoom(2L, "Kuitula", 22, 200.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/Kuitula_ylakuva-2-1920x725.jpg", "<ul>\n" +
+					"</ul>\n"
+			),
+			createRoom(
+				2L,
+				"Kuitula",
+				22,
+				200.0,
+				"/img/kuitula-357w.jpg",
+				"/img/kuitula.jpg",
+				"<ul>\n" +
 				"    <li>pc, mahdollisuus ulkopuoliselle pc:lle</li>\n" +
 				"    <li>internetyhteys (kiinteä + WLAN)</li>\n" +
 				"    <li>dataprojektori</li>\n" +
@@ -107,21 +129,42 @@ public class DatabasePopulator {
 				"    <li>heijastava seinä</li>\n" +
 				"    <li>fläppitaulu</li>\n" +
 				"</ul>"),
-			createRoom(3L, "Tallin vintti", 40, 90.0, "https://www.xamkravintolat.fi/wp-content/uploads/sites/2/2017/02/talli_ylakerta-1920x725.jpg", "<ul>\n" +
+			createRoom(
+				3L,
+				"Tallin vintti",
+				40,
+				90.0,
+				"/img/vintti-357w.jpg",
+				"/img/vintti.jpg",
+				"<ul>\n" +
 				"    <li>pc</li>\n" +
 				"    <li>internetyhteys (WLAN)</li>\n" +
 				"    <li>dataprojektori</li>\n" +
 				"    <li>valkokangas</li>\n" +
 				"    <li>fläppitaulu</li>\n" +
 				"</ul>"),
-			createRoom(4L, "MA325", 9999, 80.0, "/img/ma325.jpg", "<ul>\n" +
+			createRoom(
+				4L,
+				"MA325",
+				9999,
+				80.0,
+				"/img/ma325-357w.jpg",
+				"/img/ma325.jpg",
+				"<ul>\n" +
 				"    <li>pc</li>\n" +
 				"    <li>internetyhteys (kiinteä + WLAN)</li>\n" +
 				"    <li>dataprojektori</li>\n" +
 				"    <li>valkokangas</li>\n" +
 				"    <li>fläppitaulu</li>\n" +
 				"</ul>"),
-			createRoom(5L, "MB124", 14, 60.0, "/img/mb124.jpg", "<ul>\n" +
+			createRoom(
+				5L,
+				"MB124",
+				14,
+				60.0,
+				"/img/mb124-357w.jpg",
+				"/img/mb124.jpg",
+				"<ul>\n" +
 				"    <li>pc</li>\n" +
 				"    <li>internetyhteys (kiinteä + WLAN)</li>\n" +
 				"    <li>kiinteä skype-kamera</li>\n" +

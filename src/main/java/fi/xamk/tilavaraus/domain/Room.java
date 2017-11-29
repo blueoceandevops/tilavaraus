@@ -16,6 +16,7 @@ public class Room {
 	private Integer capacity;
 	private BigDecimal hourlyPrice;
 	private String thumbnailSrc;
+	private String coverImageSrc;
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	@ManyToMany
@@ -27,6 +28,10 @@ public class Room {
 
 	public Set<AdditionalService> getAllowedAdditionalServices() {
 		return allowedAdditionalServices;
+	}
+
+	public String getCoverImageSrc() {
+		return coverImageSrc;
 	}
 
 	public String getDescription() {
@@ -51,6 +56,10 @@ public class Room {
 
 	public BigDecimal getHourlyPrice() {
 		return hourlyPrice;
+	}
+
+	public void setCoverImageSrc(String coverImageSrc) {
+		this.coverImageSrc = coverImageSrc;
 	}
 
 	public void setDescription(String description) {

@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<div class="bg-dark pt-4 mt-4">
+<div class="bg-dark py-4 mt-4">
 	<div class="container">
 		<div class="row">
 			<div class="col">

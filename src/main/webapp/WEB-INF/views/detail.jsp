@@ -35,7 +35,7 @@
 				<form:hidden path="room" value="${room.id}"/>
 				<form:hidden path="user" value="${user.id}"/>
 				<div class="row">
-					<form:errors cssClass="alert alert-danger"/>
+					<form:errors cssClass="alert alert-danger m-3 col"/>
 				</div>
 				<div class="row">
 					<div class="col-md-8 mt-4">

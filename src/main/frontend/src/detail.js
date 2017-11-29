@@ -13,7 +13,8 @@ const state = {
 	$duration: $('#duration'),
 	$startTime: $('#startTime'),
 	$endTime: $('#endTime'),
-	$calendar: $('#calendar')
+	$calendar: $('#calendar'),
+	$errors: document.getElementById('reservation.errors')
 };
 
 const durationBetween = (start, end) => moment.duration(start.diff(end));
@@ -46,6 +47,11 @@ $('input').on({
 	change: refresh,
 	keyup: refresh
 });
+
+if (state.$errors) {
+	state.$errors.scrollIntoView();
+}
+
 
 initCalendar({
 	container: state.$calendar,

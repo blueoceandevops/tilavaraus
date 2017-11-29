@@ -2,6 +2,7 @@ package fi.xamk.tilavaraus.domain;
 
 import fi.xamk.tilavaraus.domain.validation.Future;
 import fi.xamk.tilavaraus.domain.validation.TimeWindow;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Reservation {
 	@NotNull
 	@Min(0)
 	private Integer personCount;
+	@Length(max = 1000)
 	private String notes;
 	private String stripeToken;
 	private String chargeToken;

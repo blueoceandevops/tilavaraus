@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -89,7 +90,11 @@ public class FooController {
 	@GetMapping("/myreservations")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String myReservations(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		model.addAttribute("reservations", reservationRepository.findByUser(myUserDetails.getUser()));
+		List<Reservation> all = reservationRepository.findByUser(myUserDetails.getUser());
+		List<Reservation> newReservations = all.stream().filter(r -> !r.isOld()).collect(Collectors.toList());
+		List<Reservation> oldReservations = all.stream().filter(Reservation::isOld).collect(Collectors.toList());
+		model.addAttribute("newReservations", newReservations);
+		model.addAttribute("oldReservations", oldReservations);
 		return "myreservations";
 	}
 

@@ -62,6 +62,10 @@ public class Reservation {
 		this.additionalServices = additionalServices;
 	}
 
+	public boolean isOld() {
+		return this.date.isBefore(LocalDate.now());
+	}
+
 	public String getChargeToken() {
 		return chargeToken;
 	}

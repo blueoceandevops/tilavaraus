@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<div class="container">
-			<form:form action="${pageContext.request.contextPath}/checkout"
+			<form:form action="${pageContext.request.contextPath}/rooms/${room.id}"
 			           id="reservationForm"
 			           method="POST" modelAttribute="reservation">
 				<form:hidden path="room" value="${room.id}"/>

@@ -29,14 +29,15 @@ public class FooController {
 	private final ReservationValidator reservationValidator;
 	private final ReservationService reservationService;
 
-	@PostMapping("/checkout")
+	@PostMapping("/rooms/{id}")
 	@PreAuthorize("(principal.username == #reservation.user.email)")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public String checkout(@Valid @ModelAttribute("reservation") Reservation reservation,
 	                       BindingResult bindingResult,
 	                       @AuthenticationPrincipal MyUserDetails userDetails,
 	                       Model model,
-	                       HttpServletRequest request) throws JsonProcessingException {
+	                       HttpServletRequest request,
+	                       @PathVariable("id") String roomId) throws JsonProcessingException {
 		model.addAttribute("user", userDetails.getUser());
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("room", reservation.getRoom());

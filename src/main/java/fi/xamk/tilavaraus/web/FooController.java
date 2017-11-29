@@ -27,7 +27,6 @@ public class FooController {
 	private final ReservationRepository reservationRepository;
 	private final ObjectMapper objectMapper;
 	private final ReservationValidator reservationValidator;
-	private final AdditionalServiceRepository additionalServiceRepository;
 	private final ReservationService reservationService;
 
 	@PostMapping("/checkout")
@@ -52,12 +51,11 @@ public class FooController {
 	                     ReservationRepository reservationRepository,
 	                     ObjectMapper objectMapper,
 	                     ReservationValidator reservationValidator,
-	                     AdditionalServiceRepository additionalServiceRepository, ReservationService reservationService) {
+	                     ReservationService reservationService) {
 		this.roomRepository = roomRepository;
 		this.reservationRepository = reservationRepository;
 		this.objectMapper = objectMapper;
 		this.reservationValidator = reservationValidator;
-		this.additionalServiceRepository = additionalServiceRepository;
 		this.reservationService = reservationService;
 	}
 
@@ -67,11 +65,6 @@ public class FooController {
 	public String cancelReservation(@PathVariable("id") Reservation reservation) {
 		reservationRepository.delete(reservation);
 		return "redirect:/myreservations";
-	}
-
-	@ModelAttribute("additionalServices")
-	public Iterable<AdditionalService> getAdditionalServices() {
-		return additionalServiceRepository.findAll();
 	}
 
 	@GetMapping("/rooms/{id}/events")

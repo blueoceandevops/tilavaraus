@@ -52,7 +52,7 @@
 
 				<fieldset class="form-group">
 					<legend><spring:message code="reservation.additionalServices"/></legend>
-					<c:forEach items="${additionalServices}" var="additionalService">
+					<c:forEach items="${reservation.room.allowedAdditionalServices}" var="additionalService">
 						<div class="form-check">
 							<label class="form-check-label">
 								<form:checkbox path="additionalServices" class="form-check-input"

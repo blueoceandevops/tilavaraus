@@ -40,7 +40,7 @@ public class Reservation {
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<AdditionalService> additionalServices;
 
-	@Future(days = PREPARATION_DAYS)
+	@Future(days = PREPARATION_DAYS - 1)
 	@DateTimeFormat(iso = ISO.DATE)
 	@NotNull
 	private LocalDate date;
@@ -167,7 +167,7 @@ public class Reservation {
 	}
 
 	public boolean isCancellable() {
-		return this.date.isAfter(LocalDate.now().plus(PREPARATION_DAYS, ChronoUnit.DAYS));
+		return this.date.isAfter(LocalDate.now().plus(PREPARATION_DAYS - 1, ChronoUnit.DAYS));
 	}
 
 	public enum PaymentMethod {

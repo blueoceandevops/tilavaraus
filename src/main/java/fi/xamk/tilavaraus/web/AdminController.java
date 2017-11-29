@@ -39,6 +39,7 @@ public class AdminController {
 	@PostMapping("/reservations/{id}/edit")
 	public String editReservation(@PathVariable("id") Reservation existingReservation,
 	                              @ModelAttribute("reservation") Reservation reservation) {
+		existingReservation.setDate(reservation.getDate());
 		existingReservation.setStartTime(reservation.getStartTime());
 		existingReservation.setEndTime(reservation.getEndTime());
 		existingReservation.setPersonCount(reservation.getPersonCount());

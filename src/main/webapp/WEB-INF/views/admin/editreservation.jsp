@@ -16,25 +16,35 @@
 				</a>
 
 				<div class="form-group">
-					<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>
+					<form:label path="date"><spring:message code="reservation.date"/></form:label>
 					<form:input class="form-control"
-					            type="datetime-local"
-					            path="startTime"
-					            onchange="APP.updateDuration()"
+					            type="date"
+					            path="date"
 					            required="true"
 					            cssErrorClass="form-control is-invalid"/>
 					<form:errors path="startTime" cssClass="invalid-feedback"/>
 				</div>
 
-				<div class="form-group">
-					<form:label path="endTime"><spring:message code="reservation.endTime"/></form:label>
-					<form:input class="form-control"
-					            type="datetime-local"
-					            path="endTime"
-					            onchange="APP.updateDuration()"
-					            required="true"
-					            cssErrorClass="form-control is-invalid"/>
-					<form:errors path="endTime" cssClass="invalid-feedback"/>
+				<div class="form-row">
+					<div class="form-group col">
+						<form:label path="startTime"><spring:message code="reservation.startTime"/></form:label>
+						<form:input class="form-control"
+						            type="time"
+						            path="startTime"
+						            required="true"
+						            cssErrorClass="form-control is-invalid"/>
+						<form:errors path="startTime" cssClass="invalid-feedback"/>
+					</div>
+
+					<div class="form-group col">
+						<form:label path="endTime"><spring:message code="reservation.endTime"/></form:label>
+						<form:input class="form-control"
+						            type="time"
+						            path="endTime"
+						            required="true"
+						            cssErrorClass="form-control is-invalid"/>
+						<form:errors path="endTime" cssClass="invalid-feedback"/>
+					</div>
 				</div>
 
 				<div class="form-group">

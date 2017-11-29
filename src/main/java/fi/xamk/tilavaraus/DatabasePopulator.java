@@ -101,7 +101,7 @@ public class DatabasePopulator {
 					"    <li>valkokangas</li>\n" +
 					"    <li>fläppitaulu</li>\n" +
 					"</ul>"),
-				createRoom(5L, "MB124", 9999, 60.0, "/img/mb124.jpg", "<ul>\n" +
+				createRoom(5L, "MB124", 14, 60.0, "/img/mb124.jpg", "<ul>\n" +
 					"    <li>pc</li>\n" +
 					"    <li>internetyhteys (kiinteä + WLAN)</li>\n" +
 					"    <li>kiinteä skype-kamera</li>\n" +

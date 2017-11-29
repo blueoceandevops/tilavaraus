@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
-<t:layout title="allReservations">
+<t:layout title="allReservations" noContainer="true">
 	<c:if test="${empty reservations}">
 		<div class="text-center mt-3">
 			<p class="h1 text-muted"><spring:message code="noReservations"/></p>
@@ -16,6 +16,7 @@
 				<th><spring:message code="reservation.personCount"/></th>
 				<th><spring:message code="reservation.additionalServices"/></th>
 				<th><spring:message code="reservation.totalPrice"/></th>
+				<th><spring:message code="reservation.paymentMethod"/></th>
 				<th><spring:message code="reservation.notes"/></th>
 				<th><spring:message code="actions"/></th>
 			</tr>
@@ -39,6 +40,7 @@
 						</ul>
 					</td>
 					<td>${reservation.totalPrice} €</td>
+					<td><spring:message code="reservation.paymentMethod.${reservation.paymentMethod}"/></td>
 					<td><c:out value="${reservation.notes}"/></td>
 					<td>
 						<a class="btn btn-danger"

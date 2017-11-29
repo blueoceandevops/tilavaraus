@@ -16,6 +16,7 @@
 				<th><spring:message code="reservation.personCount"/></th>
 				<th><spring:message code="reservation.additionalServices"/></th>
 				<th><spring:message code="reservation.totalPrice"/></th>
+				<th><spring:message code="reservation.paymentMethod"/></th>
 				<th><spring:message code="reservation.notes"/></th>
 				<th><spring:message code="actions"/></th>
 			</tr>
@@ -34,6 +35,7 @@
 						</ul>
 					</td>
 					<td>${reservation.totalPrice} €</td>
+					<td><spring:message code="reservation.paymentMethod.${reservation.paymentMethod}"/></td>
 					<td><c:out value="${reservation.notes}"/></td>
 					<td>
 						<a class="btn btn-danger${reservation.cancellable ? '' : ' disabled'}"

@@ -22,7 +22,7 @@
 			<c:forEach items="${reservations}" var="reservation">
 				<tr>
 					<td>
-						<a href="${spring:mvcUrl('AC#showUser').arg(0, reservation.user).build()}">
+						<a class="text-info" href="${spring:mvcUrl('AC#showUser').arg(0, reservation.user).build()}">
 								${reservation.user.email}
 						</a>
 					</td>

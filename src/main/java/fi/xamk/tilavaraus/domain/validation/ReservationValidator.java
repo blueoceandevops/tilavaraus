@@ -44,8 +44,7 @@ public class ReservationValidator implements Validator {
 			errors.reject("validation.overLappingReservation", "Cannot make overlapping reservations!");
 		}
 
-
-		if (!reservation.getAdditionalServices()
+		if (reservation.getAdditionalServices() != null && !reservation.getAdditionalServices()
 			.stream()
 			.allMatch(as -> reservation.getRoom().getAllowedAdditionalServices().contains(as))) {
 			errors.rejectValue("additionalServices",

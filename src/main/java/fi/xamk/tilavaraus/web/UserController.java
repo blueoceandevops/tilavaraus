@@ -69,14 +69,17 @@ public class UserController {
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@PreAuthorize("hasRole('ROLE_ADMIN') || (principal.username == #currentUser.email)")
 	public String updateProfile(@ModelAttribute("user") @Valid User updatedUser,
+	                            BindingResult bindingResult,
 	                            Model model,
 	                            @PathVariable("id") User currentUser) {
-		currentUser.setName(updatedUser.getName());
-		currentUser.setAddress(updatedUser.getAddress());
-		currentUser.setZip(updatedUser.getZip());
-		currentUser.setPhone(updatedUser.getPhone());
-		currentUser.setCity(updatedUser.getCity());
-		model.addAttribute("user", userRepository.save(currentUser));
+		if (!bindingResult.hasErrors()) {
+			currentUser.setName(updatedUser.getName());
+			currentUser.setAddress(updatedUser.getAddress());
+			currentUser.setZip(updatedUser.getZip());
+			currentUser.setPhone(updatedUser.getPhone());
+			currentUser.setCity(updatedUser.getCity());
+			model.addAttribute("user", userRepository.save(currentUser));
+		}
 		return "user/profile";
 	}
 

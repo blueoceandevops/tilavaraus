@@ -25,9 +25,10 @@ public class DatabasePopulator {
 	}
 
 	private void addAdminUser() {
-		if (!userRepository.findByEmail("admin@admin").isPresent()) {
+		String ADMIN_EMAIL = "admin@admin.test";
+		if (!userRepository.findByEmail(ADMIN_EMAIL).isPresent()) {
 			User user = new User();
-			user.setEmail("admin@admin");
+			user.setEmail(ADMIN_EMAIL);
 			user.setPassword("$2a$10$QcKi3mvVHXrgPX1leqbbqO6s2UQCYKME3aU6KcLjVSjDb3gj1NsNe");
 			user.setRole("ROLE_ADMIN");
 			user.setAddress("Admin address");

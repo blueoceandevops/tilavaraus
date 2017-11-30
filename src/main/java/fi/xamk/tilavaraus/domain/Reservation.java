@@ -37,7 +37,7 @@ public class Reservation {
 	@ManyToOne
 	@NotNull
 	private User user;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private Set<AdditionalService> additionalServices;
 
 	@Future(days = PREPARATION_DAYS - 1)

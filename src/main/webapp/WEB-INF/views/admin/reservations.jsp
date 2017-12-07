@@ -2,12 +2,12 @@
 <%@ include file="/WEB-INF/views/taglibs.jspf" %>
 
 <t:layout title="allReservations" noContainer="true">
-	<c:if test="${empty reservations}">
+	<c:if test="${!reservations.hasContent()}">
 		<div class="text-center mt-3">
 			<p class="h1 text-muted"><spring:message code="noReservations"/></p>
 		</div>
 	</c:if>
-	<c:if test="${not empty reservations}">
+	<c:if test="${reservations.hasContent()}">
 		<table class="table table-responsive mt-3">
 			<tr>
 				<th><spring:message code="reservation.user"/></th>
@@ -20,7 +20,7 @@
 				<th><spring:message code="reservation.notes"/></th>
 				<th><spring:message code="actions"/></th>
 			</tr>
-			<c:forEach items="${reservations}" var="reservation">
+			<c:forEach items="${reservations.content}" var="reservation">
 				<tr>
 					<td>
 						<a class="text-info" href="${spring:mvcUrl('AC#showUser').arg(0, reservation.user).build()}">

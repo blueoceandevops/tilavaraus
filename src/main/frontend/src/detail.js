@@ -42,15 +42,19 @@ const refresh = () => {
 	});
 };
 
-state.$startTime.add(state.$endTime).change(() => {
-	console.log('change');
-	state.$calendar.fullCalendar('unselect');
-	const date = state.$date.val();
-	state.$calendar.fullCalendar(
-		'select',
-		toMoment(date, state.$startTime.val()), toMoment(date, state.$endTime.val())
-	);
-});
+state.$startTime
+	.add(state.$endTime)
+	.add(state.$date)
+	.change(() => {
+		console.log('change');
+		state.$calendar.fullCalendar('unselect');
+		const date = state.$date.val();
+		state.$calendar.fullCalendar('gotoDate', date);
+		state.$calendar.fullCalendar(
+			'select',
+			toMoment(date, state.$startTime.val()), toMoment(date, state.$endTime.val())
+		);
+	});
 
 $('input').on({
 	change: refresh,

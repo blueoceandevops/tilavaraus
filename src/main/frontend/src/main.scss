@@ -13,6 +13,11 @@ $font-family-base: Montserrat, sans-serif;
 
 @import "~bootstrap/scss/bootstrap";
 
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 .nav-item:hover {
 	background-color: $xamk-yellow;
 	.nav-link {

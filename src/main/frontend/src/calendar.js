@@ -1,6 +1,7 @@
 import 'fullcalendar';
 import 'fullcalendar/dist/locale-all';
 import 'fullcalendar/dist/fullcalendar.css';
+import './calendar.css';
 import moment from 'moment';
 
 const FORMAT = 'YYYY-MM-DD[T]HH:mm';

@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
-export default ({container, events, locale, onSelect}) => {
+export default ({container, events, locale, onSelect, email}) => {
 
 	let isDayClick = false;
 
@@ -36,7 +36,7 @@ export default ({container, events, locale, onSelect}) => {
 			}
 			isDayClick = false;
 		},
-		selectAllow: ({start, end}) => start.isSame(end, 'day'),
+		selectAllow: ({start, end}) => email != null && start.isSame(end, 'day'),
 		select: (start, end) => {
 			onSelect(start, end);
 		},

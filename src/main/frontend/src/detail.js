@@ -69,6 +69,7 @@ if (state.$errors) {
 initCalendar({
 	container: state.$calendar,
 	events: state.events,
+	email: state.email,
 	locale: state.locale,
 	onSelect: (start, end) => {
 		state.$date.val(start.format('YYYY-MM-DD'));

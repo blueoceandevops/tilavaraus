@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ tag description="Layout" pageEncoding="UTF-8" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="scripts" fragment="true" %>
@@ -40,6 +41,11 @@
 
 </div>
 <%@ include file="/WEB-INF/views/_outdatedbrowser.jsp" %>
+<script>
+	<security:authorize access="isFullyAuthenticated()">
+	window.userEmail = '<security:authentication property="principal.username" htmlEscape="false" />';
+	</security:authorize>
+</script>
 <script src="${pageContext.request.contextPath}/dist/main.js"></script>
 <jsp:invoke fragment="scripts"/>
 </body>

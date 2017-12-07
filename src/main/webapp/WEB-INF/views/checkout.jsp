@@ -5,9 +5,6 @@
 	<jsp:attribute name="scripts">
 		<script>
 			window.totalPrice = '${reservation.totalPrice}';
-			<security:authorize access="isFullyAuthenticated()">
-			window.userEmail = '<security:authentication property="principal.username" htmlEscape="false" />';
-			</security:authorize>
 		</script>
         <script src="https://checkout.stripe.com/checkout.js"></script>
 		<script src="${pageContext.request.contextPath}/dist/checkout.js"></script>

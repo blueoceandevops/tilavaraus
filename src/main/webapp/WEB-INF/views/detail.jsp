@@ -79,18 +79,20 @@
 									</small>
 								</div>
 							</div>
-							<div class="form-group">
-								<form:label path="personCount"><spring:message
-									code="reservation.personCount"/></form:label>
-								<form:input class="form-control"
-								            path="personCount"
-								            type="number"
-								            name="count"
-								            min="0"
-								            max="${room.capacity}"
-								            required="true"
-								            cssErrorClass="form-control is-invalid"/>
-								<form:errors path="personCount" cssClass="invalid-feedback"/>
+							<div class="form-row">
+								<div class="form-group col-md-4">
+									<form:label path="personCount"><spring:message
+										code="reservation.personCount"/></form:label>
+									<form:input class="form-control"
+												path="personCount"
+												type="number"
+												name="count"
+												min="0"
+												max="${room.capacity}"
+												required="true"
+												cssErrorClass="form-control is-invalid"/>
+									<form:errors path="personCount" cssClass="invalid-feedback"/>
+								</div>
 							</div>
 
 							<fieldset class="form-group">

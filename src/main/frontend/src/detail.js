@@ -27,10 +27,10 @@ const refresh = () => {
 		state.$price.text(state.price ? state.price + ' €' : '-');
 		state.$checkoutBtn.prop('disabled', !state.price);
 	};
-	const date = state.$date.val();
-	state.$duration.text(
-		durationBetween(toMoment(date, state.$startTime.val()), toMoment(date, state.$endTime.val())).humanize()
-	);
+	const [date, start, end] = [state.$date, state.$startTime, state.$endTime].map(it => it.val());
+	if (date && start && end) {
+		state.$duration.text(durationBetween(toMoment(date, start), toMoment(date, end)).humanize());
+	}
 	$.ajax({
 		method: 'POST',
 		url: '/api/calculatePrice',
@@ -46,14 +46,16 @@ state.$startTime
 	.add(state.$endTime)
 	.add(state.$date)
 	.change(() => {
-		console.log('change');
 		state.$calendar.fullCalendar('unselect');
 		const date = state.$date.val();
 		state.$calendar.fullCalendar('gotoDate', date);
-		state.$calendar.fullCalendar(
-			'select',
-			toMoment(date, state.$startTime.val()), toMoment(date, state.$endTime.val())
-		);
+		const [start, end] = [state.$startTime, state.$endTime].map(it => it.val());
+		if (start && end) {
+			state.$calendar.fullCalendar(
+				'select',
+				toMoment(date, start), toMoment(date, end)
+			);
+		}
 	});
 
 $('input').on({
@@ -64,7 +66,6 @@ $('input').on({
 if (state.$errors) {
 	state.$errors.scrollIntoView();
 }
-
 
 initCalendar({
 	container: state.$calendar,

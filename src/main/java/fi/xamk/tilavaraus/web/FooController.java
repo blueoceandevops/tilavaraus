@@ -68,7 +68,7 @@ public class FooController {
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@PreAuthorize("(principal.username == #reservation.user.email) && #reservation.cancellable")
 	public String cancelReservation(@PathVariable("id") Reservation reservation) {
-		reservationRepository.delete(reservation);
+		reservationService.cancel(reservation);
 		return "redirect:/myreservations";
 	}
 

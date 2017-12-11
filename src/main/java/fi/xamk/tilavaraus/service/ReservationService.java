@@ -3,6 +3,7 @@ package fi.xamk.tilavaraus.service;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.Charge;
+import com.stripe.model.Refund;
 import fi.xamk.tilavaraus.domain.Reservation;
 import fi.xamk.tilavaraus.domain.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,21 @@ public class ReservationService {
 		this.reservationRepository = reservationRepository;
 		this.stripeSecret = stripeSecret;
 		this.executor = executor;
+	}
+
+	@Transactional
+	public void cancel(Reservation reservation) {
+		if (reservation.getChargeToken() != null) {
+			Stripe.apiKey = stripeSecret;
+			Map<String, Object> refundParams = new HashMap<>();
+			refundParams.put("charge", reservation.getChargeToken());
+			try {
+				Refund.create(refundParams);
+			} catch (AuthenticationException | InvalidRequestException | CardException | APIException | APIConnectionException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		reservationRepository.delete(reservation);
 	}
 
 	private void chargeCard(Reservation reservation) {

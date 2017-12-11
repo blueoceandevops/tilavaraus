@@ -29,7 +29,9 @@ const refresh = () => {
 	};
 	const [date, start, end] = [state.$date, state.$startTime, state.$endTime].map(it => it.val());
 	if (date && start && end) {
-		state.$duration.text(durationBetween(toMoment(date, start), toMoment(date, end)).humanize());
+		state.$duration.text(durationBetween(toMoment(date, start), toMoment(date, end))
+			.locale(state.locale)
+			.humanize());
 	}
 	$.ajax({
 		method: 'POST',

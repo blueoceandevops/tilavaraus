@@ -5,7 +5,7 @@
 	<h1 class="mt-3"><spring:message code="newReservations"/></h1>
 	<c:if test="${empty newReservations}">
 		<div class="text-center">
-			<p class="h1 text-muted"><spring:message code="noReservations"/></p>
+			<p class="text-muted"><spring:message code="noReservations"/></p>
 		</div>
 	</c:if>
 	<c:if test="${not empty newReservations}">
@@ -51,7 +51,7 @@
 	<h1 class="mt-3"><spring:message code="oldReservations"/></h1>
 	<c:if test="${empty oldReservations}">
 		<div class="text-center">
-			<p class="h1 text-muted"><spring:message code="noReservations"/></p>
+			<p class="text-muted"><spring:message code="noReservations"/></p>
 		</div>
 	</c:if>
 	<c:if test="${not empty oldReservations}">

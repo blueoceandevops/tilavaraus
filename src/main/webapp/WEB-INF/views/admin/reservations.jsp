@@ -4,7 +4,7 @@
 <t:layout title="allReservations" noContainer="true">
 	<c:if test="${!reservations.hasContent()}">
 		<div class="text-center mt-3">
-			<p class="h1 text-muted"><spring:message code="noReservations"/></p>
+			<p class="text-muted"><spring:message code="noReservations"/></p>
 		</div>
 	</c:if>
 	<c:if test="${reservations.hasContent()}">

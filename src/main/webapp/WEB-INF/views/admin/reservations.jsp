@@ -40,7 +40,19 @@
 						</ul>
 					</td>
 					<td>${reservation.totalPrice} €</td>
-					<td><spring:message code="reservation.paymentMethod.${reservation.paymentMethod}"/></td>
+					<td>
+						<c:choose>
+							<c:when test="${not empty reservation.chargeToken}">
+								<a class="text-info"
+								   href="https://dashboard.stripe.com/test/payments/${reservation.chargeToken}">
+									<spring:message code="reservation.paymentMethod.${reservation.paymentMethod}"/>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<spring:message code="reservation.paymentMethod.${reservation.paymentMethod}"/>
+							</c:otherwise>
+						</c:choose>
+					</td>
 					<td><c:out value="${reservation.notes}"/></td>
 					<td>
 						<a class="btn btn-danger"

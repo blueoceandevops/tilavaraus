@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Controller
@@ -71,14 +72,19 @@ public class FooController {
 		return "redirect:/myreservations";
 	}
 
+	private Function<Reservation, FullCalendarEvent> toFullCalendarEvent(boolean isAdmin) {
+		return reservation -> new FullCalendarEvent(reservation.getId().toString(),
+			isAdmin ? reservation.getUser().getEmail() : "",
+			LocalDateTime.of(reservation.getDate(), reservation.getStartTime()),
+			LocalDateTime.of(reservation.getDate(), reservation.getEndTime()),
+			"");
+	}
+
 	@GetMapping("/rooms/{id}/events")
 	@ResponseBody
 	public Iterable<FullCalendarEvent> getEvents(@PathVariable("id") Room room, HttpServletRequest httpServletRequest) {
 		return reservationRepository.findByRoom(room).stream()
-			.map(reservation -> new FullCalendarEvent(reservation.getId().toString(),
-				httpServletRequest.isUserInRole("ADMIN") ? reservation.getUser().getEmail() : "",
-				LocalDateTime.of(reservation.getDate(), reservation.getStartTime()),
-				LocalDateTime.of(reservation.getDate(), reservation.getEndTime())))
+			.map(toFullCalendarEvent(httpServletRequest.isUserInRole("ADMIN")))
 			.collect(Collectors.toList());
 	}
 

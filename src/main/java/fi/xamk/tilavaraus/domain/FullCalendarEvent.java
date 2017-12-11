@@ -6,14 +6,16 @@ public class FullCalendarEvent {
 
 	private String id;
 	private String title;
+	private String url;
 	private LocalDateTime start;
 	private LocalDateTime end;
 
-	public FullCalendarEvent(String id, String title, LocalDateTime start, LocalDateTime end) {
+	public FullCalendarEvent(String id, String title, LocalDateTime start, LocalDateTime end, String url) {
 		this.id = id;
 		this.title = title;
 		this.start = start;
 		this.end = end;
+		this.url = url;
 	}
 
 	public LocalDateTime getEnd() {
@@ -48,4 +50,11 @@ public class FullCalendarEvent {
 		this.title = title;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

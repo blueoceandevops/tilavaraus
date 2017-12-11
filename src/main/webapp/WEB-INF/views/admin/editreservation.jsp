@@ -11,9 +11,11 @@
 		<div class="row">
 
 			<div class="col">
-				<a class="text-info" href="https://dashboard.stripe.com/test/payments/${reservation.chargeToken}">
-					<spring:message code="paymentDetails"/>
-				</a>
+				<c:if test="${not empty reservation.chargeToken}">
+					<a class="text-info" href="https://dashboard.stripe.com/test/payments/${reservation.chargeToken}">
+						<spring:message code="paymentDetails"/>
+					</a>
+				</c:if>
 
 				<div class="form-group">
 					<form:label path="date"><spring:message code="reservation.date"/></form:label>

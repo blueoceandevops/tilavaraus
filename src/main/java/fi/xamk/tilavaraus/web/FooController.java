@@ -73,11 +73,13 @@ public class FooController {
 	}
 
 	private Function<Reservation, FullCalendarEvent> toFullCalendarEvent(boolean isAdmin) {
-		return reservation -> new FullCalendarEvent(reservation.getId().toString(),
-			isAdmin ? reservation.getUser().getEmail() : "",
-			LocalDateTime.of(reservation.getDate(), reservation.getStartTime()),
-			LocalDateTime.of(reservation.getDate(), reservation.getEndTime()),
-			"");
+		return reservation -> FullCalendarEvent.builder()
+			.id(reservation.getId().toString())
+			.title(isAdmin ? reservation.getUser().getEmail() : "")
+			.start(LocalDateTime.of(reservation.getDate(), reservation.getStartTime()))
+			.end(LocalDateTime.of(reservation.getDate(), reservation.getEndTime()))
+			.url(isAdmin ? "/admin/reservations/" + reservation.getId() + "/edit" : null)
+			.build();
 	}
 
 	@GetMapping("/rooms/{id}/events")

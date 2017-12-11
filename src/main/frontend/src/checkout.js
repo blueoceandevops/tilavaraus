@@ -8,7 +8,6 @@ const handler = window.StripeCheckout.configure({
 	locale: window.locale,
 	currency: 'eur',
 	email: window.userEmail,
-	bitcoin: true,
 	token: token => {
 		$payButton.prop('disabled', true);
 		$('<input>', {

@@ -78,7 +78,7 @@
 						<div class="form-check">
 							<label class="form-check-label">
 								<form:checkbox path="additionalServices" class="form-check-input"
-								               value="${additionalService.id}"/>
+								               value="${additionalService}"/>
 								<spring:message code="additionalService.name.${additionalService.name}"/>
 							</label>
 						</div>

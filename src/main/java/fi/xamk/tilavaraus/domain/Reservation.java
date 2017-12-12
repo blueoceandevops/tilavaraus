@@ -14,8 +14,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Entity
 public class Reservation {
@@ -38,7 +38,7 @@ public class Reservation {
 	@NotNull
 	private User user;
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	private Set<AdditionalService> additionalServices;
+	private List<AdditionalService> additionalServices;
 
 	@Future(days = PREPARATION_DAYS - 1)
 	@DateTimeFormat(iso = ISO.DATE)
@@ -54,11 +54,11 @@ public class Reservation {
 	private LocalTime endTime;
 	private PaymentMethod paymentMethod;
 
-	public Set<AdditionalService> getAdditionalServices() {
+	public List<AdditionalService> getAdditionalServices() {
 		return additionalServices;
 	}
 
-	public void setAdditionalServices(Set<AdditionalService> additionalServices) {
+	public void setAdditionalServices(List<AdditionalService> additionalServices) {
 		this.additionalServices = additionalServices;
 	}
 
@@ -152,7 +152,7 @@ public class Reservation {
 
 	public BigDecimal getTotalPrice() {
 		BigDecimal additionalServicesPrice = Optional.ofNullable(getAdditionalServices())
-			.map(Set::stream)
+			.map(List::stream)
 			.map(stream -> stream.map(AdditionalService::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add))
 			.orElse(BigDecimal.ZERO);
 

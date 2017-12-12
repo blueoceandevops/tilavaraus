@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Component
 public class DatabasePopulator {
@@ -55,10 +56,12 @@ public class DatabasePopulator {
 		r.setThumbnailSrc(thumbnailSrc);
 		r.setCoverImageSrc(coverImageSrc);
 		r.setDescription(description);
-		r.setAllowedAdditionalServices(
-			id == 1L ? additionalServiceRepository.findAll().stream()
-				.filter(as -> as.getId() != 1L).collect(Collectors.toSet()) : additionalServiceRepository.findAll()
-		);
+
+		r.setAllowedAdditionalServices(StreamSupport.stream(
+			additionalServiceRepository.findAll().spliterator(),
+			false
+		).filter(as -> id != 1L || as.getId() != 1L)
+			.collect(Collectors.toList()));
 		return r;
 	}
 

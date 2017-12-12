@@ -3,7 +3,7 @@ package fi.xamk.tilavaraus.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Room {
@@ -20,13 +20,13 @@ public class Room {
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	@ManyToMany
-	private Set<AdditionalService> allowedAdditionalServices;
+	private List<AdditionalService> allowedAdditionalServices;
 
 	public String getAddress() {
 		return address;
 	}
 
-	public Set<AdditionalService> getAllowedAdditionalServices() {
+	public List<AdditionalService> getAllowedAdditionalServices() {
 		return allowedAdditionalServices;
 	}
 
@@ -46,7 +46,7 @@ public class Room {
 		return capacity;
 	}
 
-	public void setAllowedAdditionalServices(Set<AdditionalService> allowedAdditionalServices) {
+	public void setAllowedAdditionalServices(List<AdditionalService> allowedAdditionalServices) {
 		this.allowedAdditionalServices = allowedAdditionalServices;
 	}
 

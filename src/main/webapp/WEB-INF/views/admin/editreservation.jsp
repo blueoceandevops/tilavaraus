@@ -18,6 +18,16 @@
 				</c:if>
 
 				<div class="form-group">
+					<form:label path="user"><spring:message code="reservation.user"/></form:label>
+					<form:input class="form-control" path="user.email" disabled="true"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="room.name"><spring:message code="reservation.room"/></form:label>
+					<form:input class="form-control" path="room.name" disabled="true"/>
+				</div>
+
+				<div class="form-group">
 					<form:label path="date"><spring:message code="reservation.date"/></form:label>
 					<form:input class="form-control"
 					            type="date"

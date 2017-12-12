@@ -1,10 +1,7 @@
 package fi.xamk.tilavaraus.web;
 
 import com.querydsl.core.types.Predicate;
-import fi.xamk.tilavaraus.domain.AdditionalServiceRepository;
-import fi.xamk.tilavaraus.domain.Reservation;
-import fi.xamk.tilavaraus.domain.ReservationRepository;
-import fi.xamk.tilavaraus.domain.User;
+import fi.xamk.tilavaraus.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
@@ -22,11 +19,15 @@ public class AdminController {
 
 	private final ReservationRepository reservationRepository;
 	private final AdditionalServiceRepository additionalServiceRepository;
+	private final RoomRepository roomRepository;
+	private final UserRepository userRepository;
 
 	@Autowired
-	public AdminController(ReservationRepository reservationRepository, AdditionalServiceRepository additionalServiceRepository) {
+	public AdminController(ReservationRepository reservationRepository, AdditionalServiceRepository additionalServiceRepository, RoomRepository roomRepository, UserRepository userRepository) {
 		this.reservationRepository = reservationRepository;
 		this.additionalServiceRepository = additionalServiceRepository;
+		this.roomRepository = roomRepository;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("/users/{id}")
@@ -56,7 +57,10 @@ public class AdminController {
 	@GetMapping("/reservations")
 	public String listReservations(Model model,
 	                               @QuerydslPredicate(root = Reservation.class) Predicate predicate,
+	                               @ModelAttribute("reservation") Reservation reservation,
 	                               @PageableDefault(size = Integer.MAX_VALUE) @SortDefault({"date", "startTime", "endTime"}) Pageable pageable) {
+		model.addAttribute("rooms", roomRepository.findAll());
+		model.addAttribute("users", userRepository.findAll());
 		model.addAttribute("reservations", reservationRepository.findAll(predicate, pageable));
 		return "admin/reservations";
 	}

@@ -1,12 +1,15 @@
 package fi.xamk.tilavaraus.web;
 
+import com.querydsl.core.types.Predicate;
 import fi.xamk.tilavaraus.domain.AdditionalServiceRepository;
 import fi.xamk.tilavaraus.domain.Reservation;
 import fi.xamk.tilavaraus.domain.ReservationRepository;
 import fi.xamk.tilavaraus.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,8 +55,9 @@ public class AdminController {
 
 	@GetMapping("/reservations")
 	public String listReservations(Model model,
-								   @PageableDefault(size = Integer.MAX_VALUE) Pageable pageable) {
-		model.addAttribute("reservations", reservationRepository.findAll(pageable));
+	                               @QuerydslPredicate(root = Reservation.class) Predicate predicate,
+	                               @PageableDefault(size = Integer.MAX_VALUE) @SortDefault({"date", "startTime", "endTime"}) Pageable pageable) {
+		model.addAttribute("reservations", reservationRepository.findAll(predicate, pageable));
 		return "admin/reservations";
 	}
 

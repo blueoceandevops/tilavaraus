@@ -6,6 +6,9 @@ import fi.xamk.tilavaraus.domain.*;
 import fi.xamk.tilavaraus.domain.validation.ReservationValidator;
 import fi.xamk.tilavaraus.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -100,8 +103,10 @@ public class FooController {
 
 	@GetMapping("/myreservations")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String myReservations(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		Map<Boolean, List<Reservation>> reservationsByIsOld = reservationRepository.findByUser(myUserDetails.getUser())
+	public String myReservations(Model model,
+								 @AuthenticationPrincipal MyUserDetails myUserDetails,
+								 @PageableDefault(size = Integer.MAX_VALUE) @SortDefault({"date", "startTime", "endTime"}) Pageable pageable) {
+		Map<Boolean, List<Reservation>> reservationsByIsOld = reservationRepository.findByUser(myUserDetails.getUser(), pageable)
 			.stream()
 			.collect(Collectors.groupingBy(Reservation::isOld));
 		model.addAttribute("newReservations", reservationsByIsOld.get(false));

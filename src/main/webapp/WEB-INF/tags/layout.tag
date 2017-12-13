@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag description="Layout" pageEncoding="UTF-8" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="scripts" fragment="true" %>
@@ -33,6 +34,16 @@
 		<jsp:include page="/WEB-INF/views/_header.jsp"/>
 	</div>
 	<div class="${noContainer ? '' : 'container'}">
+		<%--@elvariable id="alert" type="java.lang.String"--%>
+		<c:if test="${not empty alert}">
+			<div class="container">
+				<c:set var="alertType" value="${alert.split(':')[0]}"/>
+				<c:set var="alertText" value="${alert.split(':')[1]}"/>
+				<div class="alert alert-${alertType} mt-3" role="alert">
+					<spring:message code="${alertText}" text="${alertText}"/>
+				</div>
+			</div>
+		</c:if>
 		<jsp:doBody/>
 	</div>
 	<div class="mt-auto">

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -67,8 +68,9 @@ public class FooController {
 	@GetMapping("/reservations/{id}/cancel")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@PreAuthorize("(principal.username == #reservation.user.email) && #reservation.cancellable")
-	public String cancelReservation(@PathVariable("id") Reservation reservation) {
+	public String cancelReservation(@PathVariable("id") Reservation reservation, RedirectAttributes redirectAttributes) {
 		reservationService.cancel(reservation);
+		redirectAttributes.addFlashAttribute("alert", "info:reservationCancelled");
 		return "redirect:/myreservations";
 	}
 
@@ -115,8 +117,9 @@ public class FooController {
 	@PostMapping("/reserve")
 	@PreAuthorize("(principal.username == #reservation.user.email)")
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
-	public String reserveRoom(@Valid @ModelAttribute("reservation") Reservation reservation) {
+	public String reserveRoom(@Valid @ModelAttribute("reservation") Reservation reservation, Model model) {
 		reservationService.save(reservation);
+		model.addAttribute("alert", "success:reservationSuccess");
 		return "reservationsuccess";
 	}
 

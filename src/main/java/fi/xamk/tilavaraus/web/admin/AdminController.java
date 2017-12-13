@@ -1,4 +1,4 @@
-package fi.xamk.tilavaraus.web;
+package fi.xamk.tilavaraus.web.admin;
 
 import com.querydsl.core.types.Predicate;
 import fi.xamk.tilavaraus.domain.*;

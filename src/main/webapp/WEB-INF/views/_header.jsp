@@ -48,6 +48,10 @@
 								   href="${spring:mvcUrl('AC#listReservations').build()}">
 									<spring:message code="allReservations"/>
 								</a>
+								<a class="dropdown-item"
+								   href="${spring:mvcUrl('RC#listRooms').build()}">
+									<spring:message code="manageRooms"/>
+								</a>
 							</security:authorize>
 							<form:form action="${pageContext.request.contextPath}/logout">
 								<button type="submit" class="dropdown-item">

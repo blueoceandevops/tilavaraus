@@ -2,6 +2,7 @@ package fi.xamk.tilavaraus.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -11,9 +12,12 @@ public class Room {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
+	@Size(min = 1)
 	private String name;
 	private String address;
+	@NotNull
 	private Integer capacity;
+	@NotNull
 	private BigDecimal hourlyPrice;
 	private String thumbnailSrc;
 	private String coverImageSrc;
@@ -93,4 +97,5 @@ public class Room {
 	public void setThumbnailSrc(String thumbnailSrc) {
 		this.thumbnailSrc = thumbnailSrc;
 	}
+
 }

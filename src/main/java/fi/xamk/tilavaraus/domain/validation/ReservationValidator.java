@@ -7,13 +7,33 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.time.Duration;
-import java.time.Month;
+import java.time.*;
+import java.time.temporal.TemporalAccessor;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ReservationValidator implements Validator {
 
 	private final ReservationRepository reservationRepository;
+
+	private static final List<TemporalAccessor> PUBLIC_HOLIDAYS = Arrays.asList(
+		MonthDay.of(Month.JANUARY, 1),
+		MonthDay.of(Month.JANUARY, 6),
+		MonthDay.of(Month.MAY, 1),
+		MonthDay.of(Month.DECEMBER, 6),
+		MonthDay.of(Month.DECEMBER, 24),
+		MonthDay.of(Month.DECEMBER, 25),
+		MonthDay.of(Month.DECEMBER, 26),
+		DayOfWeek.SUNDAY
+	);
+
+	private boolean isOnHoliday(LocalDate localDate) {
+		return PUBLIC_HOLIDAYS.stream().anyMatch(
+			temporalAccessor -> MonthDay.of(localDate.getMonth(), localDate.getDayOfMonth()).equals(temporalAccessor)
+		);
+	}
+
 
 	@Autowired
 	public ReservationValidator(ReservationRepository reservationRepository) {
@@ -31,6 +51,10 @@ public class ReservationValidator implements Validator {
 
 		if (reservation.getPersonCount() > reservation.getRoom().getCapacity()) {
 			errors.reject("validation.tooMuchPersons", "Too much persons!");
+		}
+
+		if (isOnHoliday(reservation.getDate())) {
+			errors.reject("validation.reservationOnHoliday", "Cannot make reservations on holidays!");
 		}
 
 		if (reservation.getDate().getMonth().equals(Month.JULY)) {

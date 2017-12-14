@@ -6,7 +6,7 @@ import moment from 'moment';
 
 const FORMAT = 'YYYY-MM-DD[T]HH:mm';
 
-export default ({container, events, locale, onSelect, email}) => {
+export default ({container, events, locale, onSelect, email, onReady}) => {
 
 	let isDayClick = false;
 
@@ -47,5 +47,7 @@ export default ({container, events, locale, onSelect, email}) => {
 			container.fullCalendar('select', start, end);
 		}
 	});
+
+	onReady();
 
 };

@@ -44,12 +44,10 @@ const refresh = () => {
 	});
 };
 
-state.$startTime
-	.add(state.$endTime)
-	.add(state.$date)
-	.change(() => {
-		state.$calendar.fullCalendar('unselect');
-		const date = state.$date.val();
+const updateCalendar = () => {
+	state.$calendar.fullCalendar('unselect');
+	const date = state.$date.val();
+	if (date) {
 		state.$calendar.fullCalendar('gotoDate', date);
 		const [start, end] = [state.$startTime, state.$endTime].map(it => it.val());
 		if (start && end) {
@@ -58,12 +56,12 @@ state.$startTime
 				toMoment(date, start), toMoment(date, end)
 			);
 		}
-	});
-
-$('input').on({
-	change: refresh,
-	keyup: refresh
+	}
+};
+state.$startTime.add(state.$endTime).add(state.$date).change(() => {
+	updateCalendar();
 });
+$('input').on({change: refresh, keyup: refresh});
 
 if (state.$errors) {
 	state.$errors.scrollIntoView();
@@ -79,5 +77,8 @@ initCalendar({
 		state.$startTime.val(start.format('HH:mm'));
 		state.$endTime.val(end.format('HH:mm'));
 		refresh();
+	},
+	onReady: () => {
+		updateCalendar();
 	}
 });

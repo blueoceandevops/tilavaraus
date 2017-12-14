@@ -30,7 +30,7 @@ public class ReservationValidator implements Validator {
 
 	private boolean isOnHoliday(LocalDate localDate) {
 		return PUBLIC_HOLIDAYS.stream().anyMatch(
-			temporalAccessor -> MonthDay.of(localDate.getMonth(), localDate.getDayOfMonth()).equals(temporalAccessor)
+			temporalAccessor -> MonthDay.of(localDate.getMonth(), localDate.getDayOfMonth()).equals(temporalAccessor) || localDate.getDayOfWeek().equals(temporalAccessor)
 		);
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.time.Duration;
+import java.time.Month;
 
 @Component
 public class ReservationValidator implements Validator {
@@ -30,6 +31,10 @@ public class ReservationValidator implements Validator {
 
 		if (reservation.getPersonCount() > reservation.getRoom().getCapacity()) {
 			errors.reject("validation.tooMuchPersons", "Too much persons!");
+		}
+
+		if (reservation.getDate().getMonth().equals(Month.JULY)) {
+			errors.reject("validation.reservationInJuly", "Cannot make reservations in July!");
 		}
 
 		if (reservation.getDuration().minus(Duration.ofHours(1)).isNegative()) {

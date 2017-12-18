@@ -5,8 +5,11 @@
 	<form:form cssClass="mt-3"
 			   action="${pageContext.request.contextPath}/admin/rooms/"
 			   method="POST"
-			   modelAttribute="room">
-		<form:hidden path="id"/>
+			   modelAttribute="roomDto"
+			   enctype="multipart/form-data">
+		<form:hidden path="room.id"/>
+		<form:hidden path="room.thumbnailSrc"/>
+		<form:hidden path="room.coverImageSrc"/>
 		<div class="row">
 			<form:errors cssClass="alert alert-danger"/>
 		</div>
@@ -15,53 +18,55 @@
 			<div class="col">
 
 				<div class="form-group">
-					<form:label path="name"><spring:message code="room.name"/></form:label>
+					<form:label path="room.name"><spring:message code="room.name"/></form:label>
 					<form:input class="form-control"
-								path="name"
+								path="room.name"
 								cssErrorClass="form-control is-invalid"/>
-					<form:errors path="name" cssClass="invalid-feedback"/>
+					<form:errors path="room.name" cssClass="invalid-feedback"/>
 				</div>
 
 				<div class="form-group">
-					<form:label path="thumbnailSrc"><spring:message code="room.thumbnailSrc"/></form:label>
+					<form:label path="thumbnailImage"><spring:message code="room.thumbnailImage"/></form:label>
 					<form:input class="form-control"
-								path="thumbnailSrc"
+								type="file"
+								path="thumbnailImage"
 								cssErrorClass="form-control is-invalid"/>
-					<form:errors path="thumbnailSrc" cssClass="invalid-feedback"/>
+					<form:errors path="thumbnailImage" cssClass="invalid-feedback"/>
 				</div>
 
 				<div class="form-group">
-					<form:label path="coverImageSrc"><spring:message code="room.coverImageSrc"/></form:label>
+					<form:label path="coverImage"><spring:message code="room.coverImage"/></form:label>
 					<form:input class="form-control"
-								path="coverImageSrc"
+								type="file"
+								path="coverImage"
 								cssErrorClass="form-control is-invalid"/>
-					<form:errors path="coverImageSrc" cssClass="invalid-feedback"/>
+					<form:errors path="coverImage" cssClass="invalid-feedback"/>
 				</div>
 
 				<div class="form-group">
-					<form:label path="hourlyPrice"><spring:message code="room.hourlyPrice"/></form:label>
+					<form:label path="room.hourlyPrice"><spring:message code="room.hourlyPrice"/></form:label>
 					<form:input class="form-control"
-								path="hourlyPrice"
+								path="room.hourlyPrice"
 								type="number"
 								cssErrorClass="form-control is-invalid"/>
-					<form:errors path="hourlyPrice" cssClass="invalid-feedback"/>
+					<form:errors path="room.hourlyPrice" cssClass="invalid-feedback"/>
 				</div>
 
 				<div class="form-group">
-					<form:label path="capacity"><spring:message code="room.capacity"/></form:label>
+					<form:label path="room.capacity"><spring:message code="room.capacity"/></form:label>
 					<form:input class="form-control"
-								path="capacity"
+								path="room.capacity"
 								type="number"
 								cssErrorClass="form-control is-invalid"/>
-					<form:errors path="capacity" cssClass="invalid-feedback"/>
+					<form:errors path="room.capacity" cssClass="invalid-feedback"/>
 				</div>
 
 				<div class="form-group">
-					<form:label path="description"><spring:message code="room.description"/></form:label>
+					<form:label path="room.description"><spring:message code="room.description"/></form:label>
 					<form:textarea class="form-control"
-								   path="description"
+								   path="room.description"
 								   cssErrorClass="form-control is-invalid"/>
-					<form:errors path="description" cssClass="invalid-feedback"/>
+					<form:errors path="room.description" cssClass="invalid-feedback"/>
 				</div>
 
 				<fieldset class="form-group">
@@ -69,7 +74,7 @@
 					<c:forEach items="${additionalServices}" var="additionalService">
 						<div class="form-check">
 							<label class="form-check-label">
-								<form:checkbox path="allowedAdditionalServices" class="form-check-input"
+								<form:checkbox path="room.allowedAdditionalServices" class="form-check-input"
 											   value="${additionalService}"/>
 								<spring:message code="additionalService.name.${additionalService.name}"/>
 							</label>
